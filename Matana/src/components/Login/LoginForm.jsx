@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Button,
     Checkbox,
@@ -10,8 +10,35 @@ import {
 } from 'antd';
 import { MailOutlined, UserOutlined, LockOutlined } from '@ant-design/icons'
 import 'antd/dist/antd.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../features/loginSlice';
+//import bcrypt from 'bcrypt'
 
 function LoginForm() {
+
+    const [usern, setUsername] = useState("");
+    const [paswd, setPassword] = useState("");
+
+    const dispatch = useDispatch();
+    //const user = useSelector(state => console.log(state));
+
+    const handleSubmite = async (event) => {
+        //event.preventDefault();
+        // const salt = 10;
+        // const hashedpass = await bcrypt.hash(paswd, salt);
+
+        const credentials = {
+            username: usern,
+            //password: hashedpass
+            password: paswd
+        }
+
+        setUsername("");
+        setPassword("");
+
+        dispatch(login(credentials));
+    }
+
     return (
         <div className='form-container'>
             <div className='div-form '>
@@ -27,6 +54,8 @@ function LoginForm() {
                     name="basic"
                     initialValues={{ remember: true }}
                     autoComplete="off"
+                    validateTrigger="onChange"
+                    onFinish={handleSubmite}
 
                 >
                     <Form.Item
@@ -34,7 +63,9 @@ function LoginForm() {
                         rules={[{ required: true, message: 'Please input your username!' }]}
                     >
                         <Input
-                            placeholder='Username' />
+                            placeholder='Username'
+                            value={usern}
+                            onChange={(e) => setUsername(e.target.value)} />
                     </Form.Item>
 
                     <Form.Item
@@ -43,7 +74,9 @@ function LoginForm() {
                     >
                         <Input.Password
                             prefix={<LockOutlined className="site-form-item-icon" />}
-                            placeholder='Password' />
+                            placeholder='Password'
+                            value={paswd}
+                            onChange={(e) => setPassword(e.target.value)} />
                     </Form.Item>
                     <Form.Item className='form-options'>
                         <Form.Item name="remember" valuePropName="checked" className='form-remember'>
@@ -52,6 +85,7 @@ function LoginForm() {
                         <div className='forgot-password'>
                             <div className='ant-form-item-control-input'>
                                 <MailOutlined />
+                                {/*  */}
                                 <Typography.Link href="#"
                                     target='_blank'>
                                     Mot de passe oublié?

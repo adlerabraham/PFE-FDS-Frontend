@@ -1,0 +1,29 @@
+Tommyemanuel
+
+-Creer visio-conference
+-Interagir avec les etudiants
+-Gerer le meeting
+-creer des devoirs
+-reutiliser des devoirs anterieurs
+-documemt de cours 
+-examen
+-notes
+-carnet de note
+-tableau blanc
+-enregistrement des cours 
+-statistiques
+
+administrateur
+-creer d'autres administrateurs
+-mis a jour de la platforme
+-operarions CRUD sur les profs et etudiants
+-Creer des classes
+-definir des droits d'acces
+-diffusions de messages
+
+conectivite user
+formation
+
+-module de paiment
+-archives
+-gestion de notes
