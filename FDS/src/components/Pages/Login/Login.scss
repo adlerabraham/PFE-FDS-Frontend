@@ -1,0 +1,154 @@
+.background {
+  background-color: #38b6ff;
+  padding-top: 2rem;
+  display: flex;
+}
+
+.background {
+  .login-right-side {
+    display: flex !important;
+    vertical-align: middle;
+  }
+}
+
+.div-form {
+  width: 100%;
+  margin: auto;
+}
+
+.form-option {
+  width: 60%;
+}
+
+.forgot-password {
+  display: inline-block;
+  height: 100%;
+}
+
+.form-remember {
+  display: inline-block;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+}
+
+.user-group-icon {
+  margin-bottom: 20px;
+}
+
+#basic_username.ant-input {
+  border-radius: 30px;
+  height: 70px;
+  width: 60%;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: none;
+}
+
+.ant-input-password {
+  height: 70px;
+  border-radius: 30px;
+  width: 60%;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: none;
+}
+
+#basic_password.ant-input {
+  background-color: rgba(255, 255, 255, 0.0);
+}
+
+.ant-input::placeholder {
+  text-align: center;
+  color: black;
+  font-size: medium;
+}
+
+.ant-btn {
+  background-color: white;
+  color: black;
+  width: 30%;
+  height: 55px;
+  border-radius: 25px;
+  border: none;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+button>span {
+  font-size: medium;
+}
+
+
+/********** Large devices only **********/
+@media (min-width: 1200px) {
+  .background {
+    .login-right-side {
+      display: flex !important;
+      vertical-align: middle;
+    }
+  }
+}
+
+/********** Medium devices only **********/
+@media (min-width: 992px) and (max-width: 1199px) {
+  .background {
+    .login-right-side {
+      display: flex !important;
+      vertical-align: middle;
+    }
+  }
+}
+
+/********** Small devices only **********/
+@media (min-width: 768px) and (max-width: 991px) {
+  .background {
+    .login-right-side {
+      display: flex !important;
+      vertical-align: middle;
+    }
+  }
+}
+
+/********** Extra small devices only **********/
+@media (max-width: 767px) {
+
+
+  .login-left-side {
+    margin: auto;
+  }
+
+
+  .top-logo {
+    margin-bottom: 20px;
+  }
+
+  #basic_username.ant-input {
+    height: 55px;
+    border-radius: 20px;
+    width: 90%;
+  }
+
+  .ant-input-password {
+    height: 55px;
+    border-radius: 20px;
+    width: 90%;
+  }
+
+  button>span {
+    font-size: small;
+  }
+
+  .ant-btn {
+    width: 50%;
+    height: 40px;
+    border-radius: 15px;
+  }
+}
+
+/********** Super extra small devices Only :-) (e.g., iPhone 4) **********/
+@media (max-width: 479px) {
+  .background {
+    height: 800px;
+  }
+}

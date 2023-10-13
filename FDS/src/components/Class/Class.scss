@@ -1,0 +1,76 @@
+.class-box {
+    background-color: beige;
+    border: none !important;
+    border-radius: 5%;
+    margin: 1rem;
+    height: 250px;
+    width: 25%;
+    box-shadow: 1px 2px 10px 4px rgb(116, 114, 114);
+}
+
+.s-class-box {
+    display: flex;
+}
+
+#s-class-icon {
+    background-color: aqua;
+    height: 25PX;
+    width: 25px;
+    border-radius: 25px;
+}
+
+.class-box .class-head {
+    background-color: goldenrod;
+    border: none;
+    border-top-right-radius: 6% !important;
+    border-top-left-radius: 6% !important;
+    text-align: start;
+    height: 40%;
+    padding: 2%;
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+
+.class-box .class-body {
+    height: 45%;
+    border: none;
+    border-top: 1px solid lightgray;
+}
+
+.class-box .class-footer {
+    height: 15%;
+    border: none;
+    border-top: 1px solid lightgray;
+}
+
+.class-head h1 {
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.class-head h2 {
+    font-size: small;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+}
+
+/********** Large devices only **********/
+@media (min-width: 1200px) {}
+
+/********** Medium devices only **********/
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+/********** Small devices only **********/
+@media (min-width: 768px) and (max-width: 991px) {}
+
+/********** Extra small devices only **********/
+@media (max-width: 767px) {}
+
+/********** Super extra small devices Only :-) (e.g., iPhone 4) **********/
+@media (max-width: 479px) {}

@@ -1,0 +1,35 @@
+.background {
+    padding-top: 0px;
+}
+
+.sidebar-container {
+    flex: 1;
+    border-right: 1px solid lightgray;
+}
+
+.nav-top {
+    border-bottom: 1px solid lightgray;
+}
+
+.nav-middle {
+    border-bottom: 1px solid lightgray;
+}
+
+.view-container {
+    flex: 3;
+}
+
+/********** Large devices only **********/
+@media (min-width: 1200px) {}
+
+/********** Medium devices only **********/
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+/********** Small devices only **********/
+@media (min-width: 768px) and (max-width: 991px) {}
+
+/********** Extra small devices only **********/
+@media (max-width: 767px) {}
+
+/********** Super extra small devices Only :-) (e.g., iPhone 4) **********/
+@media (max-width: 479px) {}
