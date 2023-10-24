@@ -1,18 +1,17 @@
 import react from 'react';
-import './Home.scss';
-import '../../Navigation/Navigation.scss'
+import '../Dashboard.scss';
+import '../../../Navigation/Navigation.scss'
 import 'antd/dist/antd.css'
 import { Button } from 'antd';
+import { CalendarOutlined, HomeOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
-import { logOut } from '../../../features/authSlice';
-import { useNavigate } from "react-router-dom"
-import Class from '../../Class/Class.jsx';
-import Footer from '../../Footer/Footer.jsx';
-import NavTop from '../../Navigation/NavTop';
-import NavBotton from '../../Navigation/NavBotton';
-import SidebarClass from '../../Class/SidebarClass.jsx';
+import { logOut } from '../../../../features/auth/authSlice';
+import { NavLink, Outlet, useNavigate } from "react-router-dom"
+import Footer from '../../../Footer/Footer.jsx';
+import NavBotton from '../../../Navigation/NavBotton';
+import SidebarClass from '../../../Class/SidebarClass.jsx';
 
-function StudentHome() {
+function StudentDashboard() {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -32,7 +31,18 @@ function StudentHome() {
             <div className='background'>
                 <div className='sidebar-container'>
                     <div className="nav-top">
-                        <NavTop />
+                        <div className='nav-box'>
+                            <div className='nav-option'>
+                                <HomeOutlined className='nav-icon' />
+                                <NavLink to="/studentDashboard"
+                                    className='nav-link'>Accueil</NavLink>
+                            </div>
+                            <div className='nav-option'>
+                                <CalendarOutlined className='nav-icon' />
+                                <NavLink to="/studentDashboard/calendar"
+                                    className='nav-link'>Calendrier</NavLink>
+                            </div>
+                        </div>
                     </div>
                     <div className="nav-middle">
                         <div className='nav-box'>
@@ -43,16 +53,13 @@ function StudentHome() {
                                 <SidebarClass />
                             </div>
                         </div>
-
                     </div>
                     <div className="nav-botton">
                         <NavBotton />
                     </div>
-
-
                 </div>
                 <div className='view-container'>
-                    <Class />
+                    <Outlet />
                 </div>
 
             </div>
@@ -63,4 +70,4 @@ function StudentHome() {
     );
 }
 
-export default StudentHome
+export default StudentDashboard

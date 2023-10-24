@@ -9,7 +9,7 @@ function Home() {
             <h1>Home page</h1>
             <ul>
                 <li>
-                    <Link to="/teacherHome">Teacher dashboard</Link>
+                    <Link to="/teacherDashboard">Teacher dashboard</Link>
                 </li>
                 <li>
                     <Link to="/login">Login</Link>

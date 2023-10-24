@@ -1,23 +1,25 @@
 import react from 'react';
-import './Home.scss';
-import '../../Navigation/Navigation.scss'
+import '../Dashboard.scss';
+import '../../../Navigation/Navigation.scss'
 import 'antd/dist/antd.css'
 import { Button } from 'antd';
+import { CalendarOutlined, HomeOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
-import { logOut } from '../../../features/authSlice';
-import { NavLink, useNavigate } from "react-router-dom"
-import Class from '../../Class/Class.jsx';
-import Footer from '../../Footer/Footer.jsx';
-import NavTop from '../../Navigation/NavTop';
-import NavBotton from '../../Navigation/NavBotton';
-import SidebarClass from '../../Class/SidebarClass';
+import { logOut } from '../../../../features/auth/authSlice';
+import { NavLink, Outlet, useNavigate } from "react-router-dom"
+import Footer from '../../../Footer/Footer.jsx';
+import NavBotton from '../../../Navigation/NavBotton';
+import SidebarClass from '../../../Class/SidebarClass';
+import { apiSlice } from '../../../../api/apiSlice';
+import { store } from "../../../../stores/store";
 
-function TeacherHome() {
+function TeacherDashboard() {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const logoutHandler = () => {
         dispatch(logOut())
+        store.dispatch(apiSlice.util.resetApiState())
         navigate('/login')
     }
 
@@ -32,7 +34,18 @@ function TeacherHome() {
             <div className='background'>
                 <div className='sidebar-container'>
                     <div className="nav-top">
-                        <NavTop />
+                        <div className='nav-box'>
+                            <div className='nav-option'>
+                                <HomeOutlined className='nav-icon' />
+                                <NavLink to="/teacherDashboard"
+                                    className='nav-link'>Accueil</NavLink>
+                            </div>
+                            <div className='nav-option'>
+                                <CalendarOutlined className='nav-icon' />
+                                <NavLink to="/teacherDashboard/calendar"
+                                    className='nav-link'>Calendrier</NavLink>
+                            </div>
+                        </div>
                     </div>
                     <div className="nav-middle">
                         <div className='nav-box'>
@@ -46,16 +59,13 @@ function TeacherHome() {
                                 <SidebarClass />
                             </div>
                         </div>
-
                     </div>
                     <div className="nav-botton">
                         <NavBotton />
                     </div>
-
-
                 </div>
                 <div className='view-container'>
-                    <Class />
+                    <Outlet />
                 </div>
 
             </div>
@@ -66,4 +76,4 @@ function TeacherHome() {
     );
 }
 
-export default TeacherHome
+export default TeacherDashboard

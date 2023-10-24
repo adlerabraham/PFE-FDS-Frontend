@@ -11,9 +11,9 @@ import {
 import { MailOutlined, UserOutlined, LockOutlined } from '@ant-design/icons'
 import 'antd/dist/antd.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { setCredentials } from '../../../features/authSlice';
+import { setCredentials } from '../../../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
-import { useLoginMutation } from '../../../features/auth/authApiSlice';
+import { useLoginMutation } from '../../../api/ApiEndpoints';
 
 
 function LoginForm() {
@@ -23,7 +23,6 @@ function LoginForm() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // const [login, { isLoading }] = useLoginMutation()
     const [login] = useLoginMutation()
 
     //const user = useSelector(state => console.log(state));
@@ -37,18 +36,31 @@ function LoginForm() {
 
         try {
             const RequestResult = await login(credentials).unwrap()
-            console.log("request result:" + RequestResult);
-            const token = JSON.stringify(RequestResult)
-            console.log(token)
-            //dispatch(setCredentials(token))
+
             dispatch(setCredentials({
                 access: RequestResult.access,
-                refresh: RequestResult.refresh
+                refresh: RequestResult.refresh,
+                group: RequestResult.group
             }))
 
             setUsername('')
             setPassword('')
-            navigate('/teacherHome')
+            const userGroup = localStorage.getItem('group')
+
+            switch (userGroup.toLowerCase()) {
+                case 'teacher':
+                    navigate('/teacherDashboard')
+                    break;
+
+                case 'student':
+                    navigate('/studentDashboard')
+                    break;
+
+                default:
+                    break;
+            }
+
+
         } catch (err) {
             console.log(err);
         }
