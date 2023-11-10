@@ -22,7 +22,7 @@ function SidebarClass() {
                             <div key={course.id} className="s-class-box">
                                 <div id='s-class-icon' className='nav-icon' ></div>
                                 <div className="s-class-title">
-                                    <NavLink to='/teacherDashboard/teacherClass'>
+                                    <NavLink to={'/teacherDashboard/' + course.id}>
                                         {course.name}
                                     </NavLink>
                                 </div>

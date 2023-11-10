@@ -1,3 +1,15 @@
+.class-filters {
+    display: flex;
+    border-bottom: 1px solid lightgray;
+    height: 40px;
+    align-items: center;
+}
+
+.level {
+    margin-left: 40px;
+}
+
+
 /********** Large devices only **********/
 @media (min-width: 1200px) {}
 

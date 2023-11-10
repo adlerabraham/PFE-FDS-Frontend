@@ -1,22 +1,23 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import React from 'react'
+import { NavLink, Outlet, useOutletContext } from 'react-router-dom'
 import './TeacherClass.scss'
-import { CalendarOutlined } from '@ant-design/icons'
+import { CalendarOutlined, SettingOutlined } from '@ant-design/icons'
 
 function TeacherClass() {
+    let [classID] = useOutletContext()
     return (
         <div>
             <div className="class-header">
                 <div className="class-header-text">
                     <div className="text-option">
-                        <NavLink to="">Niveaux</NavLink>
-                    </div>
-                    <div className="text-option">
-                        <NavLink to="/teacherDashboard/teacherclass/classParticipants">
+                        <NavLink to={"/teacherDashboard/" + classID + "/teacherclass/classParticipants"}>
                             Personnes
                         </NavLink>
                     </div>
                     <div className="text-option">
-                        <NavLink to="/teacherDashboard/teacherclass/NoteCards">Releve de notes</NavLink>
+                        <NavLink to={"/teacherDashboard/" + classID + "/teacherclass/NoteCards"}>
+                            Releve de notes
+                        </NavLink>
                     </div>
                 </div>
                 <div className="class-header-icon">
@@ -26,14 +27,16 @@ function TeacherClass() {
                         </NavLink>
                     </div>
                     <div className="icon-option">
-                        <NavLink to="" className="center-icon-option">IC2</NavLink>
+                        <NavLink to="" className="center-icon-option">
+                            <SettingOutlined />
+                        </NavLink>
                     </div>
                 </div>
             </div>
             <div className="class-body">
-                <Outlet />
+                <Outlet context={[classID]} />
             </div>
-        </div>
+        </div >
     )
 }
 
