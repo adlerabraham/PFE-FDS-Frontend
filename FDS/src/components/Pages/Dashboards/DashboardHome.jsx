@@ -32,9 +32,8 @@ function DashbordHome() {
                     )
                 } else {
 
-                    // //Enregistrer les cours dans le state
+                    //Enregistrer les cours 
                     localStorage.setItem('classTable', JSON.stringify(courses))
-
 
                     return (
 

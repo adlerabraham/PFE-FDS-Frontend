@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCredentials } from '../../../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../../../api/ApiEndpoints';
+import './Login.scss';
 
 
 function LoginForm() {
@@ -51,12 +52,14 @@ function LoginForm() {
                 case 'teacher':
                     navigate('/teacherDashboard')
                     break;
-
                 case 'student':
                     navigate('/studentDashboard')
                     break;
-
+                case 'coordinator':
+                    navigate('/coordinatorDashboard')
+                    break;
                 default:
+                    navigate('/')
                     break;
             }
 
@@ -88,34 +91,34 @@ function LoginForm() {
                 >
                     <Form.Item
                         name="username"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
+                        rules={[{ required: true, message: 'Entrez votre identifiant!' }]}
                     >
                         <Input
-                            placeholder='Username'
+                            placeholder='Identifiant'
                             value={usern}
                             onChange={(e) => setUsername(e.target.value)} />
                     </Form.Item>
 
                     <Form.Item
                         name="password"
-                        rules={[{ required: true, message: 'Please input your password!' }]}
+                        rules={[{ required: true, message: 'Entrez votre mot de passe!' }]}
                     >
                         <Input.Password
                             prefix={<LockOutlined className="site-form-item-icon" />}
-                            placeholder='Password'
+                            placeholder='Mot de passe'
                             value={paswd}
                             onChange={(e) => setPassword(e.target.value)} />
                     </Form.Item>
                     <Form.Item className='form-options'>
                         <Form.Item name="remember" valuePropName="checked" className='form-remember'>
-                            <Checkbox>Remember me</Checkbox>
+                            <Checkbox style={{ fontWeight: 'normal' }}>Se souvenir de moi</Checkbox>
                         </Form.Item>
                         <div className='forgot-password'>
                             <div className='ant-form-item-control-input'>
                                 <MailOutlined />
                                 {/*  */}
                                 <Typography.Link href="#"
-                                    target='_blank'>
+                                    target='_blank' style={{ fontWeight: 'normal' }}>
                                     Mot de passe oublié?
                                 </Typography.Link>
                             </div>
@@ -123,7 +126,7 @@ function LoginForm() {
 
                     </Form.Item>
                     <Form.Item >
-                        <Button type="primary" htmlType="submit">
+                        <Button className="custom-button1" type="primary" htmlType="submit">
                             CONNEXION
                         </Button>
                     </Form.Item>

@@ -1,21 +1,18 @@
-import react from 'react';
+import React, { useEffect } from 'react';
 import './Home.jsx';
 import 'antd/dist/antd.css'
-import { Link } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 function Home() {
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        navigate('/login')
+    }, [])
+
     return (
         <div>
-            <h1>Home page</h1>
-            <ul>
-                <li>
-                    <Link to="/teacherDashboard">Teacher dashboard</Link>
-                </li>
-                <li>
-                    <Link to="/login">Login</Link>
-
-                </li>
-            </ul>
+            <Outlet />
         </div>
     );
 }

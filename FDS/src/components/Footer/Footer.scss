@@ -1,8 +1,51 @@
+// .footer {
+//     background-color: rgb(255, 255, 255);
+// }
+
+// .footer-logo {
+//     margin-top: 20px;
+
+// }
+
+
+
+
+
+//footer.scss
 .footer {
-    background-color: rgb(255, 255, 255);
+    background-color: #184291;
+    padding: 5vh;
+    text-align: center;
+    color: #fff;
 }
 
 .footer-logo {
     margin-top: 20px;
-
 }
+
+.Space {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.footer-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;  // Ajout de la taille du texte
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+
+
+
+
+
+

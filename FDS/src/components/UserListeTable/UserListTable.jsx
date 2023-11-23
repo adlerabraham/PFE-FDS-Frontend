@@ -5,15 +5,21 @@ const columns = [
   {
     title: 'Code',
     dataIndex: 'code',
+    className: 'code', 
   },
-  {
-    title: 'Prenom',
-    dataIndex: 'prenom',
-  },
+
   {
     title: 'Nom',
     dataIndex: 'nom',
+    className: 'nom',
   },
+  
+  {
+    title: 'Prénom',
+    dataIndex: 'prenom',
+    className: 'prenom',
+  },
+
 ];
 
 function UserListTable(props) {
@@ -21,7 +27,15 @@ function UserListTable(props) {
   return (
     <Table columns={columns}
       bordered
-      dataSource={props.data} />
+      dataSource={props.data} 
+      pagination={{
+        pageSize: 15, 
+      }}
+      locale={{
+        emptyText: 'Pas de données disponibles', // Personnalisez le message ici
+      }}
+      />
   )
 }
 export default UserListTable;
+

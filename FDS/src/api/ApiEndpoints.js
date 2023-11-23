@@ -38,6 +38,62 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 methode: 'GET'
             })
         }),
+        //CRUD operation for the grades
+        getStudentGrades: builder.query({
+            query: (params) => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: "note/grade/?transcript_id=" + params.examenID,
+                methode: 'GET'
+            }),
+            providesTags: ['grades']
+        }),
+        createGrades: builder.mutation({
+            query: (params) => ({
+                url: 'note/first-entry-temp/create/?transcript_id=' + params.transcriptID,
+                method: 'POST',
+                body: { ...params.gradeList }
+            }),
+            invalidatesTags: ['grades']
+        }),
+        updateGrades: builder.mutation({
+            query: (params) => ({
+                url: 'note/first-entry-temp/update/?transcript_id=' + params.transcriptID,
+                method: 'PUT',
+                body: { ...params.gradeList }
+            }),
+            invalidatesTags: ['grades']
+        }),
+        //*****Coordinator endpoints****
+        getPrograms: builder.query({
+            query: () => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: "academic/coordinator/program",
+                methode: 'GET'
+            })
+        }),
+        getLevels: builder.query({
+            query: (params) => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: "academic/coordinator/program/level/?program_id=" + params.programID,
+                methode: 'GET'
+            })
+        }),
+        getCourses: builder.query({
+            query: (params) => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: "academic/coordinator/program/level/course/?program_id=" + params.programID
+                    + "&level_id=" + params.levelID,
+                methode: 'GET'
+            })
+        }),
     })
 })
 
@@ -46,4 +102,10 @@ export const {
     useGetClassQuery,
     useGetSudentsQuery,
     useGetNoteCardListQuery,
+    useGetStudentGradesQuery,
+    useCreateGradesMutation,
+    useUpdateGradesMutation,
+    useGetProgramsQuery,
+    useGetLevelsQuery,
+    useGetCoursesQuery,
 } = authApiSlice

@@ -1,11 +1,14 @@
 .class-box {
-    background-color: beige;
-    border: none !important;
+    padding: 2px;
+    float: left;
+    background-color: rgb(255, 255, 255);
+    border: none;
     border-radius: 5%;
-    margin: 1rem;
-    height: 250px;
-    width: 25%;
-    box-shadow: 1px 2px 10px 4px rgb(116, 114, 114);
+    margin: 2vh;
+    height: 40vh;
+    width: 40vh;
+    box-shadow: 1px 2px 10px 4px lightgray;
+    text-decoration: none;
 }
 
 .s-class-box {
@@ -14,22 +17,54 @@
     margin-bottom: 20px;
 }
 
-#s-class-icon {
-    background-color: aqua;
-    height: 25PX;
-    width: 25px;
-    border-radius: 25px;
+// #s-class-icon {
+//     //background-color: rgba(14, 50, 253, 0.349);
+//     height: 5px;
+//     width: 5px;
+//     border-radius: 5px;
+//     margin-right: 5px;
+//     margin-left : 50px;
+
+// }
+
+
+
+.s-class-title {
+    margin-left: 25px;
 }
 
+
+.s-class-title a {
+    text-decoration: none;
+    text-transform: uppercase;
+    text-overflow: ellipsis;
+    margin-left: 5px;
+    white-space: nowrap;
+    /* Empêche le texte de passer à la ligne */
+    overflow: hidden;
+    /* Masque le texte qui dépasse */
+    //color : black;
+    //line-height: 0vh;
+}
+
+
+
+
+// :root {
+//     --class-head-color: rgb(160, 201, 49); // Couleur par défaut
+// }
+
 .class-box .class-head {
-    background-color: goldenrod;
+    background-color: var(--class-head-color);
+    //background-color: goldenrod;
     border: none;
-    border-top-right-radius: 6% !important;
-    border-top-left-radius: 6% !important;
+    border-top-right-radius: 6%;
+    border-top-left-radius: 6%;
     text-align: start;
     height: 40%;
     padding: 2%;
     overflow: auto;
+    text-decoration: none;
 }
 
 ::-webkit-scrollbar {
@@ -40,26 +75,121 @@
 .class-box .class-body {
     height: 45%;
     border: none;
-    border-top: 1px solid lightgray;
+    border-top: 1px solid rgb(218, 214, 214);
 }
 
 .class-box .class-footer {
     height: 15%;
     border: none;
-    border-top: 1px solid lightgray;
+    border-top: 1px solid rgb(211, 211, 211);
 }
 
-.class-head h1 {
-    font-size: medium;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
+.class-head {
+
+    h1 {
+        font-size: large;
+        font-family: Arial, Helvetica, sans-serif;
+        padding-top: 10px;
+        margin: 0 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        /* Empêche le texte de passer à la ligne */
+        overflow: hidden;
+        /* Masque le texte qui dépasse */
+        //color : blue;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    a {
+        text-decoration: none;
+    }
 }
+
+
+
+.class-footer h6 {
+    font-size: x-small;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 10px;
+    margin: 0 10px;
+    //font-weight: bold;
+    text-transform: uppercase;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* Empêche le texte de passer à la ligne */
+    overflow: hidden;
+    /* Masque le texte qui dépasse */
+    //color : blue;
+
+}
+
+
 
 .class-head h2 {
     font-size: small;
+    margin: 10px;
     font-family: Arial, Helvetica, sans-serif;
-    font-weight: 100;
+    font-weight: 200;
+    text-transform: uppercase;
+}
+
+:root {
+    --class1-head-color: rgb(160, 201, 49);
+    --class2-head-color: #ff5733;
+    --class3-head-color: #3366cc;
+    --class4-head-color: #cd2ddb;
+    --class5-head-color: #f50c78;
+    --class6-head-color: #dace29;
+    --class7-head-color: #c2be7e;
+    --class8-head-color: #15839e;
+    --class9-head-color: #f01e17;
+    --class10-head-color: #e4e141;
+
+}
+
+.class-head.class1 {
+    background-color: var(--class1-head-color);
+}
+
+.class-head.class2 {
+    background-color: var(--class2-head-color);
+}
+
+.class-head.class3 {
+    background-color: var(--class3-head-color);
+}
+
+.class-head.class4 {
+    background-color: var(--class4-head-color);
+}
+
+.class-head.class5 {
+    background-color: var(--class5-head-color);
+}
+
+.class-head.class6 {
+    background-color: var(--class6-head-color);
+}
+
+.class-head.class7 {
+    background-color: var(--class7-head-color);
+}
+
+.class-head.class8 {
+    background-color: var(--class8-head-color);
+}
+
+.class-head.class9 {
+    background-color: var(--class9-head-color);
+}
+
+.class-head.class10 {
+    background-color: var(--class10-head-color);
 }
 
 /********** Large devices only **********/
@@ -75,4 +205,8 @@
 @media (max-width: 767px) {}
 
 /********** Super extra small devices Only :-) (e.g., iPhone 4) **********/
-@media (max-width: 479px) {}
+@media (max-width: 479px) {
+    .class-box {
+        width: 30vh;
+    }
+}

@@ -1,72 +1,161 @@
-.background {
-  background-color: #38b6ff;
-  padding-top: 2rem;
-  display: flex;
+// //Login.scss
+
+
+.zoomable-image {
+  width: 100%;
+  //margin-top: 25vh; 
+  //animation: zoomAnimation 5s infinite alternate; // 5s duree de l'animation, "infinite" la rend continue, "alternate" pour l'effet de zoom/dézoom
 }
 
-.background {
-  .login-right-side {
-    display: flex !important;
-    vertical-align: middle;
+@media (min-width: 990px) {
+  .zoomable-image {
+    width: 30%; 
+    // padding: 0vh;
+    margin-top: 17vh; 
+    //margin-bottom: 10vh;
+    animation: zoomAnimation 5s infinite alternate;
+  }
+  }
+@media (max-width: 990px) {
+  .zoomable-image {
+    width: 30%; // Ajustez la largeur selon vos besoins
+    //margin-top: 17vh; // Ajustez la valeur selon vos besoins pour les écrans de 1200 pixels ou plus
+    //margin-bottom: 7vh;
+    // margin-left: auto;
+    // margin-right: auto;
   }
 }
 
-.div-form {
-  width: 100%;
-  margin: auto;
+
+@keyframes zoomAnimation {
+  0% {
+    transform: scale(1); // Pas de zoom au début de l'animation
+  }
+  50% {
+    transform: scale(1.2); // Zoom à 120% à mi-chemin de l'animation
+  }
+  100% {
+    transform: scale(1); // Retour à la taille normale à la fin de l'animation
+  }
 }
 
-.form-option {
-  width: 60%;
-}
+// .container-fluid {
+//   width: 100%;
+//   padding : 5vh;
+//   padding-right: 15px;
+//   padding-left: 15px;
+//   margin-right: auto;
+//   margin-left: auto;
+//   min-height: 100vh; 
+//   box-sizing: border-box; 
+//   max-width: 100%;
+//   max-height: 100%;
+// }
 
-.forgot-password {
-  display: inline-block;
-  height: 100%;
-}
+// .container {
+//   height: 100vh; 
+//   box-sizing: border-box; 
+//   max-width: 100%;
+//   max-height: 100%;
+// }
 
-.form-remember {
-  display: inline-block;
-}
+// .background {
+//   background-color: #ffffff;
+//   padding-top: 2rem;
+//   display: flex;
+// }
 
-.form-container {
-  display: flex;
-  align-items: center;
-}
+// .background .login-right-side {
+//   display: flex !important;
+//   vertical-align: middle;
+// }
 
-.user-group-icon {
-  margin-bottom: 20px;
-}
+// .div-form {
+//   width: 100%;
+//   margin: auto;
+// }
 
-#basic_username.ant-input {
-  border-radius: 30px;
-  height: 70px;
-  width: 60%;
-  background-color: rgba(255, 255, 255, 0.4);
-  border: none;
-}
+// .form-option {
+//   width: 60%;
+// }
 
+// .forgot-password {
+//   display: inline-block;
+//   height: 100%;
+//   margin-left: 30px;
+// }
+
+// .form-remember a {
+//   text-decoration: none;
+//   display: inline-block;
+//   margin-left: 30px;
+//   font-size: 30%;
+// }
+
+
+// .user-group-icon {
+//   margin-bottom: 20px;
+// }
+
+
+// .form-container {
+
+//   display: flex;
+//   align-items: center;
+//   //height: 100%;
+//   // margin-top: 35vh; 
+//   // margin-bottom: 35vh; 
+
+//   @media (max-width: 990px) {
+//     margin-top: 5vh; 
+//     margin-bottom: 5vh;
+//     //height: 100%;
+
+//   }
+
+//   @media (min-width: 990px) {
+//     margin-top: 10vh; 
+//     //margin-bottom: 10vh;
+//     //height: 100%;
+//   }
+// }
+
+
+
+
+
+#basic_username.ant-input,
 .ant-input-password {
-  height: 70px;
+  border: 2px solid var(--mdc-theme-primary);
   border-radius: 30px;
+  height: 60px;
   width: 60%;
-  background-color: rgba(255, 255, 255, 0.4);
-  border: none;
+  background-color: #ffffff;
+  border: 1px solid #184291; 
 }
 
-#basic_password.ant-input {
+.ant-input-password:focus,
+#basic_username.ant-input:focus {
+  border: 1px solid #184291; 
+}
+
+.ant-form-item-control-input svg{
+  margin-right: 8px;
+}
+
+.background #basic_password.ant-input {
   background-color: rgba(255, 255, 255, 0.0);
 }
 
-.ant-input::placeholder {
+.background .ant-input::placeholder {
   text-align: center;
   color: black;
   font-size: medium;
 }
 
-.ant-btn {
-  background-color: white;
-  color: black;
+.background .ant-btn {
+  background-color: #e9ec1a;
+  color: rgb(219, 255, 14);
   width: 30%;
   height: 55px;
   border-radius: 25px;
@@ -75,80 +164,312 @@
   margin-bottom: 30px;
 }
 
-button>span {
+
+.custom-button1 {
+  background-color: #ff5722;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  font-size: medium;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 20px 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  line-height: normal; 
+  
+  &:hover {
+    background-color: #e64a19;
+  }
+}
+
+
+
+
+.background button>span {
   font-size: medium;
 }
 
 
-/********** Large devices only **********/
-@media (min-width: 1200px) {
-  .background {
-    .login-right-side {
-      display: flex !important;
-      vertical-align: middle;
-    }
+/* Ajoutez ces styles dans votre feuille de style CSS */
+.form-remember .ant-checkbox-inner {
+  font-weight: normal  !important; /* Enlève le style "bold" du texte */
+}
+
+
+
+// /********** Large devices only **********/
+// @media (min-width: 1200px) {
+//   .background {
+//     .login-right-side {
+//       display: flex !important;
+//       vertical-align: middle;
+//     }
+//   }
+// }
+
+// /********** Medium devices only **********/
+// @media (min-width: 992px) and (max-width: 1199px) {
+//   .background {
+//     .login-right-side {
+//       display: flex !important;
+//       vertical-align: middle;
+//     }
+//   }
+// }
+
+// /********** Small devices only **********/
+// @media (min-width: 768px) and (max-width: 991px) {
+//   .background {
+//     .login-right-side {
+//       display: flex !important;
+//       vertical-align: middle;
+//     }
+//   }
+// }
+
+// /********** Extra small devices only **********/
+// @media (max-width: 767px) {
+
+
+// }
+
+
+
+/* Ajoutez ces styles pour le header */
+.header {
+  height: 15vh; /* Ajustez la hauteur selon vos préférences, par exemple 10% de la hauteur de la vue */
+  // background-color: #333; /* Couleur de fond du header */
+  // color: #fff; /* Couleur du texte du header */
+  // width: 100%;
+}
+
+
+// .main-content {
+//   min-height: 80vh; /* Ajustez la hauteur minimale selon vos préférences, par exemple 80% de la hauteur de la vue */
+// }
+
+
+.footer {
+  height: 10vh; /* Ajustez la hauteur selon vos préférences, par exemple 10% de la hauteur de la vue */
+  // background-color: #333; /* Couleur de fond du footer */
+  // color: #fff; /* Couleur du texte du footer */
+}
+
+
+
+
+// body {
+//   margin: 0; 
+// }
+
+
+
+
+// body, html {
+//   height: 100%;
+//   margin: 0;
+//   padding: 0;
+// }
+
+
+
+// #root {
+//   height: 100%;
+//   display: flex;
+//   flex-direction: column;
+// }
+
+
+// .container-fluid {
+//   flex: 1;
+//   //margin: 20px; /* Ajustez la marge selon vos besoins */
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// /* Ajoutez ces styles pour le formulaire et ses éléments */
+// .form-container {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   height: 100vh; /* Assurez-vous que le formulaire prend toute la hauteur de la vue */
+// }
+
+// .div-form {
+//   width: 100%;
+//   max-width: 400px; /* Ajustez la largeur maximale du formulaire selon vos préférences */
+//   padding: 20px;
+//   border: 1px solid #d9d9d9;
+//   border-radius: 8px;
+//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+//   background-color: #fff;
+// }
+
+// .user-group-icon {
+//   text-align: center;
+// }
+
+// /* Ajoutez ces styles pour les champs de saisie */
+// .ant-input {
+//   border-radius: 4px;
+// }
+
+// /* Ajoutez ces styles pour le bouton de connexion */
+// .custom-button {
+//   width: 100%;
+//   background-color: #1890ff;
+//   border-color: #1890ff;
+//   border-radius: 4px;
+// }
+
+// /* Ajoutez ces styles pour les options du formulaire */
+// .form-options {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+// }
+
+// .form-remember {
+//   display: flex;
+//   align-items: center;
+// }
+
+// .forgot-password {
+//   display: flex;
+//   align-items: center;
+// }
+
+
+/* Ajoutez ces styles pour les liens de mot de passe oublié */
+.ant-typography-link {
+  display: flex;
+  align-items: center;
+  color: #1890ff;
+}
+
+/* Ajoutez ces styles pour rendre le formulaire responsive */
+@media (max-width: 768px) {
+  .div-form {
+    max-width: 100%;
   }
 }
 
-/********** Medium devices only **********/
-@media (min-width: 992px) and (max-width: 1199px) {
-  .background {
-    .login-right-side {
-      display: flex !important;
-      vertical-align: middle;
-    }
+
+
+
+
+
+
+
+// /* Ajoutez ces styles pour le conteneur de l'image Bienvenue */
+// .zoomable-image {
+//   display: block;
+//   margin: 0 auto; /* Centre l'image horizontalement */
+//   max-width: 100%; /* Assurez-vous que l'image ne dépasse pas la largeur du conteneur */
+//   max-height: 100%; /* Assurez-vous que l'image ne dépasse pas la hauteur du conteneur */
+// }
+
+
+
+
+.form-container {
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  //height: 100%;
+  // margin-top: 35vh; 
+  // margin-bottom: 35vh; 
+
+  @media (max-width: 990px) {
+    // margin-top: 5vh; 
+    // margin-bottom: 5vh;
+    //height: 100%;
+
+  }
+
+  @media (min-width: 990px) {
+    // margin-top: 10vh; 
+    //margin-bottom: 10vh;
+    //height: 100%;
   }
 }
 
-/********** Small devices only **********/
-@media (min-width: 768px) and (max-width: 991px) {
-  .background {
-    .login-right-side {
-      display: flex !important;
-      vertical-align: middle;
-    }
-  }
+
+
+
+
+
+/* Ajoutez ces styles pour le conteneur du formulaire */
+.div-form {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Centre le texte à l'intérieur du formulaire */
 }
 
-/********** Extra small devices only **********/
-@media (max-width: 767px) {
-
-
-  .login-left-side {
-    margin: auto;
-  }
-
-
-  .top-logo {
-    margin-bottom: 20px;
-  }
-
-  #basic_username.ant-input {
-    height: 55px;
-    border-radius: 20px;
-    width: 90%;
-  }
-
-  .ant-input-password {
-    height: 55px;
-    border-radius: 20px;
-    width: 90%;
-  }
-
-  button>span {
-    font-size: small;
-  }
-
-  .ant-btn {
-    width: 50%;
-    height: 40px;
-    border-radius: 15px;
-  }
+/* Ajoutez ces styles pour le conteneur de l'icône du groupe d'utilisateurs */
+.user-group-icon {
+  margin-bottom: 20px;
 }
 
-/********** Super extra small devices Only :-) (e.g., iPhone 4) **********/
-@media (max-width: 479px) {
-  .background {
-    height: 800px;
-  }
+
+
+
+
+
+
+
+
+
+
+
+/* Ajoutez ces styles pour le conteneur des options du formulaire */
+.form-options {
+  display: flex;
+  flex-direction: column; /* Ajuste la disposition pour les options du formulaire */
+  gap: 10px; /* Ajoute un espace entre les éléments verticalement */
 }
+
+/* Ajoutez ces styles pour le conteneur de l'icône de l'enveloppe et le lien "Mot de passe oublié" */
+.forgot-password {
+  //display: flex;
+  align-items: center;
+  justify-content: center;
+  display: inline-block;
+  // height: 100%;
+  margin-left: 30px;
+}
+
+.forgot-password a {
+  margin-left: 5px;
+}
+
+.form-remember {
+  display: inline-block;
+  margin-left: 30px;
+  font-size: 30%;
+}
+
+

@@ -1,0 +1,58 @@
+.coordinator-dashboard-bar {
+    background-color: #ffffff;
+    padding: 10px 10px;
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    //align-items: center;
+    border-bottom: 1px solid rgb(198, 216, 243);
+
+
+    .ant-btn {
+        margin-right: 10px;
+        color: #000000;
+        margin-left: auto;
+    }
+
+    .ant-input {
+        margin-right: 10px;
+        background-color: #f0f2f5;
+        color: #000000;
+        border: none;
+        border-radius: 5px;
+        margin-left: auto;
+    }
+
+    .ant-dropdown-trigger {
+        color: #1890ff;
+        margin-left: auto;
+    }
+
+    .ant-avatar {
+        margin-left: 0px;
+        margin-left: auto;
+
+    }
+
+    .menu-button {
+        position: relative;
+        margin-right: auto;
+        margin-left: 10px;
+    }
+
+}
+
+/********** Large devices only **********/
+@media (min-width: 1200px) {}
+
+/********** Medium devices only **********/
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+/********** Small devices only **********/
+@media (min-width: 768px) and (max-width: 991px) {}
+
+/********** Extra small devices only **********/
+@media (max-width: 767px) {}
+
+/********** Super extra small devices Only :-) (e.g., iPhone 4) **********/
+@media (max-width: 479px) {}

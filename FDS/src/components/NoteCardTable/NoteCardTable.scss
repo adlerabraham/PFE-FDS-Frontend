@@ -1,17 +1,235 @@
-.editable-cell {
-    position: relative;
-}
 
-.editable-cell-value-wrap {
-    padding: 5px 12px;
+// UserListTable.scss
+
+
+// ant-table {
+//     margin: auto; 
+//     height: 10% I !important; 
+//   }
+  
+  // Style pour les cellules de l'en-tête
+
+  
+
+  .save-container {
+    display: inline-flex;
+    align-items: center;
     cursor: pointer;
+  }
+  
+  .save-icon {
+    font-size: 18px; // Ajustez la taille de l'icône selon vos besoins
+    margin-right: 5px; // Ajustez la marge entre l'icône et le texte selon vos besoins
+    color: #1890ff; // Couleur de l'icône
+  }
+  
+  .save-container:hover .save-icon {
+    color: #0050b3; // Couleur de l'icône au survol
+  }
+  
+  .save-container:hover span {
+    color: #0050b3; // Couleur du texte au survol
+  }
+  
+
+  .ant-table-cell.code {
+    width: 2%; 
+    //background-color: #ee7b1d;
+    text-align: center;
+  }
+  
+
+  .ant-table-cell.nom {
+    width: 30%;
+  }
+
+
+  .ant-table-cell.prenom {
+    width: 30%; 
+  }
+  
+
+
+  .ant-table-cell.partiel {
+    width: 20%;
+  }
+
+
+  .ant-table-cell.final {
+    width: 20%;
+  }
+
+.ant-table.ant-table-bordered {
+  margin: auto;
+  width: 50%;
+  border: 1px solid #ffffff; // Couleur des bordures de la table
+  //font-family: 'VotrePolice', sans-serif; // Remplacez 'VotrePolice' par la police que vous souhaitez utiliser
 }
 
-.editable-row:hover .editable-cell-value-wrap {
-    padding: 4px 11px;
-    border: 1px solid #d9d9d9;
-    border-radius: 2px;
+.ant-table-thead > tr > th {
+  background-color: #ee7b1d;
+  color: #000000; 
+  line-height: 1vh; 
 }
+
+.ant-table-tbody > tr:hover > td {
+  background-color: #ffffff !important; 
+}
+
+.ant-table-tbody > tr > td {
+  //height: 30px;
+  line-height: 2vh; // Ajustez la ligne hauteur si nécessaire
+}
+
+
+// Autres styles de police
+.ant-table-cell.code, .ant-table-cell.nom, .ant-table-cell.prenom .ant-table-cell.partiel .ant-table-cell.final {
+  font-family: 'VotrePolice', sans-serif; // Remplacez 'VotrePolice' par la police que vous souhaitez utiliser
+  font-size: 15px; // Taille de la police
+}
+
+
+.ant-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 5vh; 
+}
+
+.ant-pagination-item,
+.ant-pagination-prev,
+.ant-pagination-next {
+  border: 1px solid #f0eaea; // Couleur de la bordure des boutons
+  //background-color: #a4cfe9; // Couleur de fond des boutons
+  color: #000000; // Couleur du texte des boutons
+  margin: 0 7px; // Marge entre les boutons
+  transition: background-color 0.3s ease; // Animation de transition
+}
+
+.ant-pagination-item-active,
+.ant-pagination-item:hover,
+.ant-pagination-prev:hover,
+.ant-pagination-next:hover {
+  background-color: #ee7b1d; // Couleur de fond des boutons au survol ou actif
+  //border-color: #001529; // Couleur de la bordure des boutons au survol ou actif
+  color: #fff; // Couleur du texte des boutons au survol ou actif
+}
+
+
+
+.ant-table .editable-cell {
+    position: relative;
+    width: 10px !important;
+    min-height: 30px !important; /* Remplacez par la hauteur souhaitée */
+    pointer-events: auto !important;
+    border: none !important; 
+}
+
+
+
+.custom-size-cell {
+  width: 17% !important; /* Remplacez 100px par la largeur que vous souhaitez */
+  height: 20% !important; // Ajustez la ligne hauteur si nécessaire
+  // position: relative;
+  // width: 10px !important;
+  //min-height: 30px !important;
+  //pointer-events: auto !important;
+  //border: none !important;
+}
+
+
+//Bouton OPTIONS pour modifier le tableau en general dans le view
+.custom-button {
+  //display: inline-flex;
+  margin-right: 42%;
+  background: lighten(rgb(124, 121, 121), 15%) !important; 
+  border: 1px solid lighten(rgb(0, 0, 0), 25%) !important; 
+  width: 90px !important;
+  height: 30px !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+
+  &:hover {
+
+    background: rgb(52, 132, 212) !important;
+
+  }
+
+  &:focus {
+
+    background: rgb(52, 132, 212) !important;
+
+  }
+
+}
+
+
+
+.custom-button-text {
+  display: inline-flex !important;
+  font-size: 14px !important;
+  font-weight: normal !important; 
+  color: black;
+}
+
+
+
+
+// .custom-checkbox {
+//   width: 15px !important;
+//   height: 15px !important;
+//   border: 1px solid #000 !important;
+//   border-radius: 3px;
+// }
+
+// .remember-text {
+//   font-size: 14px;
+//   font-weight: normal;
+// }
+
+
+
+
+/* Style pour faire pivoter les points verticalement */
+.custom-button .anticon-ellipsis {
+  transform: rotate(90deg); 
+  color: #000000;
+}
+
+/* Style pour le bouton dans le header */
+.custom-column-header .ant-dropdown-trigger {
+  //margin-left: 20px; /* Ajustez la marge pour l'espacement du bouton */
+  margin-bottom: 0px;
+  //margin-right: 10px;
+  //display: flex;
+  text-align: center !important;
+  background: transparent !important;
+  width: 2vh !important;
+  height: 0% !important;
+  border: none !important;
+  cursor: pointer;
+  color: #d9d9d9;
+}
+
+.custom-column-header svg{
+  margin-right : 5px;
+}
+
+/* Style pour faire pivoter les points verticalement */
+.custom-column-header .anticon-ellipsis {
+  transform: rotate(90deg); 
+}
+
+
+.ant-btn-icon-only > .anticon {
+  display : inline-flex;
+  justify-content: center;
+}
+
+
+
+
+
+
 
 /********** Large devices only **********/
 @media (min-width: 1200px) {}

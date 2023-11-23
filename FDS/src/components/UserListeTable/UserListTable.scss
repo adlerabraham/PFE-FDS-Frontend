@@ -1,3 +1,92 @@
+// UserListTable.scss
+
+
+// .ant-table {
+//     margin: auto; 
+//     width: 50%; 
+//   }
+  
+  // Style pour les cellules de l'en-tête
+
+  
+  .ant-table-cell.code {
+    width: 2%; 
+    //background-color: #ee7b1d;
+    text-align: center;
+  }
+  
+
+  .ant-table-cell.prenom {
+    width: 20%; 
+  }
+  
+
+   .ant-table-cell.nom {
+    width: 20%;
+  }
+
+
+.ant-table.ant-table-bordered {
+  margin: auto;
+  width: 50%;
+  border: 1px solid #ffffff; // Couleur des bordures de la table
+  //font-family: 'VotrePolice', sans-serif; // Remplacez 'VotrePolice' par la police que vous souhaitez utiliser
+}
+
+.ant-table-thead > tr > th {
+  background-color: #ee7b1d;
+  color: #000000; 
+}
+
+.ant-table-tbody > tr:hover > td {
+  background-color: #369ece !important; 
+}
+
+.ant-table-tbody > tr > td {
+  //height: 30px;
+  line-height: 2vh; // Ajustez la ligne hauteur si nécessaire
+}
+
+
+// Autres styles de police
+.ant-table-cell.code, .ant-table-cell.nom, .ant-table-cell.prenom {
+  font-family: 'VotrePolice', sans-serif; // Remplacez 'VotrePolice' par la police que vous souhaitez utiliser
+  font-size: 15px; // Taille de la police
+}
+
+
+.ant-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 5vh; 
+}
+
+.ant-pagination-item,
+.ant-pagination-prev,
+.ant-pagination-next {
+  border: 1px solid #f0eaea; // Couleur de la bordure des boutons
+  //background-color: #a4cfe9; // Couleur de fond des boutons
+  color: #000000; // Couleur du texte des boutons
+  margin: 0 7px; // Marge entre les boutons
+  transition: background-color 0.3s ease; // Animation de transition
+}
+
+.ant-pagination-item-active,
+.ant-pagination-item:hover,
+.ant-pagination-prev:hover,
+.ant-pagination-next:hover {
+  background-color: #ee7b1d; // Couleur de fond des boutons au survol ou actif
+  //border-color: #001529; // Couleur de la bordure des boutons au survol ou actif
+  color: #fff; // Couleur du texte des boutons au survol ou actif
+}
+
+
+
+
+
+
+
+
 /********** Large devices only **********/
 @media (min-width: 1200px) {}
 

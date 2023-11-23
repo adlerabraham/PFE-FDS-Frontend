@@ -1,14 +1,14 @@
 import React from 'react'
 import './StudentList.scss'
-import { useOutletContext } from 'react-router-dom'
+import { useOutletContext, useParams } from 'react-router-dom'
 import { useGetSudentsQuery } from '../../../../api/ApiEndpoints'
 import UserListTable from '../../../UserListeTable/UserListTable'
 
 function StudentList() {
-    let [classID] = useOutletContext()
+    let [classID, periodID] = useOutletContext()
+    const params = useParams()
     const classId = Number(classID)
-    let periodID = 1
-    let levelID = 1
+    let levelID = params.levelID
     const studentList = []
 
     const { data: list, isError, isLoading, error } = useGetSudentsQuery({ classId, periodID, levelID })
@@ -18,7 +18,7 @@ function StudentList() {
             list.map((student) => (
                 studentList.push({
                     key: student.id,
-                    code: student.id,
+                    code: student.student_code,
                     prenom: student.first_name,
                     nom: student.last_name,
                 })

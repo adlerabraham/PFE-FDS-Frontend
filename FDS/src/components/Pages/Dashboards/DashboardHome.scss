@@ -1,5 +1,14 @@
 .dashb-home-container {
-    display: flex;
+  display: inline-block;
+  margin-left: 5vh;
+  margin-top: 2vh;
+  margin-bottom: 4vh;
+
+  @media (min-width: 0px) {
+    margin-top: 2vh;
+    margin-bottom: 25vh; 
+  }
+
 }
 
 
@@ -17,4 +26,8 @@
 @media (max-width: 767px) {}
 
 /********** Super extra small devices Only :-) (e.g., iPhone 4) **********/
-@media (max-width: 479px) {}
+@media (max-width: 479px) {
+  .dashb-home-container {
+    display: block;
+  }
+}

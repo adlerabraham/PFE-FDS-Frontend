@@ -1,0 +1,129 @@
+// // Header.scss
+
+// .header {
+//     background-color: #184291;
+//     padding: 20px;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     color: #fff;
+//   }
+  
+//   .header-logo {
+//     margin-right: 20px;
+//   }
+  
+//   .header-options {
+//     display: flex;
+//     align-items: center;
+//   }
+  
+//   .language-selector {
+//     margin-right: 20px;
+//     padding: 5px 10px;
+//     background-color: #fff;
+//     color: #184291;
+//     border-radius: 5px;
+//     cursor: pointer;
+//   }
+  
+//   .header-nav a {
+//     color: #fff;
+//     text-decoration: none;
+//     font-weight: bold;
+//     transition: color 0.3s ease;
+//   }
+  
+//   .header-nav a:hover {
+//     color: #ffcc00; /* Changez la couleur au survol */
+//   }
+  
+
+  // Header.scss
+// Header.scss
+
+.header {
+    background: linear-gradient(to bottom, rgba(24, 66, 145, 0.8) 0%, rgba(24, 66, 145, 0) 80%, #184291 80%, #184291 100%);
+    padding: 5vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    position: relative;
+    width: 100%;
+}
+
+.header-logo {
+    margin-right: 20px;
+    z-index: 1;
+}
+
+.header-options {
+    display: flex;
+    align-items: center;
+}
+
+.language-selector {
+    margin-right: 20px;
+    padding: 5px 25px;
+    background-color: #fff;
+    color: #184291;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+.header-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.header-nav a:hover {
+    color: #ffcc00;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(24, 66, 145, 0.2);
+    z-index: -1;
+}
+
+
+ 
+/* Pour les écrans de taille moyenne (par exemple, entre 768px et 991px) */
+@media (min-width: 0px) and (max-width: 768px) {
+    .header-logo img {
+      width: 150px; /* Ajustez la taille du logo selon vos besoins */
+      margin-left: -100px;
+ 
+    }
+  }
+  
+@media (min-width: 768px) and (max-width: 991px) {
+    .header-logo img {
+      width: 200px; /* Ajustez la taille du logo selon vos besoins */
+    }
+  }
+  
+  /* Pour les écrans larges (par exemple, 992px et plus) */
+  @media (min-width: 992px) {
+    .header-logo img {
+      width: 250px; /* Ajustez la taille du logo selon vos besoins */
+    }
+  }
+
+
+  /* Styles pour les écrans de 600 pixels ou moins */
+  @media (max-width: 600px) {
+    .header-options {
+      display: none;
+    }
+  }

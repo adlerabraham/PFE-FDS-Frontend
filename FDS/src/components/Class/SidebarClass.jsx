@@ -19,7 +19,7 @@ function SidebarClass() {
                 return (
                     <div>
                         {courses.map((course) => (
-                            <div key={course.id} className="s-class-box">
+                            <div key={course.id} className="s-class-box nav-option">
                                 <div id='s-class-icon' className='nav-icon' ></div>
                                 <div className="s-class-title">
                                     <NavLink to={'/teacherDashboard/' + course.id}>
@@ -49,3 +49,4 @@ function SidebarClass() {
 }
 
 export default SidebarClass
+
