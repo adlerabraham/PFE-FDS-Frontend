@@ -29,6 +29,7 @@ import ProgramManagement from './components/Pages/Dashboards/Coordinator/Program
 import LevelClasses from './components/Pages/Dashboards/Coordinator/LevelClasses'
 import LevelClassesHome from './components/Pages/Dashboards/Coordinator/LevelClassesHome'
 import TranscriptList from './components/Pages/Dashboards/Coordinator/TranscriptList'
+import ValidateTranscript from './components/Pages/Dashboards/Coordinator/ValidateTranscript'
 
 
 
@@ -52,6 +53,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                         <Route path='view' element={<NoteCardTableView />} />
                         <Route path='create' element={<NoteCardTableCreate />} />
                         <Route path='update' element={<NoteCardTableEdit />} />
+                        <Route path=':transcript' element={<ValidateTranscript />}></Route>
                       </Route>
                     </Route>
                   </Route>

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Button, Form, Input, Table, Menu, Dropdown, notification } from 'antd';
 import './NoteCardTable.scss';
-import { useUpdateGradesMutation } from '../../api/ApiEndpoints';
+import { useUpdateGradesMutation, useUpdateSecondEntryMutation } from '../../api/ApiEndpoints';
 import { SaveOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';  // Import useNavigate
 
@@ -93,8 +93,11 @@ const EditableCell = ({
 const NoteCardTableEdit = (props) => {
     const noteData = JSON.parse(localStorage.getItem('noteCards'));
     const [dataSource, setDataSource] = useState(noteData);
+    const group = localStorage.getItem('group')
     const noteCardId = JSON.parse(localStorage.getItem('noteCardID'));
     const [updateGrades] = useUpdateGradesMutation();
+    const [updateSecondEntry] = useUpdateSecondEntryMutation()
+    const noteCardStatus = JSON.parse(localStorage.getItem('noteCardStatus'))
 
     const defaultColumns = [
         {
@@ -159,68 +162,118 @@ const NoteCardTableEdit = (props) => {
             ...row,
         });
         setDataSource(newData);
-        localStorage.setItem('noteCards', JSON.stringify(newData));
+        localStorage.setItem('noteCardsTemp', JSON.stringify(newData));
     };
 
     const handleUpdate = () => {
-        if (localStorage.getItem('noteCards') != null) {
+        if (localStorage.getItem('noteCardsTemp') != null) {
             setEditableColumns([]);
             // setEditableIndex("");
-            const gradeList = JSON.parse(localStorage.getItem('noteCards'))
+            const gradeList = JSON.parse(localStorage.getItem('noteCardsTemp'))
             const preparedData = []
-            console.log("tempgrades");
-            console.log(editableIndex);
 
             if (editableIndex === 'intra') {
-                if (localStorage.getItem("intra_first_entry_temp_id") != null) {
-                    const tempGradesId = JSON.parse(localStorage.getItem("intra_first_entry_temp_id"))
-                    //enregistrer les modifications des notes d'intra
-                    for (let index = 0; index < gradeList.length; index++) {
-                        const element = gradeList[index];
-                        const tempGradeIndex = tempGradesId.findIndex((item) =>
-                            item.student_level_id === element.student_level_id
-                        )
+                if (group.toLowerCase() === 'teacher') {
+                    if (localStorage.getItem("intra_first_entry_temp_id") != null) {
+                        const tempGradesId = JSON.parse(localStorage.getItem("intra_first_entry_temp_id"))
+                        //enregistrer les modifications des notes d'intra
+                        for (let index = 0; index < gradeList.length; index++) {
+                            const element = gradeList[index];
+                            const tempGradeIndex = tempGradesId.findIndex((item) =>
+                                item.student_level_id === element.student_level_id
+                            )
 
-                        if (tempGradesId[tempGradeIndex] != undefined) {
-                            preparedData.push({
-                                id: tempGradesId[tempGradeIndex].first_entry_temp_id,
-                                first_entry: element.intra,
-                            })
+                            if (tempGradesId[tempGradeIndex] != undefined) {
+                                preparedData.push({
+                                    id: tempGradesId[tempGradeIndex].first_entry_temp_id,
+                                    first_entry: element.intra,
+                                })
+                            }
                         }
-                    }
 
-                    const grades = { updates: preparedData }
-                    updateGrades({ gradeList: grades, transcriptID: noteCardId.intra })
-                    // Mettre à jour l'état de l'édition pour désactiver l'édition
+                        const grades = { updates: preparedData }
+                        updateGrades({ gradeList: grades, transcriptID: noteCardId.intra })
+                        localStorage.setItem('noteCards', JSON.stringify(dataSource))
+                        openNotification();
+                        navigate('../view');
+                        // Mettre à jour l'état de l'édition pour désactiver l'édition
+                    }
+                } else if (group.toLowerCase() === 'coordinator') {
+                    if (localStorage.getItem('intra_second_entry_temp_id')) {
+                        const idTable = JSON.parse(localStorage.getItem('intra_second_entry_temp_id'))
+                        for (let index = 0; index < gradeList.length; index++) {
+                            const element = gradeList[index];
+                            const tempGradeIndex = idTable.findIndex((item) =>
+                                item.student_level_id === element.student_level_id
+                            )
+
+                            if (idTable[tempGradeIndex] != undefined) {
+                                preparedData.push({
+                                    id: idTable[tempGradeIndex].second_entry_temp_id,
+                                    second_entry: element.intra,
+                                })
+                            }
+                        }
+                        const grades = { updates: preparedData }
+                        updateSecondEntry({ gradeList: grades, transcriptID: noteCardId.intra })
+                        localStorage.setItem('noteCards', JSON.stringify(dataSource))
+                        openNotification();
+                        navigate('../view');
+                    }
                 }
             } else if (editableIndex === 'examen') {
-                if (localStorage.getItem("examen_first_entry_temp_id") != null) {
-                    const tempGradesId = JSON.parse(localStorage.getItem("examen_first_entry_temp_id"))
-                    //enregistrer les modifications des notes finales
-                    for (let index = 0; index < gradeList.length; index++) {
-                        const element = gradeList[index];
-                        const tempGradeIndex = tempGradesId.findIndex((item) =>
-                            item.student_level_id === element.student_level_id
-                        )
+                if (group.toLowerCase() === 'teacher') {
+                    if (localStorage.getItem("examen_first_entry_temp_id") != null) {
+                        const tempGradesId = JSON.parse(localStorage.getItem("examen_first_entry_temp_id"))
+                        //enregistrer les modifications des notes finales
+                        for (let index = 0; index < gradeList.length; index++) {
+                            const element = gradeList[index];
+                            const tempGradeIndex = tempGradesId.findIndex((item) =>
+                                item.student_level_id === element.student_level_id
+                            )
 
-                        if (tempGradesId[tempGradeIndex] != undefined) {
-                            preparedData.push({
-                                id: tempGradesId[tempGradeIndex].first_entry_temp_id,
-                                first_entry: element.examen,
-                            })
+                            if (tempGradesId[tempGradeIndex] != undefined) {
+                                preparedData.push({
+                                    id: tempGradesId[tempGradeIndex].first_entry_temp_id,
+                                    first_entry: element.examen,
+                                })
+                            }
                         }
+
+                        const grades = { updates: preparedData }
+                        updateGrades({ gradeList: grades, transcriptID: noteCardId.examen })
+                        localStorage.setItem('noteCards', JSON.stringify(dataSource))
+                        openNotification();
+                        navigate('../view');
+                        // Mettre à jour l'état de l'édition pour désactiver l'édition
                     }
+                } else if (group.toLowerCase() === 'coordinator') {
+                    if (localStorage.getItem('examen_second_entry_temp_id')) {
+                        const idTable = JSON.parse(localStorage.getItem('examen_second_entry_temp_id'))
+                        for (let index = 0; index < gradeList.length; index++) {
+                            const element = gradeList[index];
+                            const tempGradeIndex = idTable.findIndex((item) =>
+                                item.student_level_id === element.student_level_id
+                            )
 
-                    const grades = { updates: preparedData }
-                    updateGrades({ gradeList: grades, transcriptID: noteCardId.examen })
-                    // Mettre à jour l'état de l'édition pour désactiver l'édition
+                            if (idTable[tempGradeIndex] != undefined) {
+                                preparedData.push({
+                                    id: idTable[tempGradeIndex].second_entry_temp_id,
+                                    second_entry: element.examen,
+                                })
+                            }
+                        }
+                        const grades = { updates: preparedData }
+                        updateSecondEntry({ gradeList: grades, transcriptID: noteCardId.examen })
+                        //faire le traitement du resultat de la requette
+                        localStorage.setItem('noteCards', JSON.stringify(dataSource))
+                        openNotification();
+                        navigate('../view');
+                    }
                 }
+
             }
-
-
         }
-        openNotification();
-        navigate('../view');
     };
 
     const components = {
@@ -235,36 +288,117 @@ const NoteCardTableEdit = (props) => {
             return col;
         }
 
-        const menu = (
-            <Menu>
-                <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)}>
-                    {editableIndex === col.dataIndex ? 'Annuler' : 'Modifier'}
-                </Menu.Item>
-                <Menu.Item key="save" onClick={handleUpdate}>
-                    Sauvegarder
-                </Menu.Item>
-            </Menu>
-        );
+        if (group.toLowerCase() === 'teacher') {
+            var intraMenu = (
+                <Menu>
+                    {noteCardStatus.isIntraSubmitted || !noteCardStatus.isIntraSaved ?
+                        <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)} disabled>
+                            {editableIndex === col.dataIndex ? 'Annuler' : 'Modifier'}
+                        </Menu.Item>
+                        :
+                        <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)}>
+                            {editableIndex === col.dataIndex ? 'Annuler' : 'Modifier'}
+                        </Menu.Item>
+                    }
+                    {noteCardStatus.isIntraSubmitted || !noteCardStatus.isIntraSaved ?
+                        <Menu.Item key="save" onClick={handleUpdate} disabled>
+                            Sauvegarder
+                        </Menu.Item>
+                        :
+                        <Menu.Item key="save" onClick={handleUpdate}>
+                            Sauvegarder
+                        </Menu.Item>
+                    }
 
-        return {
-            ...col,
-            onCell: (record) => ({
-                record,
-                editable: editableColumns.includes(col.dataIndex),
-                dataIndex: col.dataIndex,
-                title: col.title,
-                handleSave,
-                className: 'custom-size-cell',
-            }),
-            title: (
-                <div className="custom-column-header">
-                    {col.title}
-                    <Dropdown overlay={menu} placement="bottomRight" trigger={['click']}>
-                        <Button size="small" icon={<EllipsisOutlined />} />
-                    </Dropdown>
-                </div>
-            ),
-        };
+                </Menu>
+            )
+
+            var finaleMenu = (
+                <Menu>
+                    {noteCardStatus.isFinaleSubmitted || !noteCardStatus.isFinaleSaved ?
+                        <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)} disabled>
+                            {editableIndex === col.dataIndex ? 'Annuler' : 'Modifier'}
+                        </Menu.Item>
+                        :
+                        <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)}>
+                            {editableIndex === col.dataIndex ? 'Annuler' : 'Modifier'}
+                        </Menu.Item>
+                    }
+                    {noteCardStatus.isFinaleSubmitted || !noteCardStatus.isFinaleSaved ?
+                        <Menu.Item key="save" onClick={handleUpdate} disabled>
+                            Sauvegarder
+                        </Menu.Item>
+                        :
+                        <Menu.Item key="save" onClick={handleUpdate}>
+                            Sauvegarder
+                        </Menu.Item>
+                    }
+                </Menu>
+            )
+        } else if (group.toLowerCase() === 'coordinator') {
+            var intraMenu = (
+                <Menu>
+                    <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)}>
+                        {editableIndex === col.dataIndex ? 'Annuler' : 'Modifier'}
+                    </Menu.Item>
+                    <Menu.Item key="save" onClick={handleUpdate}>
+                        Sauvegarder
+                    </Menu.Item>
+                </Menu>
+            )
+            var finaleMenu = (
+                <Menu>
+                    <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)}>
+                        {editableIndex === col.dataIndex ? 'Annuler' : 'Modifier'}
+                    </Menu.Item>
+                    <Menu.Item key="save" onClick={handleUpdate}>
+                        Sauvegarder
+                    </Menu.Item>
+                </Menu>
+            )
+        }
+        if (col.dataIndex === 'intra') {
+            return {
+                ...col,
+                onCell: (record) => ({
+                    record,
+                    editable: editableColumns.includes(col.dataIndex),
+                    dataIndex: col.dataIndex,
+                    title: col.title,
+                    handleSave,
+                    className: 'custom-size-cell',
+                }),
+                title: (
+                    <div className="custom-column-header">
+                        {col.title}
+                        <Dropdown overlay={intraMenu} placement="bottomRight" trigger={['click']}>
+                            <Button size="small" icon={<EllipsisOutlined />} />
+                        </Dropdown>
+                    </div>
+                ),
+            };
+        } else if (col.dataIndex === 'examen') {
+            return {
+                ...col,
+                onCell: (record) => ({
+                    record,
+                    editable: editableColumns.includes(col.dataIndex),
+                    dataIndex: col.dataIndex,
+                    title: col.title,
+                    handleSave,
+                    className: 'custom-size-cell',
+                }),
+                title: (
+                    <div className="custom-column-header">
+                        {col.title}
+                        <Dropdown overlay={finaleMenu} placement="bottomRight" trigger={['click']}>
+                            <Button size="small" icon={<EllipsisOutlined />} />
+                        </Dropdown>
+                    </div>
+                ),
+            };
+        }
+
     });
 
     return (

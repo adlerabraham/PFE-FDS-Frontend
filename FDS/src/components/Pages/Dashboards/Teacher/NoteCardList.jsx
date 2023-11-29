@@ -114,7 +114,7 @@ function NoteCardList() {
             <div>
                 {/* <NoteCardListView noteData={noteData}
                         noteCardList={noteCardList} /> */}
-                <Outlet context={[classID, periodID, levelID, noteData, noteCardList]} />
+                <Outlet context={[classID, levelID, noteData, noteCardList]} />
             </div>
         )
     }

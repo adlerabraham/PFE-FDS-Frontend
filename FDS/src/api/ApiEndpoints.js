@@ -65,6 +65,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['grades']
         }),
+        submitTranscipt: builder.mutation({
+            query: (params) => ({
+                url: 'note/first-entry-temp/submission/?transcript_id=' + params.transcriptID,
+                method: 'PUT'
+            }),
+            invalidatesTags: ['transcriptStatus']
+        }),
         //*****Coordinator endpoints****
         getPrograms: builder.query({
             query: () => ({
@@ -94,6 +101,38 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 methode: 'GET'
             })
         }),
+        updateSecondEntry: builder.mutation({
+            query: (params) => ({
+                url: 'note/second-entry-temp/update/?transcript_id=' + params.transcriptID,
+                method: 'PUT',
+                body: { ...params.gradeList }
+            }),
+            invalidatesTags: ['grades']
+        }),
+        getTranscriptStatus: builder.query({
+            query: (params) => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: `note/transcript/status/?transcript_id=${params.transcriptID}`,
+                methode: 'GET'
+            }),
+            providesTags: ['transcriptStatus']
+        }),
+        validateTranscript: builder.mutation({
+            query: (params) => ({
+                url: 'note/grade/validation/?transcript_id=' + params.transcriptID,
+                method: 'PUT',
+            }),
+            invalidatesTags: ['transcriptStatus']
+        }),
+        cancelSubmission: builder.mutation({
+            query: (params) => ({
+                url: 'note/first-entry-temp/submission/cancel/?transcript_id=' + params.transcriptID,
+                method: 'PUT',
+            }),
+            invalidatesTags: ['transcriptStatus']
+        }),
     })
 })
 
@@ -108,4 +147,9 @@ export const {
     useGetProgramsQuery,
     useGetLevelsQuery,
     useGetCoursesQuery,
+    useUpdateSecondEntryMutation,
+    useSubmitTransciptMutation,
+    useGetTranscriptStatusQuery,
+    useValidateTranscriptMutation,
+    useCancelSubmissionMutation,
 } = authApiSlice

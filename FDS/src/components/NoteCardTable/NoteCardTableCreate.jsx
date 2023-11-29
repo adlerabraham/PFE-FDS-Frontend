@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Button, Form, Input, Table, Menu, Dropdown, notification } from 'antd';
 import './NoteCardTable.scss';
-import { useCreateGradesMutation } from '../../api/ApiEndpoints';
+import { useCreateGradesMutation, useUpdateSecondEntryMutation } from '../../api/ApiEndpoints';
 import { SaveOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';  // Import useNavigate
 
@@ -98,11 +98,14 @@ const EditableCell = ({
 
 const NoteCardTableEdit = (props) => {
     const noteData = JSON.parse(localStorage.getItem('noteCards'));
-    console.log('Note Data from Local Storage:', noteData);
+    // console.log('Note Data from Local Storage:', noteData);
     const [dataSource, setDataSource] = useState(noteData);
+    const group = localStorage.getItem('group')
     const noteCardId = JSON.parse(localStorage.getItem('noteCardID'));
     const [createGrades] = useCreateGradesMutation();
+    const [updateSecondEntry]= useUpdateSecondEntryMutation();
     const [updatedData, setUpdatedData] = useState([]); // Ajoutez cette ligne
+    const noteCardStatus = JSON.parse(localStorage.getItem('noteCardStatus'))
 
 
     // useEffect(() => {
@@ -178,7 +181,14 @@ const NoteCardTableEdit = (props) => {
           message: 'Sauvegarde réussie',
           description: 'Les notes ont été sauvegardées avec succès.',
         });
-      };
+    };
+
+    const openUnsuccessfulNotification = () => {
+        notification.error({
+          message: 'Sauvegarde échouée',
+          description: 'La sauvegarde des notes a échoué.',
+        });
+    };
 
     const handleSave = (row) => {
         //AAAAAAAAAA
@@ -201,44 +211,87 @@ const NoteCardTableEdit = (props) => {
             const preparedData = []
             if (editableIndex === 'intra') {
                  //enregistrer les notes d'intra
-                for (let index = 0; index < gradeList.length; index++) {
-                    const element = gradeList[index];
-                    preparedData.push({
-                        grade: {
-                            student: element.student_level_id,
-                        },
-                        first_entry: element.intra,
+                 if(group.toLowerCase() === 'teacher'){
+                    for (let index = 0; index < gradeList.length; index++) {
+                        const element = gradeList[index];
+                        preparedData.push({
+                            grade: {
+                                student: element.student_level_id,
+                            },
+                            first_entry: element.intra,
+                        })
+                    }
+                    const grades = { entries: preparedData }
+                    
+                    const createRequestResults = createGrades({ gradeList: grades, transcriptID: noteCardId.intra }).unwrap()
+                    createRequestResults.then((result) => {
+                        localStorage.setItem('intra_first_entry_temp_id', JSON.stringify(result))
+                        openNotification(); 
+                        navigate('../view');
+                    }).catch((error)=>{
+                        openUnsuccessfulNotification()
                     })
+                }else if (group.toLowerCase() === 'coordinator') {
+                    if (localStorage.getItem('intra_second_entry_temp_id')) {
+                        const idTable = JSON.parse(localStorage.getItem('intra_second_entry_temp_id'))
+                        for (let index = 0; index < gradeList.length; index++) {
+                            const element = gradeList[index];
+                            preparedData.push({
+                                id: Number(idTable[index].second_entry_temp_id), // Convertir en entier
+                                second_entry: element.intra,
+                            })
+                        }
+                        console.log(preparedData)
+                        const grades = { updates: preparedData }
+                        updateSecondEntry({ gradeList: grades, transcriptID: noteCardId.intra })
+                        openNotification(); 
+                        navigate('../view');
+                    }
+                    
                 }
-                const grades = { entries: preparedData }
-                const createRequestResults = createGrades({ gradeList: grades, transcriptID: noteCardId.intra }).unwrap()
-                createRequestResults.then((result) => {
-                    console.log(result);
-                    localStorage.setItem('intra_first_entry_temp_id', JSON.stringify(result))
-                })
             }else if(editableIndex === 'examen'){
-                //enregistrer les notes d'intra
-                for (let index = 0; index < gradeList.length; index++) {
-                    const element = gradeList[index];
-                    preparedData.push({
-                        grade: {
-                            student: element.student_level_id,
-                        },
-                        first_entry: element.examen,
+                //enregistrer les notes d'examen
+                if(group.toLowerCase() === 'teacher'){
+                    for (let index = 0; index < gradeList.length; index++) {
+                        const element = gradeList[index];
+                        preparedData.push({
+                            grade: {
+                                student: element.student_level_id,
+                            },
+                            first_entry: element.examen,
+                        })
+                    }
+                    const grades = { entries: preparedData }
+                
+                    const createRequestResults = createGrades({ gradeList: grades, transcriptID: noteCardId.examen }).unwrap()
+                    createRequestResults.then((result) => {
+                        localStorage.setItem('examen_first_entry_temp_id', JSON.stringify(result))
+                        openNotification(); 
+                        navigate('../view');
+                    }).catch((error)=>{
+                        openUnsuccessfulNotification()
                     })
-                }
-                const grades = { entries: preparedData }
-                const createRequestResults = createGrades({ gradeList: grades, transcriptID: noteCardId.examen }).unwrap()
-                createRequestResults.then((result) => {
-                    console.log(result);
-                    localStorage.setItem('examen_first_entry_temp_id', JSON.stringify(result))
-                })
+                    
+                }else if(group.toLowerCase() === 'coordinator'){
+                    if(localStorage.getItem('examen_second_entry_temp_id')){
+                        const idTable = JSON.parse(localStorage.getItem('examen_second_entry_temp_id'))
+                        for (let index = 0; index < gradeList.length; index++) {
+                            const element = gradeList[index];
+                            
+                            preparedData.push({
+                                id: idTable[index].second_entry_temp_id,
+                                second_entry: element.examen,
+                            })
+                        }
+                        const grades = { updates: preparedData }
+                        updateSecondEntry({ gradeList: grades, transcriptID: noteCardId.examen })
+                        openNotification(); 
+                        navigate('../view');
+                    }
+                }   
             }
-           
-
         }
-        openNotification(); 
-        navigate('../view');
+        
     }
     
     const components = {
@@ -253,37 +306,119 @@ const NoteCardTableEdit = (props) => {
             return col;
         }
 
-        const menu = (
-            <Menu>
-                <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)}>
-                    {editableColumns.includes(col.dataIndex) ? 'Annuler' : 'Modifier'}
-                </Menu.Item>
-                <Menu.Item key="save" onClick={handleCreate}>
-                    Sauvegarder
-                </Menu.Item>
-            </Menu>
-        );
+        if(group.toLowerCase()==='teacher'){
+            var intraMenu = (
+                <Menu>
+                    {noteCardStatus.isIntraSaved?
+                        <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)} disabled>
+                            {editableColumns.includes(col.dataIndex) ? 'Annuler' : 'Modifier'}
+                        </Menu.Item>    
+                    :
+                        <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)}>
+                            {editableColumns.includes(col.dataIndex) ? 'Annuler' : 'Modifier'}
+                        </Menu.Item>
+                    }
+                    {noteCardStatus.isIntraSaved?
+                        <Menu.Item key="save" onClick={handleCreate} disabled>
+                            Sauvegarder
+                        </Menu.Item>
+                    :
+                        <Menu.Item key="save" onClick={handleCreate}>
+                            Sauvegarder
+                        </Menu.Item>
+                    }
+                    
+                </Menu>
+            )
 
-        console.log("inside columns:", editableColumns);
-        return {
-            ...col,
-            onCell: (record) => ({
-                record,
-                editable: editableColumns.includes(col.dataIndex),
-                dataIndex: col.dataIndex,
-                title: col.title,
-                handleSave,
-                className: 'custom-size-cell',
-            }),
-            title: (
-                <div className="custom-column-header">
-                    {col.title}
-                    <Dropdown overlay={menu} placement="bottomRight" trigger={['click']}>
-                        <Button size="small" icon={<EllipsisOutlined />} />
-                    </Dropdown>
-                </div>
-            ),
-        };
+            var finaleMenu=(
+                <Menu>
+                    {noteCardStatus.isFinaleSaved?
+                        <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)} disabled>
+                            {editableColumns.includes(col.dataIndex) ? 'Annuler' : 'Modifier'}
+                        </Menu.Item>    
+                    :
+                        <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)}>
+                            {editableColumns.includes(col.dataIndex) ? 'Annuler' : 'Modifier'}
+                        </Menu.Item>
+                    }
+                    {noteCardStatus.isFinaleSaved?
+                        <Menu.Item key="save" onClick={handleCreate} disabled>
+                            Sauvegarder
+                        </Menu.Item>
+                    :
+                        <Menu.Item key="save" onClick={handleCreate}>
+                            Sauvegarder
+                        </Menu.Item>
+                    }
+                </Menu>
+            )
+
+        }else if(group.toLowerCase() === 'coordinator'){
+            var intraMenu = (
+                <Menu>
+                    <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)}>
+                        {editableColumns.includes(col.dataIndex) ? 'Annuler' : 'Modifier'}
+                    </Menu.Item>
+                    <Menu.Item key="save" onClick={handleCreate}>
+                        Sauvegarder
+                    </Menu.Item>
+                </Menu>
+            )
+
+            var finaleMenu=(
+                <Menu>
+                    <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)}>
+                        {editableColumns.includes(col.dataIndex) ? 'Annuler' : 'Modifier'}
+                    </Menu.Item>
+                    <Menu.Item key="save" onClick={handleCreate}>
+                        Sauvegarder
+                    </Menu.Item>
+                </Menu>
+            )
+        }
+        
+        if(col.dataIndex === 'intra'){
+            return {
+                ...col,
+                onCell: (record) => ({
+                    record,
+                    editable: editableColumns.includes(col.dataIndex),
+                    dataIndex: col.dataIndex,
+                    title: col.title,
+                    handleSave,
+                    className: 'custom-size-cell',
+                }),
+                title: (
+                    <div className="custom-column-header">
+                        {col.title}
+                        <Dropdown overlay={intraMenu} placement="bottomRight" trigger={['click']}>
+                            <Button size="small" icon={<EllipsisOutlined />} />
+                        </Dropdown>
+                    </div>
+                ),
+            };
+        }else if(col.dataIndex === 'examen'){
+            return {
+                ...col,
+                onCell: (record) => ({
+                    record,
+                    editable: editableColumns.includes(col.dataIndex),
+                    dataIndex: col.dataIndex,
+                    title: col.title,
+                    handleSave,
+                    className: 'custom-size-cell',
+                }),
+                title: (
+                    <div className="custom-column-header">
+                        {col.title}
+                        <Dropdown overlay={finaleMenu} placement="bottomRight" trigger={['click']}>
+                            <Button size="small" icon={<EllipsisOutlined />} />
+                        </Dropdown>
+                    </div>
+                ),
+            };
+        }
     });
 
     const [pagination, setPagination] = useState({
