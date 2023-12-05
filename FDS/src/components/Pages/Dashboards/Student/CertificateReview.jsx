@@ -36,6 +36,7 @@ function CertificateReview(props) {
                     }
                 });
 
+                setIsLoading(false)
                 // Create a link element
                 const link = document.createElement('a');
                 console.log(link);
@@ -61,6 +62,7 @@ function CertificateReview(props) {
                 document.body.removeChild(link);
             } catch (error) {
                 console.error('Error downloading PDF:', error);
+                setIsError(true)
             }
         };
 
@@ -68,48 +70,34 @@ function CertificateReview(props) {
         downloadPdf();
     }
 
+    if (!(isLoading || isError)) {
+        localStorage.setItem('payment', 0)
 
-    // return (
-    //     <div>
-    //         Consulter l'email que vous avez fourni pour retrouver votre attestation
-    //     </div>
-    // )
-    // const { data, isLoading, error } = useGenerateCertificateQuery({
-    //     academic_year: order.document_aca_year,
-    //     levelID: order.level,
-    //     orderID: order.id
-    // })
+        return (
+            <div>
+                Consulter l'email que vous avez fourni pour retrouver votre attestation
+            </div>
+        )
+    }
 
-    // if (!(isLoading || error.originalStatus != 200) && data) {
-    //     localStorage.setItem('payment', 0)
-    //     //console.log(data);
-    //     // const blob = new Blob([data], { type: 'application/pdf' });
-    //     // saveAs(blob, 'certificate.pdf');
-    //     return (
-    //         <div>
-    //             Consulter l'email que vous avez fourni pour retrouver votre attestation
-    //         </div>
-    //     )
-    // }
+    if (isLoading) {
+        return (
+            <div className='spin'>
+                <Spin size='large' />
+            </div>
+        )
+    }
 
-    // if (isLoading) {
-    //     return (
-    //         <div className='spin'>
-    //             <Spin size='large' />
-    //         </div>
-    //     )
-    // }
-
-    // if (error.originalStatus != 200) {
-    //     return (
-    //         <div className='error'>
-    //             <p>Une erreur s'est produite lors de l'envoi du document.</p>
-    //             <Button type='primary' onClick={handleRetry}>
-    //                 Reessayer
-    //             </Button>
-    //         </div>
-    //     )
-    // }
+    if (isError) {
+        return (
+            <div className='error'>
+                <p>Une erreur s'est produite lors de l'envoi du document.</p>
+                <Button type='primary' onClick={handleRetry}>
+                    Reessayer
+                </Button>
+            </div>
+        )
+    }
 
 }
 
