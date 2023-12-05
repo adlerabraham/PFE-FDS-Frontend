@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { NavLink, Outlet, useParams } from 'react-router-dom'
 import { useGetLevelsQuery } from '../../../../api/ApiEndpoints'
 import './ProgramManagement.scss'
+import { Spin } from 'antd'
 
 function ProgramManagement(props) {
     const params = useParams()
@@ -46,8 +47,8 @@ function ProgramManagement(props) {
 
     if (isLoading) {
         return (
-            <div>
-                Chargement ...
+            <div className='spin'>
+                <Spin tip='Chargement ...' size='large' />
             </div>
         )
     }

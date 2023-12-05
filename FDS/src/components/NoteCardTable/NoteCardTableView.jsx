@@ -115,7 +115,7 @@ const NoteCardTableView = (props) => {
   }
 
   const naviagteToValidateFinale = () => {
-    const validationResult = validateTranscript({ transcriptID: noteCardID.intra }).unwrap()
+    const validationResult = validateTranscript({ transcriptID: noteCardID.examen }).unwrap()
     validationResult.then((result) => {
       console.log(result.message);
       if (result.message) {
@@ -265,9 +265,6 @@ const NoteCardTableView = (props) => {
 
   return (
     <div>
-      {/* <Dropdown overlay={menu}>
-        <Button icon={<EllipsisOutlined />} className="custom-button" />
-        </Dropdown> */}
       <Dropdown overlay={submitMenu}>
         <Button className="custom-button">
           <span className="custom-button-text">Options</span>

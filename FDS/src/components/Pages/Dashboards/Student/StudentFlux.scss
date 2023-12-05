@@ -1,0 +1,22 @@
+/* Flux.scss */
+.flux-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.flux-header {
+    background-color: #4285f4;
+    /* Couleur de fond bleue */
+    color: #ffffff;
+    /* Couleur du texte blanc */
+    padding: 20px;
+}
+
+.flux-header h1 {
+    font-size: 24px;
+}
+
+// .flux-content {
+//     /* Ajoutez des styles pour le contenu ici */
+// }

@@ -3,6 +3,7 @@ import './StudentList.scss'
 import { useOutletContext, useParams } from 'react-router-dom'
 import { useGetSudentsQuery } from '../../../../api/ApiEndpoints'
 import UserListTable from '../../../UserListeTable/UserListTable'
+import { Spin } from 'antd'
 
 function StudentList() {
     let [classID, periodID] = useOutletContext()
@@ -39,8 +40,8 @@ function StudentList() {
 
     } else {
         return (
-            <div>
-                Chargement ....
+            <div className='spin'>
+                <Spin tip='Chargement ...' size='large' />
             </div>
         )
     }

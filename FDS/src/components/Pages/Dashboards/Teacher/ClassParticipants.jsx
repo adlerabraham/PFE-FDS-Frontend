@@ -163,7 +163,6 @@
 
 import React, { useState } from 'react';
 import { NavLink, useOutletContext, Outlet } from 'react-router-dom';
-import { UnorderedListOutlined, BookOutlined } from '@ant-design/icons';
 import './ClassParticipants.scss';
 
 function ClassParticipants() {

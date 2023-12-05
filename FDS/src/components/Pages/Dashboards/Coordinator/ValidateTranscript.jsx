@@ -298,6 +298,7 @@ const ValidateTranscript = () => {
                 validationResult.then((result) => {
                     if (result.message) {
                         openNotification()
+                        navigate('../view')
                     } else {
                         openUnsuccessfulValidationNotification()
                         localStorage.setItem('mismatchedID', JSON.stringify(result))
@@ -309,6 +310,7 @@ const ValidateTranscript = () => {
                 validationResult.then((result) => {
                     if (result.message) {
                         openNotification()
+                        navigate('../view')
                     } else {
                         openUnsuccessfulValidationNotification()
                         localStorage.setItem('mismatchedID', JSON.stringify(result))

@@ -1,6 +1,8 @@
 import React from 'react'
 import { useGetProgramsQuery } from '../../../../api/ApiEndpoints'
 import Program from '../../../Program/Program'
+import { Spin } from 'antd'
+import './CoordinatorDashboard.scss'
 
 function CoordinatorDashboardHome(props) {
     const { data: programList, isLoading, isError } = useGetProgramsQuery()
@@ -21,8 +23,8 @@ function CoordinatorDashboardHome(props) {
     }
     if (isLoading) {
         return (
-            <div>
-                Loading ...
+            <div className='spin'>
+                <Spin tip='Chargement ...' size='large' />
             </div>
         )
     }

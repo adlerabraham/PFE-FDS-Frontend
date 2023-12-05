@@ -23,13 +23,24 @@ import { useOutletContext } from 'react-router-dom';
 import './Flux.scss'; // Assurez-vous de créer le fichier CSS correspondant
 
 function FluxComponent() {
-    const [classID, courseName] = useOutletContext();
-  
+    const [classID] = useOutletContext();
+    if (localStorage.getItem('classTable') != null) {
+        const classes = JSON.parse(localStorage.getItem('classTable'))
+        var classIndex = classes.findIndex((item) =>
+            item.id == classID
+        )
+        if (classIndex != -1)
+            var courseName = classes[classIndex].name
+    }
 
     return (
         <div className="flux-container">
             <div className="flux-header">
-                <h1>Nom de la classe {courseName}</h1>
+                {classIndex != -1 ?
+                    <h1>{courseName}</h1>
+                    :
+                    <h1>Nom du cours</h1>
+                }
                 <p>ID de la classe: {classID}</p>
             </div>
             <div className="flux-content">

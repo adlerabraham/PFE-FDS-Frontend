@@ -72,6 +72,7 @@ import React, { useEffect } from 'react'
 import { Outlet, useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { useGetNoteCardListQuery, useGetSudentsQuery } from '../../../../api/ApiEndpoints'
 import './NoteCardList.scss'
+import { Spin } from 'antd'
 
 function NoteCardList() {
     const [classID, periodID] = useOutletContext()
@@ -109,7 +110,7 @@ function NoteCardList() {
                 }
             )
         ))
-
+        localStorage.setItem('transcriptLength', studentList.length)
         return (
             <div>
                 {/* <NoteCardListView noteData={noteData}
@@ -122,8 +123,8 @@ function NoteCardList() {
 
     if (isLoading1 || isLoading2) {
         return (
-            <div>
-                Chargement ....
+            <div className='spin'>
+                <Spin tip='Chargement ...' size='large' />
             </div>
         )
     } else if (isError1 || isError2) {

@@ -2,6 +2,8 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useGetCoursesQuery } from '../../../../api/ApiEndpoints'
 import Class from '../../../Class/Class'
+import { Spin } from 'antd'
+import './LevelClassesHome.scss'
 
 function LevelClassesHome(props) {
     const params = useParams()
@@ -36,8 +38,8 @@ function LevelClassesHome(props) {
 
     if (isLoading) {
         return (
-            <div>
-                Chargement ...
+            <div className='spin'>
+                <Spin tip='Chargement ...' size='large' />
             </div>
         )
     }

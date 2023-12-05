@@ -55,7 +55,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 method: 'POST',
                 body: { ...params.gradeList }
             }),
-            invalidatesTags: ['grades']
+            invalidatesTags: ['grades', 'transcriptStatus']
         }),
         updateGrades: builder.mutation({
             query: (params) => ({
@@ -133,6 +133,81 @@ export const authApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['transcriptStatus']
         }),
+        //***** Student's apis ******
+        getStudentCourse: builder.query({
+            query: () => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: "academic/student/course/",
+                methode: 'GET'
+            })
+        }),
+        getGrades: builder.query({
+            query: (params) => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: "note/student/exam/?course_id=" + params.classId,
+                methode: 'GET'
+            })
+        }),
+        getStudentLevel: builder.query({
+            query: () => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: "academic/student/level",
+                methode: 'GET'
+            })
+        }),
+        //****** Document apis *****
+        getDocumentType: builder.query({
+            query: () => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: "document/type",
+                methode: 'GET'
+            })
+        }),
+        orderDocument: builder.mutation({
+            query: (params) => ({
+                url: 'document/order/create/',
+                method: 'POST',
+                body: { ...params.documentOrder }
+            })
+        }),
+        generateTranscript: builder.query({
+            query: (params) => ({
+                headers: {
+                    'Content-Type': 'application/pdf',
+                },
+                url: "document/transcript/generate/?academic_year_id=" + params.academic_year +
+                    "&level_id=" + params.levelID + "&order_id=" + params.orderID,
+                methode: 'GET'
+            })
+        }),
+        getOrderedDocument: builder.query({
+            query: (params) => ({
+                headers: {
+                    'Content-Type': 'application/pdf',
+                },
+                url: "document/order/?order_id=" + params.orderID,
+                methode: 'GET'
+            })
+        }),
+        generateCertificate: builder.query({
+            query: (params) => ({
+                headers: {
+                    'Content-Type': 'application/pdf',
+                },
+                url: "document/certificate/generate/?academic_year_id=" + params.academic_year +
+                    "&level_id=" + params.levelID + "&order_id=" + params.orderID,
+                methode: 'GET'
+            })
+        }),
+
     })
 })
 
@@ -152,4 +227,12 @@ export const {
     useGetTranscriptStatusQuery,
     useValidateTranscriptMutation,
     useCancelSubmissionMutation,
+    useGetStudentCourseQuery,
+    useGetGradesQuery,
+    useGetStudentLevelQuery,
+    useGetDocumentTypeQuery,
+    useOrderDocumentMutation,
+    useGenerateTranscriptQuery,
+    useGetOrderedDocumentQuery,
+    useGenerateCertificateQuery,
 } = authApiSlice

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useGetStudentGradesQuery } from '../../../../api/ApiEndpoints'
 import { Outlet, useNavigate, useOutletContext, useParams } from 'react-router-dom'
+import { Spin } from 'antd'
+import './NoteCardTable.scss'
 
 function NoteCardTable(props) {
     const [classID, levelID, noteData, noteCardList] = useOutletContext()
@@ -127,8 +129,8 @@ function NoteCardTable(props) {
 
     if (!(isIReady || isFReady) && !isRenderable) {
         return (
-            <div>
-                Chargement ...
+            <div className='spin'>
+                <Spin tip='Chargement ...' size='large' />
             </div>
         )
     } else if (!isRenderable) {

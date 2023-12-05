@@ -33,7 +33,7 @@ const EditableCell = ({
     const form = useContext(EditableContext);
 
     useEffect(() => {
-        if (editing) {
+        if (editing && inputRef.current!= null) {
             inputRef.current.focus();
         }
     }, [editing]);
@@ -208,12 +208,16 @@ const NoteCardTableEdit = (props) => {
     const handleCreate = () => {
         if (localStorage.getItem('noteCards') != null) {
             const gradeList = JSON.parse(localStorage.getItem('noteCards'))
+            const transcriptLength = localStorage.getItem('transcriptLength')
             const preparedData = []
+            //var validRow = 0
             if (editableIndex === 'intra') {
                  //enregistrer les notes d'intra
                  if(group.toLowerCase() === 'teacher'){
                     for (let index = 0; index < gradeList.length; index++) {
                         const element = gradeList[index];
+                        // if(element.intra != null)
+                        //     validRow ++
                         preparedData.push({
                             grade: {
                                 student: element.student_level_id,
@@ -221,31 +225,42 @@ const NoteCardTableEdit = (props) => {
                             first_entry: element.intra,
                         })
                     }
-                    const grades = { entries: preparedData }
                     
-                    const createRequestResults = createGrades({ gradeList: grades, transcriptID: noteCardId.intra }).unwrap()
-                    createRequestResults.then((result) => {
-                        localStorage.setItem('intra_first_entry_temp_id', JSON.stringify(result))
-                        openNotification(); 
-                        navigate('../view');
-                    }).catch((error)=>{
-                        openUnsuccessfulNotification()
-                    })
+                    //if(validRow == transcriptLength){
+                        const grades = { entries: preparedData }                    
+                        const createRequestResults = createGrades({ gradeList: grades, transcriptID: noteCardId.intra }).unwrap()
+                        createRequestResults.then((result) => {
+                            localStorage.setItem('intra_first_entry_temp_id', JSON.stringify(result))
+                            openNotification(); 
+                            navigate('../view');
+                        }).catch((error)=>{
+                            openUnsuccessfulNotification()
+                        })
+                    // }else{
+                    //     openUnsuccessfulNotification()
+                    // }
+                    
                 }else if (group.toLowerCase() === 'coordinator') {
                     if (localStorage.getItem('intra_second_entry_temp_id')) {
                         const idTable = JSON.parse(localStorage.getItem('intra_second_entry_temp_id'))
                         for (let index = 0; index < gradeList.length; index++) {
                             const element = gradeList[index];
+                            // if(element.intra != null)
+                            //     validRow ++
                             preparedData.push({
                                 id: Number(idTable[index].second_entry_temp_id), // Convertir en entier
                                 second_entry: element.intra,
                             })
                         }
-                        console.log(preparedData)
-                        const grades = { updates: preparedData }
-                        updateSecondEntry({ gradeList: grades, transcriptID: noteCardId.intra })
-                        openNotification(); 
-                        navigate('../view');
+                        
+                        //if(validRow == transcriptLength){
+                            const grades = { updates: preparedData }
+                            updateSecondEntry({ gradeList: grades, transcriptID: noteCardId.intra })
+                            openNotification(); 
+                            navigate('../view');
+                        // }else{
+                        //     openUnsuccessfulNotification()
+                        // }
                     }
                     
                 }
@@ -254,6 +269,8 @@ const NoteCardTableEdit = (props) => {
                 if(group.toLowerCase() === 'teacher'){
                     for (let index = 0; index < gradeList.length; index++) {
                         const element = gradeList[index];
+                        // if(element.examen != null)
+                        //     validRow ++
                         preparedData.push({
                             grade: {
                                 student: element.student_level_id,
@@ -261,32 +278,41 @@ const NoteCardTableEdit = (props) => {
                             first_entry: element.examen,
                         })
                     }
-                    const grades = { entries: preparedData }
-                
-                    const createRequestResults = createGrades({ gradeList: grades, transcriptID: noteCardId.examen }).unwrap()
-                    createRequestResults.then((result) => {
-                        localStorage.setItem('examen_first_entry_temp_id', JSON.stringify(result))
-                        openNotification(); 
-                        navigate('../view');
-                    }).catch((error)=>{
-                        openUnsuccessfulNotification()
-                    })
                     
+                    //if(validRow == transcriptLength){
+                        const grades = { entries: preparedData }                
+                        const createRequestResults = createGrades({ gradeList: grades, transcriptID: noteCardId.examen }).unwrap()
+                        createRequestResults.then((result) => {
+                            localStorage.setItem('examen_first_entry_temp_id', JSON.stringify(result))
+                            openNotification(); 
+                            navigate('../view');
+                        }).catch((error)=>{
+                            openUnsuccessfulNotification()
+                        })
+                    // }else{
+                    //     openUnsuccessfulNotification()
+                    // }
                 }else if(group.toLowerCase() === 'coordinator'){
                     if(localStorage.getItem('examen_second_entry_temp_id')){
                         const idTable = JSON.parse(localStorage.getItem('examen_second_entry_temp_id'))
                         for (let index = 0; index < gradeList.length; index++) {
                             const element = gradeList[index];
-                            
+                            // if(element.examen != null)
+                            //     validRow ++
                             preparedData.push({
                                 id: idTable[index].second_entry_temp_id,
                                 second_entry: element.examen,
                             })
                         }
-                        const grades = { updates: preparedData }
-                        updateSecondEntry({ gradeList: grades, transcriptID: noteCardId.examen })
-                        openNotification(); 
-                        navigate('../view');
+                        
+                        //if(validRow == transcriptLength){
+                            const grades = { updates: preparedData }
+                            updateSecondEntry({ gradeList: grades, transcriptID: noteCardId.examen })
+                            openNotification(); 
+                            navigate('../view');
+                        // }else{
+                        //     openUnsuccessfulNotification()
+                        // }
                     }
                 }   
             }

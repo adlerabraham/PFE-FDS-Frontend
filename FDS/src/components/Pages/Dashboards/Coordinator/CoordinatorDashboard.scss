@@ -1,3 +1,10 @@
+.spin {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
 /********** Large devices only **********/
 @media (min-width: 1200px) {}
 

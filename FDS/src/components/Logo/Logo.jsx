@@ -3,6 +3,7 @@ import React from 'react';
 import { Image } from 'antd';
 import './logo.scss';
 import 'antd/dist/antd.css';
+import fdsLogo from '../../Image/logofds.png'
 
 function Logo(props) {
   var width = Number(props.LogoWidth);
@@ -13,7 +14,7 @@ function Logo(props) {
         <Image
           className='logo-img' // Ajoutez cette classe pour personnaliser la taille du logo
           width={width} // Utilisez l'interpolation pour la largeur
-          src='./logofds.png'
+          src={fdsLogo}
           alt='Logo de la Faculte Des Sciences'
         />
       </div>

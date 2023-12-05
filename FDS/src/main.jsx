@@ -23,13 +23,27 @@ import NoteCardTable from './components/Pages/Dashboards/Teacher/NoteCardTable'
 import NoteCardTableView from './components/NoteCardTable/NoteCardTableView'
 import NoteCardTableCreate from './components/NoteCardTable/NoteCardTableCreate'
 import NoteCardTableEdit from './components/NoteCardTable/NoteCardTableEdit'
-import CoordinatorDashbord from './components/Pages/Dashboards/Coordinator/CoordinatorDashbord'
+import CoordinatorDashboard from './components/Pages/Dashboards/Coordinator/CoordinatorDashboard'
 import CoordinatorDashboardHome from './components/Pages/Dashboards/Coordinator/CoordinatorDashboardHome'
 import ProgramManagement from './components/Pages/Dashboards/Coordinator/ProgramManagement'
 import LevelClasses from './components/Pages/Dashboards/Coordinator/LevelClasses'
 import LevelClassesHome from './components/Pages/Dashboards/Coordinator/LevelClassesHome'
 import TranscriptList from './components/Pages/Dashboards/Coordinator/TranscriptList'
 import ValidateTranscript from './components/Pages/Dashboards/Coordinator/ValidateTranscript'
+import StudentClass from './components/Pages/Dashboards/Student/StudentClass'
+import StudentFlux from './components/Pages/Dashboards/Student/StudentFlux'
+import StudentsGrades from './components/Pages/Dashboards/Student/StudentsGrades'
+import RequestForm from './components/Pages/Dashboards/Student/RequestForm'
+import Transition from './components/Pages/Dashboards/Student/Transition'
+import TranscriptRequest from './components/Pages/Dashboards/Student/TranscriptRequest'
+import PaymentPage from './components/Pages/Payment/PaymentPage'
+import TranscriptReview from './components/Pages/Dashboards/Student/TranscriptReview'
+import CertificateRequest from './components/Pages/Dashboards/Student/CertificateRequest'
+import CertificateReview from './components/Pages/Dashboards/Student/CertificateReview'
+import DocViewer from './components/Pages/Doc/DocViewer'
+import TranscriptViewer from './components/Pages/Doc/TranscriptViewer'
+import CertificateViewer from './components/Pages/Doc/CertificateViewer'
+
 
 
 
@@ -41,7 +55,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route element={<RequireAuth />}>
-            <Route path='/coordinatorDashboard' element={<CoordinatorDashbord />}>
+            <Route path='/coordinatorDashboard' element={<CoordinatorDashboard />}>
               <Route index element={<CoordinatorDashboardHome />} />
               <Route path='calendar' element={<DashboardCalendar />} />
               <Route path=':programId' element={<ProgramManagement />} >
@@ -86,7 +100,28 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path='/studentdashboard' element={<StudentDashboard />} exact >
               <Route index element={<DashboardHome />} />
               <Route path='calendar' element={<DashboardCalendar />} />
+              <Route path=':classID' element={<ClassBoard />}>
+                <Route path='studentClass' element={<StudentClass />}>
+                  <Route index element={<StudentFlux />}></Route>
+                  <Route path='studentGrades' element={<StudentsGrades />} />
+                </Route>
+              </Route>
+              <Route path='requestForm' element={<RequestForm />}>
+                <Route path=':documentId' element={<Transition />}>
+                  <Route path='certificate' element={<CertificateRequest />} />
+                  <Route path='transcript' element={<TranscriptRequest />} >
+
+                  </Route>
+                </Route>
+              </Route>
+              <Route path='transcriptReview' element={<TranscriptReview />} />
+              <Route path='certificateReview' element={<CertificateReview />} />
             </Route>
+          </Route>
+          <Route path='/amazon-payment' element={<PaymentPage />} />
+          <Route path=':orderId' element={<DocViewer />} >
+            <Route path='transcript' element={<TranscriptViewer />} />
+            <Route path='certificate' element={<CertificateViewer />} />
           </Route>
         </Routes>
       </BrowserRouter>

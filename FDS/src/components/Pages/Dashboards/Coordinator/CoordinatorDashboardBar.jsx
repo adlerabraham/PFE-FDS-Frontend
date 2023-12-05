@@ -30,8 +30,18 @@ function CoordinatorDashboardBar({ onToggleSidebar }) {
         navigate('/login');
     };
 
+    const username = localStorage.getItem('username')
     const accountMenu = (
         <Menu>
+            {username != null ?
+                <Menu.Item key="1" icon={<UserOutlined />}>
+                    {username}
+                </Menu.Item>
+                :
+                <Menu.Item key="1" icon={<UserOutlined />}>
+                    user_name
+                </Menu.Item>
+            }
             <Menu.Item key="1" icon={<SettingOutlined />}>
                 Paramètres du compte
             </Menu.Item>

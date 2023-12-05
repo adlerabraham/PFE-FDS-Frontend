@@ -1,6 +1,7 @@
 import Class from '../../Class/Class'
-import { useGetClassQuery } from "../../../api/ApiEndpoints"
+import { useGetClassQuery, useGetStudentCourseQuery } from "../../../api/ApiEndpoints"
 import './DashboardHome.scss'
+import { Spin } from 'antd';
 
 function DashbordHome() {
 
@@ -16,9 +17,11 @@ function DashbordHome() {
 
         //Retrouver les cours en fonction du type d'utilisateur
         if (value === '0') {
+            //teacher
             var { data: courses, isError, isLoading, error } = useGetClassQuery()
         } else {
-            //const { data: courses, isError, isLoading, error } = useGetClassQuery()
+            //student
+            var { data: courses, isError, isLoading, error } = useGetStudentCourseQuery()
         }
 
 
@@ -35,32 +38,52 @@ function DashbordHome() {
                     //Enregistrer les cours 
                     localStorage.setItem('classTable', JSON.stringify(courses))
 
-                    return (
+                    if (value === '0') {
+                        //teacher
+                        return (
+                            <div className='dashb-home-container'>
+                                {courses.map((course) => (
+                                    <Class key={course.id}
+                                        courseID={course.id}
+                                        courseName={course.name}
+                                        levels={course.levels}
+                                        teacher={course.user_info}
+                                        period={course.period}
+                                        group={value}
+                                        coordinator={'0'} />
+                                ))}
+                            </div>
+                        );
+                    } else {
+                        //student
+                        return (
+                            <div className='dashb-home-container'>
+                                {courses.map((course) => (
+                                    <Class key={course.id}
+                                        courseID={course.id}
+                                        courseName={course.course_name}
+                                        level={course.level_name}
+                                        teacher={course.teacher_name}
+                                        period={course.period_name}
+                                        group={value}
+                                        coordinator={'0'} />
+                                ))}
+                            </div>
+                        );
+                    }
 
-                        <div className='dashb-home-container'>
-                            {courses.map((course) => (
-                                <Class key={course.id}
-                                    courseID={course.id}
-                                    courseName={course.name}
-                                    levels={course.levels}
-                                    teacher={course.user_info}
-                                    period={course.period}
-                                    group={value} />
-                            ))}
-                        </div>
-                    );
                 }
 
             } else {
                 console.log(error);
                 return (
-                    <div>Non autorise</div>
+                    <div>Erreur de chargment</div>
                 )
             }
         } else {
             return (
-                <div>
-                    Chargement...
+                <div className='spin'>
+                    <Spin tip='Chargement ...' size='large' />
                 </div>
             )
         }

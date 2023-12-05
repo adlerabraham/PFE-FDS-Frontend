@@ -6,9 +6,16 @@
 
   @media (min-width: 0px) {
     margin-top: 2vh;
-    margin-bottom: 25vh; 
+    margin-bottom: 25vh;
   }
 
+}
+
+.spin {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
 
 

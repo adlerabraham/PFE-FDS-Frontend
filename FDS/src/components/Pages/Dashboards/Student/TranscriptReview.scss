@@ -1,0 +1,31 @@
+.spin {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.error {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.error {
+    .ant-btn {
+        background-color: #1890ff;
+        color: #fff;
+        height: 40px;
+        width: 100px;
+        font-weight: normal;
+        border: 1px solid #1890ff;
+        border-radius: 4px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        outline: none;
+        transition: background-color 0.3s, color 0.3s;
+    }
+}

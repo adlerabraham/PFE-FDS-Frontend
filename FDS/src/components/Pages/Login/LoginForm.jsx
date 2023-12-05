@@ -41,7 +41,8 @@ function LoginForm() {
             dispatch(setCredentials({
                 access: RequestResult.access,
                 refresh: RequestResult.refresh,
-                group: RequestResult.group
+                group: RequestResult.group,
+                username: RequestResult.username
             }))
 
             setUsername('')

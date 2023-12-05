@@ -105,3 +105,10 @@ NavLink:hover {
     color: #fff;
     /* Changement de couleur du texte au survol */
 }
+
+.spin {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}

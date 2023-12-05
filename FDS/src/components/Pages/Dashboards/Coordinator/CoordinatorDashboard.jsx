@@ -5,12 +5,12 @@ import 'antd/dist/antd.css';
 import { BookOutlined, CalendarOutlined, HomeOutlined, CheckSquareOutlined } from '@ant-design/icons';
 import { NavLink, Outlet } from "react-router-dom";
 import Footer from '../../../Footer/Footer.jsx';
-import NavBotton from '../../../Navigation/NavBotton';
-import SidebarClass from '../../../Class/SidebarClass';
-import Header from '../../../Header/Header';
+import NavBotton from '../../../Navigation/NavBotton.jsx';
+import SidebarClass from '../../../Class/SidebarClass.jsx';
+import Header from '../../../Header/Header.jsx';
 import CoordinatorDashboardBar from './CoordinatorDashboardBar.jsx';
 
-function CoordinatorDashbord(props) {
+function CoordinatorDashboard(props) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
     const toggleSidebar = () => {
@@ -71,5 +71,5 @@ function CoordinatorDashbord(props) {
     );
 }
 
-export default CoordinatorDashbord
+export default CoordinatorDashboard
 

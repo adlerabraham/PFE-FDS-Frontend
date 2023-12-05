@@ -1,0 +1,44 @@
+.checkbox-container {
+    display: flex;
+    flex-direction: column;
+    width: 20vh;
+
+    margin: auto;
+    text-align: start;
+}
+
+.checkbox-line {
+    margin-bottom: 8px;
+}
+
+.action-container {
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-around;
+}
+
+.price {
+    text-align: start;
+    padding-left: 50px;
+}
+
+.action-container {
+    .ant-btn {
+        background-color: #1890ff;
+        color: #fff;
+        height: 40px;
+        font-weight: normal;
+        border: 1px solid #1890ff;
+        border-radius: 4px;
+        padding: 3px 7px;
+        /* Espace intérieur du bouton */
+        cursor: pointer;
+        /* Curseur de la souris */
+        font-size: 14px;
+        /* Taille de la police */
+        outline: none;
+        /* Supprimer la bordure de focus */
+        transition: background-color 0.3s, color 0.3s;
+        //margin-left: 20px;
+    }
+}

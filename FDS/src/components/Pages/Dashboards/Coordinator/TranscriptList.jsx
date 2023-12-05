@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { Outlet, useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { useGetNoteCardListQuery, useGetSudentsQuery } from '../../../../api/ApiEndpoints'
+import { Spin } from 'antd'
+import './CoordinatorDashboard.scss'
 
 function TranscriptList(props) {
     let params = useParams()
@@ -55,8 +57,8 @@ function TranscriptList(props) {
 
     if (isLoading1 || isLoading2) {
         return (
-            <div>
-                Chargement ....
+            <div className='spin'>
+                <Spin tip='Chargement ...' size='large' />
             </div>
         )
     } else if (isError1 || isError2) {
