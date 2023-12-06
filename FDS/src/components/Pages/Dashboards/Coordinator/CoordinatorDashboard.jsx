@@ -59,7 +59,7 @@ function CoordinatorDashboard(props) {
                     <div className="nav-botton">
                         <div className="nav-option">
                             <FileDoneOutlined className="nav-icon" />
-                            {isSidebarOpen && <NavLink to="" className='nav-link'>Cours archivés</NavLink>}
+                            {isSidebarOpen && <NavLink to="/coordinatorDashboard/academicYears" className='nav-link'>Cours archivés</NavLink>}
                         </div>
                         <div className="nav-option">
                             <SettingOutlined className="nav-icon" />

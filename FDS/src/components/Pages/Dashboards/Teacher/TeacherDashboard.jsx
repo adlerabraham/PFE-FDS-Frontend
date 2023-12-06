@@ -66,7 +66,7 @@ function TeacherDashboard() {
                     <div className="nav-botton">
                         <div className="nav-option">
                             <FileDoneOutlined className="nav-icon" />
-                            {isSidebarOpen && <NavLink to="" className='nav-link'>Cours archivés</NavLink>}
+                            {isSidebarOpen && <NavLink to="/TeacherDashboard/academicYears" className='nav-link'>Cours archivés</NavLink>}
                         </div>
                         <div className="nav-option">
                             <SettingOutlined className="nav-icon" />

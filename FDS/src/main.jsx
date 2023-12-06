@@ -43,6 +43,9 @@ import CertificateReview from './components/Pages/Dashboards/Student/Certificate
 import DocViewer from './components/Pages/Doc/DocViewer'
 import TranscriptViewer from './components/Pages/Doc/TranscriptViewer'
 import CertificateViewer from './components/Pages/Doc/CertificateViewer'
+import AcademicYears from './components/Pages/Dashboards/Teacher/Archive/AcademicYears'
+import Periods from './components/Pages/Dashboards/Teacher/Archive/Periods'
+import ArchivedCourses from './components/Pages/Dashboards/Teacher/Archive/ArchivedCourses'
 
 
 
@@ -73,6 +76,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                   </Route>
                 </Route>
               </Route>
+              <Route path='academicYears' element={<AcademicYears />}>
+                <Route path=':acaYearId' element={<Periods />}>
+                  <Route path=':periodId' element={<CoordinatorDashboardHome />} />
+                </Route>
+              </Route>
             </Route>
             <Route path='/teacherDashboard' element={<TeacherDashboard />} exact >
               <Route index element={<DashboardHome />} />
@@ -92,6 +100,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <Route path=':levelID' element={<StudentList />}></Route>
                   </Route>
                   <Route index element={<Flux />}></Route>
+                </Route>
+              </Route>
+              <Route path='academicYears' element={<AcademicYears />}>
+                <Route path=':acaYearId' element={<Periods />}>
+                  <Route path=':periodId' element={<ArchivedCourses />} />
                 </Route>
               </Route>
             </Route>
@@ -116,6 +129,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               </Route>
               <Route path='transcriptReview' element={<TranscriptReview />} />
               <Route path='certificateReview' element={<CertificateReview />} />
+              <Route path='academicYears' element={<AcademicYears />}>
+                <Route path=':acaYearId' element={<Periods />}>
+                  <Route path=':periodId' element={<ArchivedCourses />} />
+                </Route>
+              </Route>
             </Route>
           </Route>
           <Route path='/amazon-payment' element={<PaymentPage />} />

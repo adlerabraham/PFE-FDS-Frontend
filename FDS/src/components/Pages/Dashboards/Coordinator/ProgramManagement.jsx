@@ -22,7 +22,7 @@ function ProgramManagement(props) {
             <div>
                 <div className="class-filters">
                     <select id="levelDropdown" onChange={handleLevelChange} value={selectedLevel || ''} className="level-dropdown-class">
-                        <option value="" disabled>Selectionner un niveau</option>
+                        <option value="" disabled>Sélectionner un niveau</option>
                         {levels.map((level) => (
                             <option key={level.id} value={level.id}>
                                 {level.name}
@@ -33,7 +33,7 @@ function ProgramManagement(props) {
                     {selectedLevel && (
                         <NavLink to={`/coordinatorDashboard/${programID}/${selectedLevel}`}>
                             <button className="custom-list-button">
-                                Afficher la liste
+                                Afficher les cours
                             </button>
                         </NavLink>
                     )}

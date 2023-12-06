@@ -1,11 +1,11 @@
 import React from 'react'
-import Class from '../../Class/Class'
-import { useGetClassQuery, useGetStudentCourseQuery } from "../../../api/ApiEndpoints"
-import './DashboardHome.scss'
 import { Spin } from 'antd';
+import { useGetArchivedClassQuery, useGetArvhivedStudentCoursesQuery } from '../../../../../api/ApiEndpoints';
+import Class from '../../../../Class/Class';
+import { useParams } from 'react-router-dom';
 
-function DashbordHome() {
-
+function ArchivedCourses(props) {
+    const params = useParams()
     //verification du type d'utilisateur
     const userGroup = localStorage.getItem('group');
     if (userGroup != null) {
@@ -19,10 +19,14 @@ function DashbordHome() {
         //Retrouver les cours en fonction du type d'utilisateur
         if (value === '0') {
             //teacher
-            var { data: courses, isError, isLoading, error } = useGetClassQuery()
+            var { data: courses, isError,
+                isLoading,
+                error } = useGetArchivedClassQuery({ acaYearId: params.acaYearId, periodId: params.periodId })
         } else {
             //student
-            var { data: courses, isError, isLoading, error } = useGetStudentCourseQuery()
+            var { data: courses, isError,
+                isLoading,
+                error } = useGetArvhivedStudentCoursesQuery({ acaYearId: params.acaYearId, periodId: params.periodId })
         }
 
 
@@ -95,7 +99,7 @@ function DashbordHome() {
             // Add a button to go back
         );
     }
-
 }
 
-export default DashbordHome
+export default ArchivedCourses
+

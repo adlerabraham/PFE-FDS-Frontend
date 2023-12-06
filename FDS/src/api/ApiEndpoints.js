@@ -207,6 +207,54 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 methode: 'GET'
             })
         }),
+        //gestion des archives
+        getAcademicYears: builder.query({
+            query: () => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: "academic/academicyear",
+                methode: 'GET'
+            })
+        }),
+        getPeriods: builder.query({
+            query: (params) => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: "academic/period/?academic_year_id=" + params.acaYearId,
+                methode: 'GET'
+            })
+        }),
+        getArchivedClass: builder.query({
+            query: (params) => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: "academic/course/?academic_year_id=" + params.acaYearId + "&period_id=" + params.periodId,
+                methode: 'GET'
+            })
+        }),
+        getArvhivedStudentCourses: builder.query({
+            query: (params) => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: "academic/course/?academic_year_id=" + params.acaYearId + "&period_id=" + params.periodId,
+                methode: 'GET'
+            })
+        }),
+        getArchivedCourses: builder.query({
+            query: (params) => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: "academic/coordinator/program/level/course/?program_id=" + params.programID +
+                    "&level_id=" + params.levelID + "&academic_year_id=" + params.acaYearId +
+                    "&period_id=" + params.periodId,
+                methode: 'GET'
+            })
+        }),
 
     })
 })
@@ -235,4 +283,9 @@ export const {
     useGenerateTranscriptQuery,
     useGetOrderedDocumentQuery,
     useGenerateCertificateQuery,
+    useGetAcademicYearsQuery,
+    useGetPeriodsQuery,
+    useGetArchivedClassQuery,
+    useGetArvhivedStudentCoursesQuery,
+    useGetArchivedCoursesQuery,
 } = authApiSlice
