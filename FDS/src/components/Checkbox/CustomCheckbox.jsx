@@ -30,6 +30,12 @@ function CustomCheckbox(props) {
         isPaymentCompleted = 0
     }
 
+    //set checkedList when payment is completed
+    if (localStorage.getItem('levelName') && isPaymentCompleted) {
+        setCheckedList[localStorage.getItem('levelName')]
+        console.log(checkedList);
+    }
+
     const documents = JSON.parse(localStorage.getItem('documents'))
     const index = documents.findIndex((item) =>
         item.name.toLowerCase() === 'releve de notes'

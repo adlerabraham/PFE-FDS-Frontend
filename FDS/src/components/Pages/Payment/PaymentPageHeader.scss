@@ -1,6 +1,28 @@
 .ant-layout-header {
-    height: fit-content;
+    height: 100px;
     background: linear-gradient(to bottom, rgba(24, 66, 145, 0.8) 0%,
             rgba(24, 66, 145, 0) 80%, #184291 80%, #184291 100%);
     margin-bottom: 20px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+
+.centered {
+    margin: auto;
+}
+
+.link-col button {
+    color: #184291;
+
+    :hover {
+        color: #df6228;
+    }
+}
+
+.ant-layout-header {
+    line-height: 40px;
 }

@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import {
     Steps, Button, Form, Input, Popconfirm, Divider, Card,
-    Radio, Select, InputNumber, notification, message
+    Radio, Select, InputNumber, notification, message, Image
 } from 'antd';
 import 'antd/dist/antd.css';
 import './PaymentPage.scss'; // You can create a CSS file for styling
 import PaymentPageHeader from './PaymentPageHeader';
 import { useNavigate } from 'react-router-dom';
+import MonthOptions from '../../DatePickup/MonthOptions';
+import YearOptions from '../../DatePickup/YearOptions';
+import PaymentPageFooter from './PaymentPageFooter';
+import paymentCardImageLink from "../../../Image/payment_card.png";
 
 const { Step } = Steps;
 
@@ -36,7 +40,7 @@ const PaymentPage = () => {
 
     const getRandomvalues = () => {
         // Générer un identifiant de classe aléatoire (par exemple, entre 1 et 10)
-        const randomValue = Math.floor(Math.random() * 100) + 1;
+        const randomValue = Math.floor(Math.random() * 4) + 1;
         return randomValue;
     };
     const openSuccessfullPaymentNotification = () => {
@@ -70,34 +74,28 @@ const PaymentPage = () => {
         message.error('Vous avez dit non.');
     };
 
-    // const handleFinish = (values) => {
-    //     console.log('Received values:', values);
-    //     // Add logic to handle payment submission
-    //     const result = getRandomvalues()
-    //     if (result == 50) {
-    //         openUnsuccessfullPaymentNotification()
-    //     } else {
-    //         openSuccessfullPaymentNotification()
-    //         var payment = 1
-    //         localStorage.setItem('payment', payment)
-    //         navigate(-1)
-    //     }
-
-    // };
-
     const steps = [
         {
             title: 'Methode de paiement',
             content: (
-                <Form name="paymentForm" onFinish={handleNextStep}>
-                    <Card title="Choisis une methode de paiement">
-                        <Radio.Group>
-                            <Radio value="credit">Carte de credit</Radio>
-                            <Radio value="visa">Carte Visa</Radio>
-                            <Radio value="master">Martercard</Radio>
-                        </Radio.Group>
-                    </Card>
-                </Form>
+                <div className='first-step'>
+                    <Form name="paymentForm" onFinish={handleNextStep}>
+                        <Card title="Choisis une methode de paiement">
+                            <Radio.Group>
+                                <Radio value="credit">Carte de credit</Radio>
+                                <Radio value="visa">Carte Visa</Radio>
+                                <Radio value="master">Martercard</Radio>
+                            </Radio.Group>
+                        </Card>
+                    </Form>
+                    <div className='card-image'>
+                        <Image
+                            width={200}
+                            src={paymentCardImageLink}
+                            alt='Image de carte de paiement'
+                        />
+                    </div>
+                </div>
             ),
         },
         {
@@ -125,14 +123,8 @@ const PaymentPage = () => {
                         rules={[{ required: true, message: "Choisir la date d'expiration" }]}
                     >
                         <Input.Group compact>
-                            <Select placeholder="Month">
-                                <Option value="01">01</Option>
-                                {/* Add more months */}
-                            </Select>
-                            <Select placeholder="Year">
-                                <Option value="2023">2023</Option>
-                                {/* Add more years */}
-                            </Select>
+                            <MonthOptions />
+                            <YearOptions />
                         </Input.Group>
                     </Form.Item>
 
@@ -143,37 +135,15 @@ const PaymentPage = () => {
                     >
                         <Input.Password placeholder="Entrer le CVV" />
                     </Form.Item>
-
-                    {/* <Form.Item
-                        label="Montant"
-                        name="amount"
-                        rules={[{ required: true, message: 'Entrer le montant' }]}
-                    >
-                        <InputNumber
-                            style={{ width: '100%' }}
-                            formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                            parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
-                            placeholder="Entrer le montant"
-                        />
-                    </Form.Item> */}
                 </Form>
             ),
         },
-        // {
-        //     title: 'Confirmation de paiement',
-        //     content: (
-        //         <div>
-        //             {/* Display a summary of the order for review */}
-        //             Informations review
-        //         </div>
-        //     ),
-        // },
     ];
 
     return (
         <div className="payment-page">
             <PaymentPageHeader />
-            <Steps current={currentStep} size="small">
+            <Steps className="steps" current={currentStep} size="small">
                 {steps.map((step) => (
                     <Step key={step.title} title={step.title} />
                 ))}
@@ -192,26 +162,25 @@ const PaymentPage = () => {
                 )}
 
                 {currentStep < steps.length - 1 && (
-                    <Button type="primary" onClick={handleNextStep}>
+                    <Button type="primary" style={{ margin: '0 8px' }} onClick={handleNextStep}>
                         Suivant
                     </Button>
                 )}
                 {currentStep == steps.length - 1 && (
-                    // <Button type="primary" onClick={handleFinish}>
-                    //     Confirmer paiement
-                    // </Button>
                     <Popconfirm
                         title="Confirmer paiement"
                         description="Voullez vous effectuer ce paiement?"
                         onConfirm={confirm}
                         onCancel={cancel}
                         okText="OUI"
-                        cancelText="NON"
-                    >
-                        <Button type="primary">Confirmer paiement</Button>
+                        cancelText="NON">
+                        <Button type="primary" style={{ margin: '0 8px' }}>
+                            Confirmer paiement
+                        </Button>
                     </Popconfirm>
                 )}
             </div>
+            <PaymentPageFooter />
         </div>
     );
 };

@@ -3,12 +3,14 @@ import '../Dashboard.scss';
 import '../../../Navigation/Navigation.scss'
 import 'antd/dist/antd.css'
 import { Button } from 'antd';
-import { BookOutlined, CalendarOutlined, HomeOutlined, FileTextOutlined, CheckSquareOutlined } from '@ant-design/icons';
+import {
+    BookOutlined, CalendarOutlined, HomeOutlined, FileTextOutlined,
+    FileDoneOutlined, CheckSquareOutlined, SettingOutlined
+} from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../../../features/auth/authSlice';
 import { NavLink, Outlet, useNavigate } from "react-router-dom"
 import Footer from '../../../Footer/Footer.jsx';
-import NavBotton from '../../../Navigation/NavBotton';
 import SidebarClass from '../../../Class/SidebarClass.jsx';
 import TeacherDashboardBar from '../Teacher/TeacherDashboardBar.jsx';
 import Header from '../../../Header/Header.jsx';
@@ -64,7 +66,14 @@ function StudentDashboard() {
                     </div>
 
                     <div className="nav-botton">
-                        <NavBotton isSidebarOpen={isSidebarOpen} />
+                        <div className="nav-option">
+                            <FileDoneOutlined className="nav-icon" />
+                            {isSidebarOpen && <NavLink to="" className='nav-link'>Cours archivés</NavLink>}
+                        </div>
+                        <div className="nav-option">
+                            <SettingOutlined className="nav-icon" />
+                            {isSidebarOpen && <NavLink to="" className='nav-link'>Paramètres</NavLink>}
+                        </div>
                     </div>
                 </div>
                 <div className={`view-container ${isSidebarOpen ? '' : 'sidebar-closed'}`}>

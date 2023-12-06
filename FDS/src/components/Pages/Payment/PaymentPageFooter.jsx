@@ -1,14 +1,12 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Space } from 'antd';
 import 'antd/dist/antd.css'
-import './footer.scss'
+import '../../Footer/Footer.scss'
 
-function Footer() {
+function PaymentPageFooter() {
     return (
         <div className='footer'>
             <Space>
-                <NavLink className="footer-link">Espace virtuel</NavLink>|
                 <NavLink className="footer-link">Mentions legales</NavLink>|
                 <NavLink className="footer-link">A propos</NavLink>|
                 <NavLink className="footer-link">Aide</NavLink>|
@@ -17,6 +15,4 @@ function Footer() {
     );
 }
 
-export default Footer
-
-
+export default PaymentPageFooter

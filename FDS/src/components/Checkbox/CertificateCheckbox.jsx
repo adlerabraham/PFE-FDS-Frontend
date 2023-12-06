@@ -30,6 +30,11 @@ function CertificateCheckbox(props) {
         isPaymentCompleted = 0
     }
 
+    //set checkedList when payment is completed
+    if (localStorage.getItem('levelName') && isPaymentCompleted) {
+        setCheckedList[localStorage.getItem('levelName')]
+    }
+
     const documents = JSON.parse(localStorage.getItem('documents'))
     const index = documents.findIndex((item) =>
         item.name.toLowerCase() === 'attestation'

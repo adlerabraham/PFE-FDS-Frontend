@@ -19,7 +19,7 @@ function DocViewer(props) {
 
         if (document.document_type_id == 1) {
             navigate('./certificate')
-        } else if (document.document_type_id == 1) {
+        } else if (document.document_type_id == 4) {
             navigate('./transcript')
         }
         return (

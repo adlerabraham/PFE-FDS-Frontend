@@ -16,7 +16,7 @@ function StudentClass(props) {
 
     // Effet de montage pour définir l'onglet actif lors de la première visite
     useEffect(() => {
-        if (window.location.pathname === "/teacherDashboard/" + params.classID + "/teacherclass") {
+        if (window.location.pathname === "/studentDashboard/" + params.classID + "/studentClass") {
             // Si l'URL se termine par "/teacherclass", alors c'est "flux"
             setClickedTab('flux');
         }

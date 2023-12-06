@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useGenerateCertificateQuery } from '../../../../api/ApiEndpoints'
 import { Button, Spin } from 'antd'
 import './TranscriptReview.scss'
 import { useNavigate } from 'react-router-dom'
-//import { saveAs } from 'file-saver'
 
 import axios from 'axios';
 
@@ -23,9 +22,10 @@ function CertificateReview(props) {
         order = JSON.parse(localStorage.getItem('order'))
     }
 
-    const token = localStorage.getItem('accessToken')
-    if (token) {
-        const downloadPdf = async () => {
+
+    const downloadPdf = async () => {
+        const token = localStorage.getItem('accessToken')
+        if (token) {
             try {
                 const response = await axios.get("http://127.0.0.1:8000/api/document/certificate/generate/?academic_year_id=" + order.document_aca_year +
                     "&level_id=" + order.level + "&order_id=" + order.id, {
@@ -64,11 +64,15 @@ function CertificateReview(props) {
                 console.error('Error downloading PDF:', error);
                 setIsError(true)
             }
-        };
+        }
+    };
 
+    useEffect(() => {
         // Call the downloadPdf function
         downloadPdf();
-    }
+    }, [])
+
+
 
     if (!(isLoading || isError)) {
         localStorage.setItem('payment', 0)

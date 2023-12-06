@@ -8,12 +8,12 @@ import { useParams } from 'react-router-dom';
 function TranscriptViewer(props) {
     const params = useParams()
     const defaultLayoutPluginInstance = defaultLayoutPlugin();
+    const pdfUrl = `/pdf_output/transcript_${params.orderId}.pdf`
     return (
         <div>
             <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker">
                 <Viewer
-                    fileUrl="/pdf_output/certificate_21.pdf"
-                    // fileUrl="C:\Users\Adler Abraham\Desktop\Robot restaurateur_devoir#1.pdf"
+                    fileUrl={pdfUrl}
                     plugins={[
                         // Register plugins
                         defaultLayoutPluginInstance,

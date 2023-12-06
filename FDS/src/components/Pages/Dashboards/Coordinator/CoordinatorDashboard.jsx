@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import '../Dashboard.scss';
 import '../../../Navigation/Navigation.scss';
 import 'antd/dist/antd.css';
-import { BookOutlined, CalendarOutlined, HomeOutlined, CheckSquareOutlined } from '@ant-design/icons';
+import { BookOutlined, CalendarOutlined, HomeOutlined, CheckSquareOutlined, FileDoneOutlined, SettingOutlined } from '@ant-design/icons';
 import { NavLink, Outlet } from "react-router-dom";
 import Footer from '../../../Footer/Footer.jsx';
-import NavBotton from '../../../Navigation/NavBotton.jsx';
-import SidebarClass from '../../../Class/SidebarClass.jsx';
 import Header from '../../../Header/Header.jsx';
 import CoordinatorDashboardBar from './CoordinatorDashboardBar.jsx';
 
@@ -59,7 +57,14 @@ function CoordinatorDashboard(props) {
                     </div>
 
                     <div className="nav-botton">
-                        <NavBotton isSidebarOpen={isSidebarOpen} />
+                        <div className="nav-option">
+                            <FileDoneOutlined className="nav-icon" />
+                            {isSidebarOpen && <NavLink to="" className='nav-link'>Cours archivés</NavLink>}
+                        </div>
+                        <div className="nav-option">
+                            <SettingOutlined className="nav-icon" />
+                            {isSidebarOpen && <NavLink to="" className='nav-link'>Paramètres</NavLink>}
+                        </div>
                     </div>
                 </div>
                 <div className={`view-container ${isSidebarOpen ? '' : 'sidebar-closed'}`}>
