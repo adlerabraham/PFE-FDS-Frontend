@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useGenerateCertificateQuery } from '../../../../api/ApiEndpoints'
-import { Button, Spin } from 'antd'
+import { Button, Spin, notification } from 'antd'
 import './TranscriptReview.scss'
 import { useNavigate } from 'react-router-dom'
-
 import axios from 'axios';
 
 
@@ -18,13 +16,28 @@ function CertificateReview(props) {
     const handleRetry = () => {
         navigate(-1)
     }
+
+    const openSuccessfullCompletionNotification = () => {
+        notification.success({
+            message: 'Envoi de document réussie',
+            description: "Consulter l'email que vous avez fourni pour retrouver votre attestation",
+        });
+    };
+
+    const openUnSuccessfullCompletionNotification = () => {
+        notification.error({
+            message: 'Envoi de document échouée',
+            description: "L'envoi du document a échoué. Veuillez réesseyer.",
+        });
+    };
+
     if (localStorage.getItem('order')) {
         order = JSON.parse(localStorage.getItem('order'))
     }
 
+    const token = localStorage.getItem('accessToken')
 
     const downloadPdf = async () => {
-        const token = localStorage.getItem('accessToken')
         if (token) {
             try {
                 const response = await axios.get("http://127.0.0.1:8000/api/document/certificate/generate/?academic_year_id=" + order.document_aca_year +
@@ -60,16 +73,25 @@ function CertificateReview(props) {
 
                 // Remove the link from the document
                 document.body.removeChild(link);
+
+                openSuccessfullCompletionNotification()
             } catch (error) {
                 console.error('Error downloading PDF:', error);
+                openUnSuccessfullCompletionNotification()
                 setIsError(true)
             }
+        } else {
+            openUnSuccessfullCompletionNotification()
+            setIsError(true)
         }
     };
 
     useEffect(() => {
         // Call the downloadPdf function
         downloadPdf();
+        if (!(isLoading || isError)) {
+            navigate('/studentdashboard')
+        }
     }, [])
 
 
@@ -79,7 +101,7 @@ function CertificateReview(props) {
 
         return (
             <div>
-                Consulter l'email que vous avez fourni pour retrouver votre attestation
+
             </div>
         )
     }
@@ -92,13 +114,19 @@ function CertificateReview(props) {
         )
     }
 
-    if (isError) {
+    if (isError && token) {
         return (
             <div className='error'>
                 <p>Une erreur s'est produite lors de l'envoi du document.</p>
                 <Button type='primary' onClick={handleRetry}>
                     Reessayer
                 </Button>
+            </div>
+        )
+    } else {
+        return (
+            <div className='error'>
+                <p>Vous n'avez l'authorisation d'effectuer cette action.</p>
             </div>
         )
     }

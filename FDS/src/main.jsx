@@ -127,6 +127,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               </Route>
             </Route>
           </Route>
+
+          {/* STUDENT'S ROUTES SET UP */}
           <Route element={<RequireAuth />}>
             <Route path='/studentdashboard' element={<StudentDashboard />} exact >
               <Route index element={<DashboardHome />} />
@@ -140,9 +142,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <Route path='requestForm' element={<RequestForm />}>
                 <Route path=':documentId' element={<Transition />}>
                   <Route path='certificate' element={<CertificateRequest />} />
-                  <Route path='transcript' element={<TranscriptRequest />} >
-
-                  </Route>
+                  <Route path='transcript' element={<TranscriptRequest />} />
                 </Route>
               </Route>
               <Route path='transcriptReview' element={<TranscriptReview />} />

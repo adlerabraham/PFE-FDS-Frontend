@@ -30,11 +30,12 @@ function CustomCheckbox(props) {
         isPaymentCompleted = 0
     }
 
-    //set checkedList when payment is completed
-    if (localStorage.getItem('levelName') && isPaymentCompleted) {
-        setCheckedList[localStorage.getItem('levelName')]
-        console.log(checkedList);
+    if (localStorage.getItem('levelName')) {
+        var checkedlevelsName = JSON.parse(localStorage.getItem('levelName'))
     }
+
+    if (localStorage.getItem('totalPrice'))
+        var totalPriceSet = localStorage.getItem('totalPrice')
 
     const documents = JSON.parse(localStorage.getItem('documents'))
     const index = documents.findIndex((item) =>
@@ -79,7 +80,8 @@ function CustomCheckbox(props) {
     }
 
     const handlePayment = () => {
-        localStorage.setItem('levelName', checkedList[0])
+        localStorage.setItem('levelName', JSON.stringify(checkedList))
+        localStorage.setItem('totalPrice', totalPrice)
         navigate('/amazon-payment')
     }
 
@@ -99,7 +101,7 @@ function CustomCheckbox(props) {
 
     const handleOrderSubmission = () => {
         const levelIndex = levels.findIndex((item) =>
-            item.level_name == localStorage.getItem('levelName')
+            item.level_name == checkedlevelsName[0]
         )
         if (levelIndex != -1) {
             const documentOrder = {
@@ -124,51 +126,48 @@ function CustomCheckbox(props) {
     return (
         <div>
             {isPaymentCompleted == 1 ?
-                <div className='checkbox-container'>
-                    <div className='checkbox-line'>
-                        <Checkbox indeterminate={indeterminate}
-                            onChange={onCheckAllChange} checked={checkAll} disabled>
-                            Cocher tout
-                        </Checkbox>
+                <div>
+                    <p>Niveau(x) choisi(s)</p>
+                    <div className='checkbox-container'>
+                        <div className='checkbox-line'>
+                            <CheckboxGroup options={plainOptions} value={checkedlevelsName} onChange={onChange} disabled />
+                        </div>
                     </div>
-                    <div className='checkbox-line'>
-                        <CheckboxGroup options={plainOptions} value={checkedList} onChange={onChange} disabled />
+                    <div className='price'>
+                        <p>Prix total: {totalPriceSet} {currency} </p>
+                    </div>
+                    <div className='action-container'>
+                        <Button onClick={handleOrderSubmission}>Soumettre</Button>
                     </div>
                 </div>
                 :
-                <div className='checkbox-container'>
-                    <div className='checkbox-line'>
-                        <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
-                            Cocher tout
-                        </Checkbox>
+                <div>
+                    <p>Choix de niveau(x)</p>
+                    <div className='checkbox-container'>
+                        <div className='checkbox-line'>
+                            <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
+                                Cocher tout
+                            </Checkbox>
+                        </div>
+                        <div className='checkbox-line'>
+                            <CheckboxGroup options={plainOptions} value={checkedList} onChange={onChange} />
+                        </div>
                     </div>
-                    <div className='checkbox-line'>
-                        <CheckboxGroup options={plainOptions} value={checkedList} onChange={onChange} />
+                    <div className='price'>
+                        <p>Prix total: {totalPrice} {currency} </p>
+                    </div>
+                    <div className='action-container'>
+                        <Button onClick={handleCancel}>Annuler</Button>
+                        {checkedList.length > 0 ?
+                            <Button onClick={handlePayment}>Payer</Button>
+                            :
+                            <Button onClick={handlePayment} disabled>Payer</Button>
+                        }
+
                     </div>
                 </div>
             }
-
-            <div className='price'>
-                <p>Prix total: {totalPrice} {currency} </p>
-            </div>
-            {isPaymentCompleted == 1 ?
-                <div className='action-container'>
-                    <Button onClick={handleOrderSubmission}>Soumettre</Button>
-                </div>
-                :
-                <div className='action-container'>
-                    <Button onClick={handleCancel}>Annuler</Button>
-                    {checkedList.length > 0 ?
-                        <Button onClick={handlePayment}>Payer</Button>
-                        :
-                        <Button onClick={handlePayment} disabled>Payer</Button>
-                    }
-
-                </div>
-            }
-
         </div>
-
     );
 };
 export default CustomCheckbox;

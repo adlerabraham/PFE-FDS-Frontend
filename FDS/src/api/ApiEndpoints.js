@@ -240,7 +240,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 headers: {
                     'Content-type': 'application/json',
                 },
-                url: "academic/course/?academic_year_id=" + params.acaYearId + "&period_id=" + params.periodId,
+                url: "academic/student/course/?academic_year_id=" + params.acaYearId + "&period_id=" + params.periodId,
                 methode: 'GET'
             })
         }),

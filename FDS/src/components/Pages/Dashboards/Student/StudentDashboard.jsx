@@ -47,7 +47,7 @@ function StudentDashboard() {
                         <div className='nav-box'>
                             <div className="nav-option">
                                 <BookOutlined className='nav-icon' />
-                                {isSidebarOpen && <NavLink to="/studentDashboard" className='nav-link'>Cours suivies</NavLink>}
+                                {isSidebarOpen && <NavLink to="/studentDashboard" className='nav-link'>Cours suivis</NavLink>}
                             </div>
                             {isSidebarOpen && (
                                 <div>
@@ -61,7 +61,7 @@ function StudentDashboard() {
                         </div>
                         <div className="nav-option">
                             <FileTextOutlined className='nav-icon' />
-                            {isSidebarOpen && <NavLink to='/studentDashboard/requestForm' className='nav-link'>Demander un document</NavLink>}
+                            {isSidebarOpen && <NavLink to='/studentDashboard/requestForm' className='nav-link'>Demande de document</NavLink>}
                         </div>
                     </div>
 

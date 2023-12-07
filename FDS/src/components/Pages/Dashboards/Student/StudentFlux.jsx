@@ -9,8 +9,11 @@ function StudentFlux(props) {
         var classIndex = classes.findIndex((item) =>
             item.id == params.classID
         )
-        if (classIndex != -1)
+        if (classIndex != -1) {
             var courseName = classes[classIndex].course_name
+            var period = classes[classIndex].period_name
+        }
+
     }
 
     return (
@@ -21,7 +24,11 @@ function StudentFlux(props) {
                     :
                     <h1>Nom du cours</h1>
                 }
-                <p>ID de la classe: {params.classID}</p>
+                {classIndex != -1 ?
+                    <p>{period}</p>
+                    :
+                    <p>periode</p>
+                }
             </div>
             <div className="flux-content">
                 {/* Ajoutez ici le contenu spécifique à la page Flux */}

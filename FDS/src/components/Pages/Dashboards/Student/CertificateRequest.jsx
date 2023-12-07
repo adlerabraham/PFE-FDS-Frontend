@@ -10,7 +10,6 @@ function CertificateRequest(props) {
             <div className='request-form-container'>
                 <h4>DEMANDER UNE ATTESTATION</h4>
                 <Divider />
-                <p>Choix du niveau</p>
                 <CertificateCheckbox levels={levels} />
             </div>
         )

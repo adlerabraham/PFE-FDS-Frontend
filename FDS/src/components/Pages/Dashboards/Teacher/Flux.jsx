@@ -29,8 +29,11 @@ function FluxComponent() {
         var classIndex = classes.findIndex((item) =>
             item.id == classID
         )
-        if (classIndex != -1)
+        if (classIndex != -1) {
             var courseName = classes[classIndex].name
+            var period = classes[classIndex].period.name
+        }
+
     }
 
     return (
@@ -41,7 +44,11 @@ function FluxComponent() {
                     :
                     <h1>Nom du cours</h1>
                 }
-                <p>ID de la classe: {classID}</p>
+                {classIndex != -1 ?
+                    <p>{period}</p>
+                    :
+                    <p>periode</p>
+                }
             </div>
             <div className="flux-content">
                 {/* Ajoutez ici le contenu spécifique à la page Flux */}
