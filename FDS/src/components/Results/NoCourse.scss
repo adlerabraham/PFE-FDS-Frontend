@@ -1,0 +1,29 @@
+.ant-result .ant-btn {
+    background-color: #1890ff;
+    /* Couleur de fond */
+    color: #fff;
+    /* Couleur du texte */
+    height: 35px;
+    width: 80px;
+    border: 1px solid #1890ff;
+    /* Bordure */
+    border-radius: 4px;
+    /* Coins arrondis */
+    padding: 3px 7px;
+    /* Espace intérieur du bouton */
+    cursor: pointer;
+    /* Curseur de la souris */
+    font-size: 14px;
+    /* Taille de la police */
+    outline: none;
+    /* Supprimer la bordure de focus */
+    transition: background-color 0.3s, color 0.3s;
+    /* Animation de transition */
+}
+
+.ant-result .ant-btn:hover {
+    background-color: #df6228;
+    /* Changement de couleur au survol */
+    color: #fff;
+    /* Changement de couleur du texte au survol */
+}

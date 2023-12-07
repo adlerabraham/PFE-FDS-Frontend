@@ -27,7 +27,7 @@ function AcademicYears(props) {
 
             return (
                 <div>
-                    <div className="class-filters">
+                    <div className="class-filters" style={{ marginBottom: 0 }}>
                         <select id="levelDropdown" onChange={handleLevelChange} value={selectedAcaYear || ''} className="level-dropdown-class">
                             <option value="" disabled>Sélectionner une année académique</option>
                             {aca_years.map((aca_year) => (

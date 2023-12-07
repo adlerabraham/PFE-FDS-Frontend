@@ -3,6 +3,7 @@ import Class from '../../Class/Class'
 import { useGetClassQuery, useGetStudentCourseQuery } from "../../../api/ApiEndpoints"
 import './DashboardHome.scss'
 import { Spin } from 'antd';
+import NoCourses from '../../Results/NoCourses';
 
 function DashbordHome() {
 
@@ -31,7 +32,7 @@ function DashbordHome() {
                 if (courses.length == 0) {
                     return (
                         <div>
-                            Pas de cours disponnible!
+                            <NoCourses />
                         </div>
                     )
                 } else {

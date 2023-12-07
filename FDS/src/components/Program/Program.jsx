@@ -1,8 +1,17 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import './Program.scss'
 
 function Program(props) {
+  const params = useParams()
+  var link
+  if (params.acaYearId != undefined) {
+    link = `/coordinatorDashboard/${props.programId}`
+  } else {
+    // link = `/coordinatorDashboard/${props.programId}`
+    link = `./${props.programId}`
+  }
+  console.log(params.acaYearId);
   const getRandomClassID = () => {
     // Générer un identifiant de classe aléatoire (par exemple, entre 1 et 10)
     const randomClassID = Math.floor(Math.random() * 10) + 1;
@@ -12,7 +21,7 @@ function Program(props) {
   return (
     <div className="program-container">
       <div className={`program-head ${getRandomClassID()}`}>
-        <NavLink to={`/coordinatorDashboard/${props.programId}`}>{props.programName}</NavLink>
+        <NavLink to={`./${props.programId}`}>{props.programName}</NavLink>
         <p>{props.programAbv}</p>
       </div>
       <div className="program-middle">

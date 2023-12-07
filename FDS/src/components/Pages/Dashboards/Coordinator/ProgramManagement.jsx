@@ -31,7 +31,7 @@ function ProgramManagement(props) {
                     </select>
 
                     {selectedLevel && (
-                        <NavLink to={`/coordinatorDashboard/${programID}/${selectedLevel}`}>
+                        <NavLink to={`./${selectedLevel}`}>
                             <button className="custom-list-button">
                                 Afficher les cours
                             </button>

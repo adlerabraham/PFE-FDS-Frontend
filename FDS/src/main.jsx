@@ -46,6 +46,7 @@ import CertificateViewer from './components/Pages/Doc/CertificateViewer'
 import AcademicYears from './components/Pages/Dashboards/Teacher/Archive/AcademicYears'
 import Periods from './components/Pages/Dashboards/Teacher/Archive/Periods'
 import ArchivedCourses from './components/Pages/Dashboards/Teacher/Archive/ArchivedCourses'
+import CoordinatorArchiveHome from './components/Pages/Dashboards/Coordinator/CoordinatorArchiveHome'
 
 
 
@@ -78,7 +79,24 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               </Route>
               <Route path='academicYears' element={<AcademicYears />}>
                 <Route path=':acaYearId' element={<Periods />}>
-                  <Route path=':periodId' element={<CoordinatorDashboardHome />} />
+                  <Route path=':periodId' element={<CoordinatorArchiveHome />}>
+                    <Route index element={<CoordinatorDashboardHome />} />
+                    <Route path=':programId' element={<ProgramManagement />} >
+                      <Route path=':levelID' element={<LevelClasses />}>
+                        <Route index element={<LevelClassesHome />} />
+                        <Route path=':classID' element={<ClassBoard />}>
+                          <Route path='transcriptList' element={<TranscriptList />}>
+                            <Route path='noteCardTable' element={<NoteCardTable />}>
+                              <Route path='view' element={<NoteCardTableView />} />
+                              <Route path='create' element={<NoteCardTableCreate />} />
+                              <Route path='update' element={<NoteCardTableEdit />} />
+                              <Route path=':transcript' element={<ValidateTranscript />}></Route>
+                            </Route>
+                          </Route>
+                        </Route>
+                      </Route>
+                    </Route>
+                  </Route>
                 </Route>
               </Route>
             </Route>
