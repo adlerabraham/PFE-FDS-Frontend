@@ -11,7 +11,7 @@ function Transition(props) {
         } else if (params.documentId == 4) {//releve de notes
             navigate(`/studentdashboard/requestForm/${params.documentId}/transcript`)
         }
-    }, [])
+    }, [params.documentId])
     return (
         <div>
             <Outlet />

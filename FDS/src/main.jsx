@@ -47,6 +47,7 @@ import AcademicYears from './components/Pages/Dashboards/Teacher/Archive/Academi
 import Periods from './components/Pages/Dashboards/Teacher/Archive/Periods'
 import ArchivedCourses from './components/Pages/Dashboards/Teacher/Archive/ArchivedCourses'
 import CoordinatorArchiveHome from './components/Pages/Dashboards/Coordinator/CoordinatorArchiveHome'
+import PaymentPageBuffer from './components/Pages/Payment/PaymentPageBuffer'
 
 
 
@@ -154,7 +155,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               </Route>
             </Route>
           </Route>
-          <Route path='/amazon-payment' element={<PaymentPage />} />
+          <Route path='/fds-payment' element={<PaymentPageBuffer />} >
+            <Route path=':docId' element={<PaymentPage />} />
+          </Route>
           <Route path=':orderId' element={<DocViewer />} >
             <Route path='transcript' element={<TranscriptViewer />} />
             <Route path='certificate' element={<CertificateViewer />} />

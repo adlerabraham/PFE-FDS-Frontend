@@ -6,7 +6,7 @@ import {
 import 'antd/dist/antd.css';
 import './PaymentPage.scss'; // You can create a CSS file for styling
 import PaymentPageHeader from './PaymentPageHeader';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import MonthOptions from '../../DatePickup/MonthOptions';
 import YearOptions from '../../DatePickup/YearOptions';
 import PaymentPageFooter from './PaymentPageFooter';
@@ -17,6 +17,7 @@ const { Step } = Steps;
 const PaymentPage = () => {
     const [currentStep, setCurrentStep] = useState(0);
     const navigate = useNavigate()
+    const params = useParams()
 
     const openNotification = () => {
         notification.success({
@@ -59,12 +60,17 @@ const PaymentPage = () => {
     const confirm = (e) => {
         console.log(e);
         const result = getRandomvalues()
-        if (result == 50) {
+        if (result == 4) {
             openUnsuccessfullPaymentNotification()
         } else {
+
             openSuccessfullPaymentNotification()
-            var payment = 1
-            localStorage.setItem('payment', payment)
+            if (params.docId == 1) {
+                localStorage.setItem('certificatePayment', 1)
+            } else if (params.docId == 4) {
+                localStorage.setItem('transcriptPayment', 1)
+            }
+
             navigate(-1)
         }
     };

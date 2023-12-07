@@ -71,6 +71,7 @@ function TranscriptReview(props) {
                 // Remove the link from the document
                 document.body.removeChild(link);
                 openSuccessfullCompletionNotification()
+                navigate('/studentdashboard')
             } catch (error) {
                 console.error('Error downloading PDF:', error);
                 openUnSuccessfullCompletionNotification()
@@ -85,14 +86,11 @@ function TranscriptReview(props) {
     useEffect(() => {
         // Call the downloadPdf function
         downloadPdf();
-        if (!(isLoading || isError)) {
-            navigate('/studentdashboard')
-        }
     }, [])
 
 
     if (!(isLoading || isError)) {
-        localStorage.setItem('payment', 0)
+        localStorage.setItem('transcriptPayment', 0)
         return (
             <div></div>
         )

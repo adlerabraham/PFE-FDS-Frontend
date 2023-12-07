@@ -75,6 +75,7 @@ function CertificateReview(props) {
                 document.body.removeChild(link);
 
                 openSuccessfullCompletionNotification()
+                navigate('/studentdashboard')
             } catch (error) {
                 console.error('Error downloading PDF:', error);
                 openUnSuccessfullCompletionNotification()
@@ -89,15 +90,12 @@ function CertificateReview(props) {
     useEffect(() => {
         // Call the downloadPdf function
         downloadPdf();
-        if (!(isLoading || isError)) {
-            navigate('/studentdashboard')
-        }
     }, [])
 
 
 
     if (!(isLoading || isError)) {
-        localStorage.setItem('payment', 0)
+        localStorage.setItem('certificatePayment', 0)
 
         return (
             <div>

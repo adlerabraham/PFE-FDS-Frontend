@@ -24,8 +24,8 @@ function CertificateCheckbox(props) {
     const checkAll = plainOptions.length === checkedList.length;
     const indeterminate = checkedList.length > 0 && checkedList.length < plainOptions.length;
 
-    if (localStorage.getItem('payment')) {
-        isPaymentCompleted = localStorage.getItem('payment')
+    if (localStorage.getItem('certificatePayment')) {
+        isPaymentCompleted = localStorage.getItem('certificatePayment')
     } else {
         isPaymentCompleted = 0
     }
@@ -34,8 +34,8 @@ function CertificateCheckbox(props) {
         var checkedlevelsName = JSON.parse(localStorage.getItem('levelName'))
     }
 
-    if (localStorage.getItem('totalPrice'))
-        var totalPriceSet = localStorage.getItem('totalPrice')
+    if (localStorage.getItem('cerificateTotalPrice'))
+        var totalPriceSet = localStorage.getItem('cerificateTotalPrice')
 
     const documents = JSON.parse(localStorage.getItem('documents'))
     const index = documents.findIndex((item) =>
@@ -81,8 +81,8 @@ function CertificateCheckbox(props) {
 
     const handlePayment = () => {
         localStorage.setItem('levelName', JSON.stringify(checkedList))
-        localStorage.setItem('totalPrice', totalPrice)
-        navigate('/amazon-payment')
+        localStorage.setItem('cerificateTotalPrice', totalPrice)
+        navigate(`/fds-payment/${documents[index].id}`)
     }
 
     const openSuccessfullSubmissionNotification = () => {

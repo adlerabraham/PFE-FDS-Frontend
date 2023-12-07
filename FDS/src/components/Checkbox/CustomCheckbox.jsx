@@ -24,8 +24,8 @@ function CustomCheckbox(props) {
     const checkAll = plainOptions.length === checkedList.length;
     const indeterminate = checkedList.length > 0 && checkedList.length < plainOptions.length;
 
-    if (localStorage.getItem('payment')) {
-        isPaymentCompleted = localStorage.getItem('payment')
+    if (localStorage.getItem('transcriptPayment')) {
+        isPaymentCompleted = localStorage.getItem('transcriptPayment')
     } else {
         isPaymentCompleted = 0
     }
@@ -34,8 +34,8 @@ function CustomCheckbox(props) {
         var checkedlevelsName = JSON.parse(localStorage.getItem('levelName'))
     }
 
-    if (localStorage.getItem('totalPrice'))
-        var totalPriceSet = localStorage.getItem('totalPrice')
+    if (localStorage.getItem('transcriptTotalPrice'))
+        var totalPriceSet = localStorage.getItem('transcriptTotalPrice')
 
     const documents = JSON.parse(localStorage.getItem('documents'))
     const index = documents.findIndex((item) =>
@@ -81,8 +81,8 @@ function CustomCheckbox(props) {
 
     const handlePayment = () => {
         localStorage.setItem('levelName', JSON.stringify(checkedList))
-        localStorage.setItem('totalPrice', totalPrice)
-        navigate('/amazon-payment')
+        localStorage.setItem('transcriptTotalPrice', totalPrice)
+        navigate(`/fds-payment/${documents[index].id}`)
     }
 
     const openSuccessfullSubmissionNotification = () => {

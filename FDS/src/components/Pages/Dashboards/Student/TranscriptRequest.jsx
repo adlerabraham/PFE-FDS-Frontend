@@ -11,7 +11,7 @@ function TranscriptRequest(props) {
 
         return (
             <div className='request-form-container'>
-                <h4>DEMANDER UN RELEVE DE NOTES</h4>
+                <h6>DEMANDER UN RELEVE DE NOTES</h6>
                 <Divider />
                 <CustomCheckbox levels={levels} />
             </div>

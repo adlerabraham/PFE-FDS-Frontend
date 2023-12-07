@@ -8,7 +8,7 @@ function CertificateRequest(props) {
     if (!(isLoading || isError)) {
         return (
             <div className='request-form-container'>
-                <h4>DEMANDER UNE ATTESTATION</h4>
+                <h6>DEMANDER UNE ATTESTATION</h6>
                 <Divider />
                 <CertificateCheckbox levels={levels} />
             </div>
