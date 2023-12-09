@@ -1,0 +1,45 @@
+.archive {
+    display: flex;
+    justify-content: center;
+
+    .class-filters {
+        width: 250px;
+        height: 75px;
+        border-right: 1px solid rgb(198, 216, 243);
+
+        .filter-link {
+            margin-top: 5px;
+            display: flex;
+            justify-content: center;
+
+            .custom-list-button {
+                margin-left: 0px;
+            }
+        }
+    }
+
+    .finale-box {
+        margin-left: -200px;
+    }
+}
+
+/********** Large devices only **********/
+@media (min-width: 1200px) {}
+
+/********** Medium devices only **********/
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+/********** Small devices only **********/
+@media (min-width: 768px) and (max-width: 991px) {
+    .archive {
+        .finale-box {
+            margin-left: -400px;
+        }
+    }
+}
+
+/********** Extra small devices only **********/
+@media (max-width: 767px) {}
+
+/********** Super extra small devices Only :-) (e.g., iPhone 4) **********/
+@media (max-width: 479px) {}

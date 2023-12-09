@@ -3,6 +3,7 @@ import { Space, Spin, Table, Tag } from 'antd';
 import { useParams } from 'react-router-dom';
 import { useGetGradesQuery } from '../../../../api/ApiEndpoints';
 import './StudentsGrades.scss'
+import TranscriptHeader from '../../../TranscriptHeader/TranscriptHeader';
 
 function StudentsGrades() {
     const params = useParams()
@@ -14,6 +15,18 @@ function StudentsGrades() {
             examen: null,
         }
     ]
+
+    if (localStorage.getItem('classTable') != null) {
+        const classes = JSON.parse(localStorage.getItem('classTable'))
+        var classIndex = classes.findIndex((item) =>
+            item.id == params.classID
+        )
+        if (classIndex != -1) {
+            var courseName = classes[classIndex].course_name
+            var period = classes[classIndex].period_name
+            var level = classes[classIndex].level_name
+        }
+    }
 
     if (!(isError || isLoading)) {
         const columns = [
@@ -41,6 +54,10 @@ function StudentsGrades() {
         }
         return (
             <div>
+                <TranscriptHeader
+                    courseName={courseName}
+                    period={period}
+                    level={level} />
                 <Table
                     bordered
                     columns={columns}

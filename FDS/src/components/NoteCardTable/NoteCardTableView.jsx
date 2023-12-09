@@ -7,6 +7,7 @@ import {
   useGetTranscriptStatusQuery,
   useSubmitTransciptMutation, useValidateTranscriptMutation
 } from '../../api/ApiEndpoints';
+import TranscriptHeader from '../TranscriptHeader/TranscriptHeader';
 
 
 
@@ -33,9 +34,41 @@ const NoteCardTableView = (props) => {
       "/noteCardTable/create"
     var updateLink = "/teacherDashboard/" + classID + "/teacherclass/noteCards/" + levelID +
       "/noteCardTable/update"
+
+    if (localStorage.getItem('classTable') != null) {
+      const classes = JSON.parse(localStorage.getItem('classTable'))
+      var classIndex = classes.findIndex((item) =>
+        item.id == params.classID
+      )
+      if (classIndex != -1) {
+        var courseName = classes[classIndex].name
+        var period = classes[classIndex].period.name
+        var levels = classes[classIndex].levels
+        var levelIndex = levels.findIndex((item) =>
+          item.id == levelID
+        )
+        if (levelIndex != -1) {
+          var level = levels[levelIndex].name
+        } else {
+          console.log("can't find level");
+        }
+      }
+    }
   } else if (group.toLowerCase() === 'coordinator') {
     var createLink = `/coordinatorDashboard/${params.programId}/${params.levelID}/${params.classID}/transcriptList/noteCardTable/create`
     var updateLink = `/coordinatorDashboard/${params.programId}/${params.levelID}/${params.classID}/transcriptList/noteCardTable/update`
+
+    if (localStorage.getItem('classInfoTable') != null) {
+      const classes = JSON.parse(localStorage.getItem('classInfoTable'))
+      var classIndex = classes.findIndex((item) =>
+        item.id == params.classID
+      )
+      if (classIndex != -1) {
+        var courseName = classes[classIndex].name
+        var period = classes[classIndex].period.name
+        var level = params.levelID
+      }
+    }
   }
 
   const navigateToCreate = () => {
@@ -265,12 +298,20 @@ const NoteCardTableView = (props) => {
 
   return (
     <div>
+      {/* <h6>{courseName.toUpperCase()}</h6>
+      <p>{period}</p> */}
+
       <Dropdown overlay={submitMenu}>
         <Button className="custom-button">
           <span className="custom-button-text">Options</span>
           <EllipsisOutlined />
         </Button>
       </Dropdown>
+      <TranscriptHeader
+        courseName={courseName}
+        level={level}
+        period={period}
+      />
       <Table
         bordered
         dataSource={dataSource}

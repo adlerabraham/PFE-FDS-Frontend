@@ -1,0 +1,40 @@
+.transcript-header {
+    margin: auto;
+    width: 55%;
+    border: 1px solid #ffffff;
+    background-color: #89afdf;
+    line-height: 10px;
+}
+
+.first-row {
+    border-bottom: 1px solid #ffffff;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h6 {
+        margin: 0;
+    }
+}
+
+.second-row {
+    display: flex;
+    height: 20px;
+    margin: 0;
+}
+
+.left {
+    width: 51%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid #ffffff;
+}

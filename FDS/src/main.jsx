@@ -43,11 +43,12 @@ import CertificateReview from './components/Pages/Dashboards/Student/Certificate
 import DocViewer from './components/Pages/Doc/DocViewer'
 import TranscriptViewer from './components/Pages/Doc/TranscriptViewer'
 import CertificateViewer from './components/Pages/Doc/CertificateViewer'
-import AcademicYears from './components/Pages/Dashboards/Teacher/Archive/AcademicYears'
+import AcademicYears from './components/Pages/Dashboards/Teacher/Archive/StudentAcademicYears'
 import Periods from './components/Pages/Dashboards/Teacher/Archive/Periods'
-import ArchivedCourses from './components/Pages/Dashboards/Teacher/Archive/ArchivedCourses'
+import ArchivedCourses from './components/Pages/Dashboards/Teacher/Archive/StudentArchivedCourses'
 import CoordinatorArchiveHome from './components/Pages/Dashboards/Coordinator/CoordinatorArchiveHome'
 import PaymentPageBuffer from './components/Pages/Payment/PaymentPageBuffer'
+import StudentPeriods from './components/Pages/Dashboards/Student/Archive/StudentPeriods'
 
 
 
@@ -101,6 +102,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 </Route>
               </Route>
             </Route>
+
+            {/* TEACHER ROUTES SET UP */}
             <Route path='/teacherDashboard' element={<TeacherDashboard />} exact >
               <Route index element={<DashboardHome />} />
               <Route path='calendar' element={<DashboardCalendar />} />
@@ -149,7 +152,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <Route path='transcriptReview' element={<TranscriptReview />} />
               <Route path='certificateReview' element={<CertificateReview />} />
               <Route path='academicYears' element={<AcademicYears />}>
-                <Route path=':acaYearId' element={<Periods />}>
+                <Route path=':acaYearId' element={<StudentPeriods />}>
                   <Route path=':periodId' element={<ArchivedCourses />} />
                 </Route>
               </Route>

@@ -75,10 +75,12 @@ function TranscriptReview(props) {
             } catch (error) {
                 console.error('Error downloading PDF:', error);
                 openUnSuccessfullCompletionNotification()
+                setIsLoading(false)
                 setIsError(true)
             }
         } else {
             openUnSuccessfullCompletionNotification()
+            setIsLoading(false)
             setIsError(true)
         }
     };

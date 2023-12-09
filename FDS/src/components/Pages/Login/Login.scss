@@ -1,5 +1,8 @@
 // //Login.scss
 
+.login-faild {
+  color: red;
+}
 
 .zoomable-image {
   width: 100%;
@@ -9,13 +12,14 @@
 
 @media (min-width: 990px) {
   .zoomable-image {
-    width: 30%; 
+    width: 30%;
     // padding: 0vh;
-    margin-top: 17vh; 
+    margin-top: 17vh;
     //margin-bottom: 10vh;
     animation: zoomAnimation 5s infinite alternate;
   }
-  }
+}
+
 @media (max-width: 990px) {
   .zoomable-image {
     width: 30%; // Ajustez la largeur selon vos besoins
@@ -31,9 +35,11 @@
   0% {
     transform: scale(1); // Pas de zoom au début de l'animation
   }
+
   50% {
     transform: scale(1.2); // Zoom à 120% à mi-chemin de l'animation
   }
+
   100% {
     transform: scale(1); // Retour à la taille normale à la fin de l'animation
   }
@@ -131,15 +137,15 @@
   height: 60px;
   width: 60%;
   background-color: #ffffff;
-  border: 1px solid #184291; 
+  border: 1px solid #184291;
 }
 
 .ant-input-password:focus,
 #basic_username.ant-input:focus {
-  border: 1px solid #184291; 
+  border: 1px solid #184291;
 }
 
-.ant-form-item-control-input svg{
+.ant-form-item-control-input svg {
   margin-right: 8px;
 }
 
@@ -177,8 +183,8 @@
   padding: 20px 30px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  line-height: normal; 
-  
+  line-height: normal;
+
   &:hover {
     background-color: #e64a19;
   }
@@ -194,7 +200,8 @@
 
 /* Ajoutez ces styles dans votre feuille de style CSS */
 .form-remember .ant-checkbox-inner {
-  font-weight: normal  !important; /* Enlève le style "bold" du texte */
+  font-weight: normal !important;
+  /* Enlève le style "bold" du texte */
 }
 
 
@@ -239,7 +246,8 @@
 
 /* Ajoutez ces styles pour le header */
 .header {
-  height: 15vh; /* Ajustez la hauteur selon vos préférences, par exemple 10% de la hauteur de la vue */
+  height: 15vh;
+  /* Ajustez la hauteur selon vos préférences, par exemple 10% de la hauteur de la vue */
   // background-color: #333; /* Couleur de fond du header */
   // color: #fff; /* Couleur du texte du header */
   // width: 100%;
@@ -252,7 +260,8 @@
 
 
 .footer {
-  height: 10vh; /* Ajustez la hauteur selon vos préférences, par exemple 10% de la hauteur de la vue */
+  height: 10vh;
+  /* Ajustez la hauteur selon vos préférences, par exemple 10% de la hauteur de la vue */
   // background-color: #333; /* Couleur de fond du footer */
   // color: #fff; /* Couleur du texte du footer */
 }
@@ -426,7 +435,8 @@
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Centre le texte à l'intérieur du formulaire */
+  text-align: center;
+  /* Centre le texte à l'intérieur du formulaire */
 }
 
 /* Ajoutez ces styles pour le conteneur de l'icône du groupe d'utilisateurs */
@@ -448,8 +458,10 @@
 /* Ajoutez ces styles pour le conteneur des options du formulaire */
 .form-options {
   display: flex;
-  flex-direction: column; /* Ajuste la disposition pour les options du formulaire */
-  gap: 10px; /* Ajoute un espace entre les éléments verticalement */
+  flex-direction: column;
+  /* Ajuste la disposition pour les options du formulaire */
+  gap: 10px;
+  /* Ajoute un espace entre les éléments verticalement */
 }
 
 /* Ajoutez ces styles pour le conteneur de l'icône de l'enveloppe et le lien "Mot de passe oublié" */
@@ -471,5 +483,3 @@
   margin-left: 30px;
   font-size: 30%;
 }
-
-

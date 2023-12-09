@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Button, Form, Input, Table, Menu, Dropdown, notification } from 'antd';
+import { Button, Form, Input, Table, Menu, Dropdown, notification, InputNumber } from 'antd';
 import './NoteCardTable.scss';
 import { useUpdateGradesMutation, useUpdateSecondEntryMutation } from '../../api/ApiEndpoints';
 import { SaveOutlined, EllipsisOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import { useNavigate, useParams } from 'react-router-dom';  // Import useNavigate
+import TranscriptHeader from '../TranscriptHeader/TranscriptHeader';
 
 
 const EditableContext = React.createContext(null);
+// var inputError
 
 // ...
 
@@ -34,6 +36,7 @@ const EditableCell = ({
     const [editing, setEditing] = useState(false);
     const inputRef = useRef(null);
     const form = useContext(EditableContext);
+    // const [isInputError, setIsInputError] = useState()
 
     useEffect(() => {
         if (editing) {
@@ -56,7 +59,10 @@ const EditableCell = ({
                 ...record,
                 ...values,
             });
+
         } catch (errInfo) {
+            setIsInputError(true)
+            inputError = isInputError
             console.log('Save failed:', errInfo);
         }
     };
@@ -80,7 +86,7 @@ const EditableCell = ({
                     },
                 ]}
             >
-                <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+                <InputNumber ref={inputRef} min={0} max={100} onPressEnter={save} onBlur={save} />
             </Form.Item>
         ) : (
             <div
@@ -112,8 +118,41 @@ const NoteCardTableEdit = (props) => {
     const [updateGrades] = useUpdateGradesMutation();
     const [updateSecondEntry] = useUpdateSecondEntryMutation()
     const noteCardStatus = JSON.parse(localStorage.getItem('noteCardStatus'))
-
+    const params = useParams()
     const [editableIndex, setEditableIndex] = useState('');
+    if (group.toLowerCase() === 'teacher') {
+        if (localStorage.getItem('classTable') != null) {
+            const classes = JSON.parse(localStorage.getItem('classTable'))
+            var classIndex = classes.findIndex((item) =>
+                item.id == params.classID
+            )
+            if (classIndex != -1) {
+                var courseName = classes[classIndex].name
+                var period = classes[classIndex].period.name
+                var levels = classes[classIndex].levels
+                var levelIndex = levels.findIndex((item) =>
+                    item.id == params.levelID
+                )
+                if (levelIndex != -1) {
+                    var level = levels[levelIndex].name
+                } else {
+                    console.log("can't find level");
+                }
+            }
+        }
+    } else if (group.toLowerCase() === 'coordinator') {
+        if (localStorage.getItem('classInfoTable') != null) {
+            const classes = JSON.parse(localStorage.getItem('classInfoTable'))
+            var classIndex = classes.findIndex((item) =>
+                item.id == params.classID
+            )
+            if (classIndex != -1) {
+                var courseName = classes[classIndex].name
+                var period = classes[classIndex].period.name
+                var level = params.levelID
+            }
+        }
+    }
 
     const handleEdit = (dataIndex) => {
         setEditableColumns([dataIndex]);
@@ -426,15 +465,32 @@ const NoteCardTableEdit = (props) => {
     });
 
     // ...
+    const [pagination, setPagination] = useState({
+        current: 1,
+        pageSize: 40, // Set the desired page size here
+    });
+
+    const handleTableChange = (pagination) => {
+        setPagination(pagination);
+    };
 
     return (
         <div>
+            {/* <h6>{courseName.toUpperCase()}</h6>
+            <p>{period}</p> */}
+            <TranscriptHeader
+                courseName={courseName}
+                level={level}
+                period={period}
+            />
             <Table
                 components={components}
                 rowClassName={() => 'editable-row'}
                 bordered
                 dataSource={dataSource}
                 columns={columns}
+                pagination={pagination}
+                onChange={handleTableChange}
             />
         </div>
     );

@@ -21,6 +21,8 @@ function LoginForm() {
 
     const [usern, setUsername] = useState("");
     const [paswd, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(true)
+    const [isLoginFaild, setIsLoginFaild] = useState(false)
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -29,7 +31,7 @@ function LoginForm() {
     //const user = useSelector(state => console.log(state));
 
     const handleSubmite = async (event) => {
-
+        setIsLoading(true)
         const credentials = {
             username: usern,
             password: paswd
@@ -48,7 +50,7 @@ function LoginForm() {
             setUsername('')
             setPassword('')
             const userGroup = localStorage.getItem('group')
-
+            setIsLoading(false)
             switch (userGroup.toLowerCase()) {
                 case 'teacher':
                     navigate('/teacherDashboard')
@@ -66,6 +68,8 @@ function LoginForm() {
 
 
         } catch (err) {
+            setIsLoading(false)
+            setIsLoginFaild(true)
             console.log(err);
         }
 
@@ -126,6 +130,14 @@ function LoginForm() {
                         </div>
 
                     </Form.Item>
+                    {(!isLoading && isLoginFaild) ?
+                        <Form.Item>
+                            <p className="login-faild">Votre nom d'utilisateur ou votre mot de passe est incorrect! </p>
+                            <p className="login-faild">Veuillez reessayer.</p>
+                        </Form.Item>
+                        :
+                        <div></div>
+                    }
                     <Form.Item >
                         <Button className="custom-button1" type="primary" htmlType="submit">
                             CONNEXION

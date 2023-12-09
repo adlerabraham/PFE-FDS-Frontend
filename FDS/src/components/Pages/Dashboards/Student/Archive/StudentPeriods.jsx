@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { NavLink, Outlet, useParams } from 'react-router-dom'
 import { Spin } from 'antd'
 import { useGetPeriodsQuery } from '../../../../../api/ApiEndpoints';
-import './ArchiveFilters.scss'
+import './StudentArchiveFilters.scss'
 
-function Periods(props) {
+function StudentPeriods(props) {
     const params = useParams()
     var link
     var isCoordinator = false
@@ -61,7 +61,7 @@ function Periods(props) {
                         }
 
                     </div>
-                    <div className='next finale-box'>
+                    <div className='next s-finale-box' style={{ position: 'absolute' }}>
                         <Outlet />
                     </div>
                 </div>
@@ -92,5 +92,5 @@ function Periods(props) {
     )
 }
 
-export default Periods
+export default StudentPeriods
 

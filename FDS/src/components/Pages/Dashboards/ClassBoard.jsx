@@ -18,7 +18,7 @@ function ClassBoard() {
 
         useEffect(() => {
             navigate(classLink)
-        }, [])
+        }, [params.classID])
 
 
         return (
