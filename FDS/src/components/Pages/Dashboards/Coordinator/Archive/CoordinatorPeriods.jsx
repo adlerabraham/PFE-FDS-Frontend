@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { NavLink, Outlet, useParams } from 'react-router-dom'
 import { Spin } from 'antd'
 import { useGetPeriodsQuery } from '../../../../../api/ApiEndpoints';
-import './StudentArchiveFilters.scss'
+import './CoordinatorArchiveFilters.scss'
+import '../../Teacher/Archive/ArchiveFilters.scss'
 
-function StudentPeriods(props) {
+function CoordinatorPeriods(props) {
     const params = useParams()
     var link
     var isCoordinator = false
@@ -42,11 +43,13 @@ function StudentPeriods(props) {
                         </select>
                         {isCoordinator ?
                             (selectedPeriod && (
-                                <NavLink to={link}>
-                                    <button className="custom-list-button">
-                                        Afficher les programmes
-                                    </button>
-                                </NavLink>
+                                <div className="filter-link">
+                                    <NavLink to={link}>
+                                        <button className="custom-list-button">
+                                            Afficher les programmes
+                                        </button>
+                                    </NavLink>
+                                </div>
                             ))
                             :
                             (selectedPeriod && (
@@ -61,7 +64,7 @@ function StudentPeriods(props) {
                         }
 
                     </div>
-                    <div className='next s-finale-box' style={{ position: 'absolute' }}>
+                    <div className='next c-finale-box'>
                         <Outlet />
                     </div>
                 </div>
@@ -92,5 +95,5 @@ function StudentPeriods(props) {
     )
 }
 
-export default StudentPeriods
+export default CoordinatorPeriods
 

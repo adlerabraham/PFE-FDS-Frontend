@@ -7,7 +7,17 @@ import TranscriptHeader from '../../../TranscriptHeader/TranscriptHeader';
 
 function StudentsGrades() {
     const params = useParams()
-    const { data: grades, isError, isLoading } = useGetGradesQuery({ classId: params.classID })
+    if (localStorage.getItem('classTable')) {
+        var courses = JSON.parse(localStorage.getItem('classTable'))
+        const courseIndex = courses.findIndex((course) =>
+            course.id == params.classID
+        )
+
+        if (courseIndex != -1) {
+            var periodId = courses[courseIndex].period_name.id
+        }
+    }
+    const { data: grades, isError, isLoading } = useGetGradesQuery({ classId: params.classID, periodId })
     const gradeData = [
         {
             key: '0',
@@ -23,7 +33,7 @@ function StudentsGrades() {
         )
         if (classIndex != -1) {
             var courseName = classes[classIndex].course_name
-            var period = classes[classIndex].period_name
+            var period = classes[classIndex].period_name.name
             var level = classes[classIndex].level_name
         }
     }

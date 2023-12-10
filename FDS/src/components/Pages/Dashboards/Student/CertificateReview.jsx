@@ -74,6 +74,7 @@ function CertificateReview(props) {
                 // Remove the link from the document
                 document.body.removeChild(link);
 
+                localStorage.setItem('certificatePayment', 0)
                 openSuccessfullCompletionNotification()
                 navigate('/studentdashboard')
             } catch (error) {
@@ -97,7 +98,7 @@ function CertificateReview(props) {
 
 
     if (!(isLoading || isError)) {
-        localStorage.setItem('certificatePayment', 0)
+
 
         return (
             <div>

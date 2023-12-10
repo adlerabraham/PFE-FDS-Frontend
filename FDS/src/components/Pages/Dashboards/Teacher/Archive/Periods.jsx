@@ -31,7 +31,7 @@ function Periods(props) {
 
             return (
                 <div className='archive' style={{ display: 'block' }}>
-                    <div className="class-filters" style={{ marginBottom: 0 }}>
+                    <div className="period-filters" style={{ marginBottom: 0 }}>
                         <select id="levelDropdown" onChange={handleLevelChange} value={selectedPeriod || ''} className="level-dropdown-class">
                             <option value="" disabled>Sélectionner une période</option>
                             {periods.map((period) => (

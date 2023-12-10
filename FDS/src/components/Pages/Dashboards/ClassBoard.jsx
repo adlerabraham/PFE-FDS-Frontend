@@ -13,7 +13,8 @@ function ClassBoard() {
         } else if (userGroup.toLowerCase() === 'student') {
             var classLink = "/studentDashboard/" + params.classID + "/studentClass"
         } else if (userGroup.toLowerCase() === 'coordinator') {
-            var classLink = `/coordinatorDashboard/${params.programId}/${params.levelID}/${params.classID}/transcriptList`
+            //var classLink = `/coordinatorDashboard/${params.programId}/${params.levelID}/${params.classID}/transcriptList`
+            var classLink = './transcriptList'
         }
 
         useEffect(() => {

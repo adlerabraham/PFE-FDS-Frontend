@@ -28,7 +28,7 @@ function AcademicYears(props) {
 
             return (
                 <div className='archive'>
-                    <div className="class-filters" style={{
+                    <div className="period-filters" style={{
                         marginBottom: 0,
                         borderLeft: '1px solid rgb(198, 216, 243)'
                     }}>

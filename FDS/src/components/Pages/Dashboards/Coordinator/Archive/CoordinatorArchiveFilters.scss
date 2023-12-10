@@ -1,6 +1,6 @@
 .archive {
-    .s-finale-box {
-        margin-left: -41%;
+    .c-finale-box {
+        margin-left: -267px;
     }
 }
 
@@ -8,31 +8,19 @@
 @media (min-width: 1200px) {}
 
 /********** Medium devices only **********/
-@media (min-width: 992px) and (max-width: 1199px) {
-    .archive {
-        .s-finale-box {
-            margin-left: -36%;
-        }
-    }
-}
+@media (min-width: 992px) and (max-width: 1199px) {}
 
 /********** Small devices only **********/
 @media (min-width: 768px) and (max-width: 991px) {
     .archive {
-        .s-finale-box {
-            margin-left: -34%;
+        .finale-box {
+            margin-left: -400px;
         }
     }
 }
 
 /********** Extra small devices only **********/
-@media (max-width: 767px) {
-    .archive {
-        .s-finale-box {
-            margin-left: -33%;
-        }
-    }
-}
+@media (max-width: 767px) {}
 
 /********** Super extra small devices Only :-) (e.g., iPhone 4) **********/
 @media (max-width: 479px) {}

@@ -43,12 +43,14 @@ import CertificateReview from './components/Pages/Dashboards/Student/Certificate
 import DocViewer from './components/Pages/Doc/DocViewer'
 import TranscriptViewer from './components/Pages/Doc/TranscriptViewer'
 import CertificateViewer from './components/Pages/Doc/CertificateViewer'
-import AcademicYears from './components/Pages/Dashboards/Teacher/Archive/StudentAcademicYears'
+import AcademicYears from './components/Pages/Dashboards/Teacher/Archive/AcademicYears'
 import Periods from './components/Pages/Dashboards/Teacher/Archive/Periods'
-import ArchivedCourses from './components/Pages/Dashboards/Teacher/Archive/StudentArchivedCourses'
+import ArchivedCourses from './components/Pages/Dashboards/Teacher/Archive/ArchivedCourses'
 import CoordinatorArchiveHome from './components/Pages/Dashboards/Coordinator/CoordinatorArchiveHome'
 import PaymentPageBuffer from './components/Pages/Payment/PaymentPageBuffer'
 import StudentPeriods from './components/Pages/Dashboards/Student/Archive/StudentPeriods'
+import CoordinatorPeriods from './components/Pages/Dashboards/Coordinator/Archive/CoordinatorPeriods'
+import ArchiveProgramManagement from './components/Pages/Dashboards/Coordinator/Archive/ArchiveProgramManagement'
 
 
 
@@ -80,10 +82,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 </Route>
               </Route>
               <Route path='academicYears' element={<AcademicYears />}>
-                <Route path=':acaYearId' element={<Periods />}>
+                <Route path=':acaYearId' element={<CoordinatorPeriods />}>
                   <Route path=':periodId' element={<CoordinatorArchiveHome />}>
                     <Route index element={<CoordinatorDashboardHome />} />
-                    <Route path=':programId' element={<ProgramManagement />} >
+                    <Route path=':programId' element={<ArchiveProgramManagement />} >
                       <Route path=':levelID' element={<LevelClasses />}>
                         <Route index element={<LevelClassesHome />} />
                         <Route path=':classID' element={<ClassBoard />}>

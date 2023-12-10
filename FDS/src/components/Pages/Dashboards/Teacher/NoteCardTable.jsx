@@ -12,7 +12,8 @@ function NoteCardTable(props) {
         var link = "/teacherDashboard/" + classID + "/teacherclass/noteCards/" + levelID +
             "/noteCardTable/view"
     } else if (group.toLowerCase() === 'coordinator') {
-        var link = `/coordinatorDashboard/${params.programId}/${params.levelID}/${params.classID}/transcriptList/noteCardTable/view`
+        //var link = `/coordinatorDashboard/${params.programId}/${params.levelID}/${params.classID}/transcriptList/noteCardTable/view`
+        var link = './view'
     }
 
     const navigate = useNavigate()

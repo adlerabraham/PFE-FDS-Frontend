@@ -72,7 +72,8 @@ function Class(props) {
             link = '/teacherDashboard/' + props.courseID
         }
     } else {
-        link = `/coordinatorDashboard/${props.programID}/${props.level}/${props.courseID}`
+        //link = `/coordinatorDashboard/${props.programID}/${props.level}/${props.courseID}`
+        link = `./${props.courseID}`
     }
 
     const getRandomClassID = () => {
@@ -113,7 +114,7 @@ function Class(props) {
                 <div className='class-body'>
                     {/* ... */}
                 </div>
-                <div className="class-footer"><h6>{props.period}</h6></div>
+                <div className="class-footer"><h6>{props.period.name}</h6></div>
             </div>
         );
     }

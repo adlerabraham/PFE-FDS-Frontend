@@ -25,7 +25,7 @@ function StudentFlux(props) {
                     <h1>Nom du cours</h1>
                 }
                 {classIndex != -1 ?
-                    <p>{period}</p>
+                    <p>{period.name}</p>
                     :
                     <p>periode</p>
                 }

@@ -2,10 +2,11 @@
     display: flex;
     justify-content: center;
 
-    .class-filters {
+    .period-filters {
         width: 250px;
         height: 75px;
         border-right: 1px solid rgb(198, 216, 243);
+        border-bottom: 1px solid rgb(198, 216, 243);
 
         .filter-link {
             margin-top: 5px;
@@ -19,7 +20,7 @@
     }
 
     .finale-box {
-        margin-left: -200px;
+        margin-left: -270px;
     }
 }
 

@@ -9,6 +9,7 @@ function TranscriptList(props) {
     let classID = params.classID
     let levelID = params.levelID
     const link = `/coordinatorDashboard/${params.programId}/${params.levelID}/${params.classID}/transcriptList/noteCardTable`
+
     const navigate = useNavigate()
     const classes = JSON.parse(localStorage.getItem("classInfoTable"))
 
@@ -26,7 +27,7 @@ function TranscriptList(props) {
         isError: isError2 } = useGetSudentsQuery({ classId: classID, periodID, levelID })
     useEffect(() => {
         if (!(isLoading1 || isLoading2) && !(isError1 || isError2)) {
-            navigate(link)
+            navigate("./noteCardTable")
         }
     }, [isError1, isError2, isLoading1, isLoading2, noteCardList, studentList])
 

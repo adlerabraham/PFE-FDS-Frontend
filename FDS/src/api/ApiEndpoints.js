@@ -148,7 +148,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 headers: {
                     'Content-type': 'application/json',
                 },
-                url: "note/student/exam/?course_id=" + params.classId,
+                url: "note/student/exam/?course_id=" + params.classId + "&period_id=" + params.periodId,
                 methode: 'GET'
             })
         }),

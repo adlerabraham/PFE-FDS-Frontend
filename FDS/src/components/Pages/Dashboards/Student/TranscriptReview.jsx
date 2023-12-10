@@ -70,6 +70,7 @@ function TranscriptReview(props) {
 
                 // Remove the link from the document
                 document.body.removeChild(link);
+                localStorage.setItem('transcriptPayment', 0)
                 openSuccessfullCompletionNotification()
                 navigate('/studentdashboard')
             } catch (error) {
@@ -92,7 +93,7 @@ function TranscriptReview(props) {
 
 
     if (!(isLoading || isError)) {
-        localStorage.setItem('transcriptPayment', 0)
+
         return (
             <div></div>
         )
