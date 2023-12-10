@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { NavLink, Outlet, useParams } from 'react-router-dom'
-//import { useGetLevelsQuery } from '../../../../api/ApiEndpoints'
 import './ArchiveProgramManagement.scss'
 import { Spin } from 'antd'
 import { useGetLevelsQuery } from '../../../../../api/ApiEndpoints'

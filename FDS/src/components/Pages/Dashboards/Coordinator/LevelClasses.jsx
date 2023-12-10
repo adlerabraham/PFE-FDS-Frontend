@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 
 function LevelClasses(props) {
     return (
-        <div>
+        <div className='archive-classes'>
             <Outlet />
         </div>
     )

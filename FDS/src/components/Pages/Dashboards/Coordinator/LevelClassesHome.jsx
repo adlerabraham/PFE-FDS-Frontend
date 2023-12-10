@@ -34,7 +34,7 @@ function LevelClassesHome(props) {
                 return key++
             }
             return (
-                <div>
+                <div className='archive-classe-home'>
                     {courseList.map((course) => (
                         <Class key={createKey()}
                             courseID={course.id}
@@ -46,7 +46,6 @@ function LevelClassesHome(props) {
                             programID={params.programId}
                             level={params.levelID} />
                     ))}
-                    <div></div>
                 </div>
             )
         } else {

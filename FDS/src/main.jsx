@@ -81,6 +81,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                   </Route>
                 </Route>
               </Route>
+              {/*************  ARCHIVE  *************/}
               <Route path='academicYears' element={<AcademicYears />}>
                 <Route path=':acaYearId' element={<CoordinatorPeriods />}>
                   <Route path=':periodId' element={<CoordinatorArchiveHome />}>

@@ -2,6 +2,19 @@
     .c-finale-box {
         margin-left: -267px;
     }
+
+    .archive-classes {
+        margin-left: -310px;
+        margin-right: -340px;
+    }
+
+    .archive-classe-home {
+        padding-left: 40px;
+        padding-top: 20px;
+        max-width: 190vh;
+        overflow-x: auto;
+    }
+
 }
 
 /********** Large devices only **********/
@@ -14,7 +27,7 @@
 @media (min-width: 768px) and (max-width: 991px) {
     .archive {
         .finale-box {
-            margin-left: -400px;
+            margin-left: -100px;
         }
     }
 }
