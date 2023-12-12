@@ -46,11 +46,15 @@ import CertificateViewer from './components/Pages/Doc/CertificateViewer'
 import AcademicYears from './components/Pages/Dashboards/Teacher/Archive/AcademicYears'
 import Periods from './components/Pages/Dashboards/Teacher/Archive/Periods'
 import ArchivedCourses from './components/Pages/Dashboards/Teacher/Archive/ArchivedCourses'
-import CoordinatorArchiveHome from './components/Pages/Dashboards/Coordinator/CoordinatorArchiveHome'
+import CoordinatorArchiveHome from './components/Pages/Dashboards/Coordinator/Archive/CoordinatorArchiveHome'
 import PaymentPageBuffer from './components/Pages/Payment/PaymentPageBuffer'
 import StudentPeriods from './components/Pages/Dashboards/Student/Archive/StudentPeriods'
 import CoordinatorPeriods from './components/Pages/Dashboards/Coordinator/Archive/CoordinatorPeriods'
 import ArchiveProgramManagement from './components/Pages/Dashboards/Coordinator/Archive/ArchiveProgramManagement'
+import DirectorDashboard from './components/Pages/Dashboards/Director/DirectorDashboard'
+import DirectorCalendar from './components/Pages/Dashboards/Director/DirectorCalendar'
+import DirectorDashbordHome from './components/Pages/Dashboards/Director/DirectorDashbordHome'
+import OrderStat from './components/Pages/Dashboards/Director/OrderStat'
 
 
 
@@ -62,7 +66,17 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
+
+          {/************* DASHBOARDS ***************/}
+          <Route path='/directorDashboard' element={<DirectorDashboard />}>
+            <Route index element={<DirectorDashbordHome />} />
+            <Route path='directorCalendar' element={<DirectorCalendar />} />
+            <Route path='orderStat' element={<OrderStat />} />
+          </Route>
           <Route element={<RequireAuth />}>
+
+
+            {/****************COORDINATOR'S ROUTES SET UP****************/}
             <Route path='/coordinatorDashboard' element={<CoordinatorDashboard />}>
               <Route index element={<CoordinatorDashboardHome />} />
               <Route path='calendar' element={<DashboardCalendar />} />
@@ -106,7 +120,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               </Route>
             </Route>
 
-            {/* TEACHER ROUTES SET UP */}
+            {/* TEACHER'S ROUTES SET UP */}
             <Route path='/teacherDashboard' element={<TeacherDashboard />} exact >
               <Route index element={<DashboardHome />} />
               <Route path='calendar' element={<DashboardCalendar />} />
@@ -133,10 +147,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 </Route>
               </Route>
             </Route>
-          </Route>
 
-          {/* STUDENT'S ROUTES SET UP */}
-          <Route element={<RequireAuth />}>
+            {/* STUDENT'S ROUTES SET UP */}
             <Route path='/studentdashboard' element={<StudentDashboard />} exact >
               <Route index element={<DashboardHome />} />
               <Route path='calendar' element={<DashboardCalendar />} />
@@ -161,6 +173,33 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               </Route>
             </Route>
           </Route>
+
+          {/* STUDENT'S ROUTES SET UP */}
+          {/* <Route element={<RequireAuth />}>
+            <Route path='/studentdashboard' element={<StudentDashboard />} exact >
+              <Route index element={<DashboardHome />} />
+              <Route path='calendar' element={<DashboardCalendar />} />
+              <Route path=':classID' element={<ClassBoard />}>
+                <Route path='studentClass' element={<StudentClass />}>
+                  <Route index element={<StudentFlux />}></Route>
+                  <Route path='studentGrades' element={<StudentsGrades />} />
+                </Route>
+              </Route>
+              <Route path='requestForm' element={<RequestForm />}>
+                <Route path=':documentId' element={<Transition />}>
+                  <Route path='certificate' element={<CertificateRequest />} />
+                  <Route path='transcript' element={<TranscriptRequest />} />
+                </Route>
+              </Route>
+              <Route path='transcriptReview' element={<TranscriptReview />} />
+              <Route path='certificateReview' element={<CertificateReview />} />
+              <Route path='academicYears' element={<AcademicYears />}>
+                <Route path=':acaYearId' element={<StudentPeriods />}>
+                  <Route path=':periodId' element={<ArchivedCourses />} />
+                </Route>
+              </Route>
+            </Route>
+          </Route> */}
           <Route path='/fds-payment' element={<PaymentPageBuffer />} >
             <Route path=':docId' element={<PaymentPage />} />
           </Route>

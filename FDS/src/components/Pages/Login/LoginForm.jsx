@@ -61,6 +61,9 @@ function LoginForm() {
                 case 'coordinator':
                     navigate('/coordinatorDashboard')
                     break;
+                case 'director':
+                    navigate('/directorDashboard')
+                    break;
                 default:
                     navigate('/')
                     break;

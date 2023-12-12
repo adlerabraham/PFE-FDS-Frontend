@@ -255,7 +255,15 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 methode: 'GET'
             })
         }),
-
+        getOrderStat: builder.query({
+            query: (params) => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: "document/order/get",
+                methode: 'GET'
+            })
+        }),
     })
 })
 
@@ -288,4 +296,5 @@ export const {
     useGetArchivedClassQuery,
     useGetArvhivedStudentCoursesQuery,
     useGetArchivedCoursesQuery,
+    useGetOrderStatQuery,
 } = authApiSlice
