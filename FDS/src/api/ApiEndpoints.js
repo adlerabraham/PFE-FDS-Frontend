@@ -36,7 +36,8 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 url: "note/transcript/?course_id=" + params.classId + "&period_id=" +
                     params.periodID + "&level_id=" + params.levelID,
                 methode: 'GET'
-            })
+            }),
+            providesTags: ['transcript']
         }),
         //CRUD operation for the grades
         getStudentGrades: builder.query({
@@ -117,7 +118,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 url: `note/transcript/status/?transcript_id=${params.transcriptID}`,
                 methode: 'GET'
             }),
-            providesTags: ['transcriptStatus']
+            providesTags: ['transcriptStatus', 'transcript']
         }),
         validateTranscript: builder.mutation({
             query: (params) => ({
@@ -133,6 +134,27 @@ export const authApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['transcriptStatus']
         }),
+
+        //*********Exam management *****
+        getExam: builder.query({
+            query: (params) => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: "note/exam/?course_id=" + params.classID + "&level_id=" + params.levelID + "&period_id=" + params.periodID,
+                methode: 'GET'
+            }),
+            providesTags: ['exam']
+        }),
+        createExam: builder.mutation({
+            query: (params) => ({
+                url: 'note/exam/create/',
+                method: 'POST',
+                body: { ...params.data }
+            }),
+            invalidatesTags: ['exam', 'transcript']
+        }),
+
         //***** Student's apis ******
         getStudentCourse: builder.query({
             query: () => ({
@@ -297,4 +319,6 @@ export const {
     useGetArvhivedStudentCoursesQuery,
     useGetArchivedCoursesQuery,
     useGetOrderStatQuery,
+    useGetExamQuery,
+    useCreateExamMutation,
 } = authApiSlice

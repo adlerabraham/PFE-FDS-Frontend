@@ -55,8 +55,10 @@ const NoteCardTableView = (props) => {
       }
     }
   } else if (group.toLowerCase() === 'coordinator') {
-    var createLink = `/coordinatorDashboard/${params.programId}/${params.levelID}/${params.classID}/transcriptList/noteCardTable/create`
-    var updateLink = `/coordinatorDashboard/${params.programId}/${params.levelID}/${params.classID}/transcriptList/noteCardTable/update`
+    //var createLink = `/coordinatorDashboard/${params.programId}/${params.levelID}/${params.classID}/transcriptList/noteCardTable/create`
+    var createLink = `../create`
+    //var updateLink = `/coordinatorDashboard/${params.programId}/${params.levelID}/${params.classID}/transcriptList/noteCardTable/update`
+    var updateLink = `../update`
 
     if (localStorage.getItem('classInfoTable') != null) {
       const classes = JSON.parse(localStorage.getItem('classInfoTable'))
@@ -162,14 +164,80 @@ const NoteCardTableView = (props) => {
   }
 
   const { data: intraStatus, isLoading: isLoadingI, isError: isErrorI } = useGetTranscriptStatusQuery({ transcriptID: noteCardID.intra })
+  if (!(isErrorI || isLoadingI)) {
+    noteCardStatus.isIntraSaved = intraStatus.is_saved
+    noteCardStatus.isIntraSubmitted = intraStatus.is_submitted
+    noteCardStatus.isIntraValidated = intraStatus.is_validated
+
+    localStorage.setItem("noteCardStatus", JSON.stringify(noteCardStatus))
+
+    if (group.toLowerCase() === 'teacher') {
+      var submitMenu = (
+        <Menu>
+          <Menu.Item key="create" onClick={navigateToCreate}>
+            <PlusOutlined /> Ajouter
+          </Menu.Item>
+          <Menu.Item key="edit" onClick={navigateToUpdate}>
+            <EditOutlined /> Modifier
+          </Menu.Item>
+          <Menu.SubMenu key="submit" title={<span><SaveOutlined /> Soumettre</span>}>
+            {!noteCardStatus.isIntraSubmitted && noteCardStatus.isIntraSaved ?
+              <Menu.Item key="submitIntra" onClick={navigateToSubmitIntra}>
+                Soumettre Partiel
+              </Menu.Item>
+              :
+              <Menu.Item key="submitIntra" onClick={navigateToSubmitIntra} disabled>
+                Soumettre Partiel
+              </Menu.Item>
+            }
+          </Menu.SubMenu>
+        </Menu>
+      );
+    } else if (group.toLowerCase() === 'coordinator') {
+      var submitMenu = (
+        <Menu>
+          {noteCardStatus.isIntraSubmitted ?
+            <Menu.Item key="create" onClick={navigateToCreate}>
+              <PlusOutlined /> Ajouter
+            </Menu.Item>
+            :
+            <Menu.Item key="create" onClick={navigateToCreate} disabled>
+              <PlusOutlined /> Ajouter
+            </Menu.Item>
+          }
+          {noteCardStatus.isIntraSubmitted ?
+            <Menu.Item key="edit" onClick={navigateToUpdate}>
+              <EditOutlined /> Modifier
+            </Menu.Item>
+            :
+            <Menu.Item key="edit" onClick={navigateToUpdate} disabled>
+              <EditOutlined /> Modifier
+            </Menu.Item>
+          }
+          <Menu.SubMenu key="submit" title={<span><SaveOutlined /> Valider</span>}>
+            {!noteCardStatus.isIntraValidated && noteCardStatus.isIntraSubmitted ?
+              <Menu.Item key="submitIntra" onClick={navigateToValidateIntra}>
+                Valider Partiel
+              </Menu.Item>
+              :
+              <Menu.Item key="submitIntra" onClick={navigateToValidateIntra} disabled>
+                Valider Partiel
+              </Menu.Item>
+            }
+          </Menu.SubMenu>
+        </Menu>
+      );
+    }
+  }
+
   const { data: finaleStatus, isLoading: isLoadingF, isError: isErrorF } = useGetTranscriptStatusQuery({ transcriptID: noteCardID.examen })
 
 
   if (!(isErrorF || isErrorI || isLoadingF || isLoadingI)) {
     //set intra transcript status
-    noteCardStatus.isIntraSaved = intraStatus.is_saved
-    noteCardStatus.isIntraSubmitted = intraStatus.is_submitted
-    noteCardStatus.isIntraValidated = intraStatus.is_validated
+    // noteCardStatus.isIntraSaved = intraStatus.is_saved
+    // noteCardStatus.isIntraSubmitted = intraStatus.is_submitted
+    // noteCardStatus.isIntraValidated = intraStatus.is_validated
 
     //Set finale transcript status
     noteCardStatus.isFinaleSaved = finaleStatus.is_saved
@@ -298,10 +366,7 @@ const NoteCardTableView = (props) => {
 
   return (
     <div>
-      {/* <h6>{courseName.toUpperCase()}</h6>
-      <p>{period}</p> */}
-
-      <Dropdown overlay={submitMenu}>
+      <Dropdown overlay={submitMenu} trigger={['click']}>
         <Button className="custom-button">
           <span className="custom-button-text">Options</span>
           <EllipsisOutlined />

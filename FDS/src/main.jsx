@@ -55,6 +55,12 @@ import DirectorDashboard from './components/Pages/Dashboards/Director/DirectorDa
 import DirectorCalendar from './components/Pages/Dashboards/Director/DirectorCalendar'
 import DirectorDashbordHome from './components/Pages/Dashboards/Director/DirectorDashbordHome'
 import OrderStat from './components/Pages/Dashboards/Director/OrderStat'
+import ClassOptions from './components/Pages/Dashboards/Coordinator/ClassOptions'
+import CoordinatorFlux from './components/Pages/Dashboards/Coordinator/CoordinatorFlux'
+import ExamManagement from './components/Pages/Dashboards/Coordinator/ExamManagement'
+import ExamView from './components/Pages/Dashboards/Coordinator/Exam/ExamView'
+import ExamCreate from './components/Pages/Dashboards/Coordinator/Exam/ExamCreate'
+import ExamUpdate from './components/Pages/Dashboards/Coordinator/Exam/ExamUpdate'
 
 
 
@@ -68,10 +74,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/login' element={<Login />} />
 
           {/************* DASHBOARDS ***************/}
+          {/****************DIRECTOR'S ROUTES SET UP****************/}
           <Route path='/directorDashboard' element={<DirectorDashboard />}>
             <Route index element={<DirectorDashbordHome />} />
             <Route path='directorCalendar' element={<DirectorCalendar />} />
-            <Route path='orderStat' element={<OrderStat />} />
+            {/* <Route path='orderStat' element={<OrderStat />} /> */}
           </Route>
           <Route element={<RequireAuth />}>
 
@@ -84,12 +91,20 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path=':levelID' element={<LevelClasses />}>
                   <Route index element={<LevelClassesHome />} />
                   <Route path=':classID' element={<ClassBoard />}>
-                    <Route path='transcriptList' element={<TranscriptList />}>
-                      <Route path='noteCardTable' element={<NoteCardTable />}>
-                        <Route path='view' element={<NoteCardTableView />} />
-                        <Route path='create' element={<NoteCardTableCreate />} />
-                        <Route path='update' element={<NoteCardTableEdit />} />
-                        <Route path=':transcript' element={<ValidateTranscript />}></Route>
+                    <Route path='classOptions' element={<ClassOptions />}>
+                      <Route index element={<CoordinatorFlux />} />
+                      <Route path='transcriptList' element={<TranscriptList />}>
+                        <Route path='noteCardTable' element={<NoteCardTable />}>
+                          <Route path='view' element={<NoteCardTableView />} />
+                          <Route path='create' element={<NoteCardTableCreate />} />
+                          <Route path='update' element={<NoteCardTableEdit />} />
+                          <Route path=':transcript' element={<ValidateTranscript />}></Route>
+                        </Route>
+                      </Route>
+                      <Route path='exam' element={<ExamManagement />}>
+                        <Route index element={<ExamView />} />
+                        <Route path='create' element={<ExamCreate />} />
+                        <Route path='update' element={<ExamUpdate />} />
                       </Route>
                     </Route>
                   </Route>

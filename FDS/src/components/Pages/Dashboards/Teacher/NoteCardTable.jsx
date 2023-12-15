@@ -3,6 +3,7 @@ import { useGetStudentGradesQuery } from '../../../../api/ApiEndpoints'
 import { Outlet, useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { Spin } from 'antd'
 import './NoteCardTable.scss'
+import NoTranscripts from '../../../Results/NoTranscripts'
 
 function NoteCardTable(props) {
     const [classID, levelID, noteData, noteCardList] = useOutletContext()
@@ -18,12 +19,27 @@ function NoteCardTable(props) {
 
     const navigate = useNavigate()
     var isRenderable = false
+    var isIReady = false
+    var isFReady = false
     var noteCardInfo = {
         intra: null,
         examen: null,
     }
     var intra_grade_id = []
     var examen_grade_id = []
+
+    console.log(noteCardList);
+    if (noteCardList.length == 0) {
+        isFReady = true
+        isIReady = true
+        //isRenderable = true
+    } else if (noteCardList.length == 1) {
+        if (noteCardList[0].name.toLowerCase() === 'intra') {
+            isFReady = true
+        } else {
+            isIReady = true
+        }
+    }
 
     for (let index = 0; index < noteCardList.length; index++) {
         const noteCard = noteCardList[index];
@@ -59,7 +75,7 @@ function NoteCardTable(props) {
                         localStorage.setItem("intra_second_entry_temp_id", JSON.stringify(intra_grade_id))
                     }
 
-                    var isIReady = true
+                    isIReady = true
                 }
                 if (!isErrorI) {
                     isRenderable = true
@@ -98,7 +114,7 @@ function NoteCardTable(props) {
                     } else if (group.toLowerCase() === 'coordinator') {
                         localStorage.setItem("examen_second_entry_temp_id", JSON.stringify(examen_grade_id))
                     }
-                    var isFReady = true
+                    isFReady = true
                 }
                 if (!isErrorf) {
                     isRenderable = true
@@ -132,6 +148,12 @@ function NoteCardTable(props) {
         return (
             <div className='spin'>
                 <Spin tip='Chargement ...' size='large' />
+            </div>
+        )
+    } else if ((isIReady || isFReady) && !isRenderable) {
+        return (
+            <div className='message'>
+                <NoTranscripts />
             </div>
         )
     } else if (!isRenderable) {

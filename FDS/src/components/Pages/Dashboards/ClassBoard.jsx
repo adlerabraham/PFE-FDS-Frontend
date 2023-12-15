@@ -13,8 +13,11 @@ function ClassBoard() {
         } else if (userGroup.toLowerCase() === 'student') {
             var classLink = "/studentDashboard/" + params.classID + "/studentClass"
         } else if (userGroup.toLowerCase() === 'coordinator') {
-            //var classLink = `/coordinatorDashboard/${params.programId}/${params.levelID}/${params.classID}/transcriptList`
-            var classLink = './transcriptList'
+            if (params.acaYearId != undefined) {
+                var classLink = './transcriptList'
+            } else {
+                var classLink = './classOptions'
+            }
         }
 
         useEffect(() => {
@@ -22,11 +25,20 @@ function ClassBoard() {
         }, [params.classID])
 
 
-        return (
-            <div>
-                <Outlet />
-            </div>
-        )
+        if (params.acaYearId != undefined) {
+            return (
+                <div style={{ paddingTop: 10 }}>
+                    <Outlet />
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <Outlet />
+                </div>
+            )
+        }
+
 
     } else {
         return <div>Non autorise</div>

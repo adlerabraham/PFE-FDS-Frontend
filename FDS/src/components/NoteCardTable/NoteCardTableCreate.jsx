@@ -384,42 +384,53 @@ const NoteCardTableEdit = (props) => {
                     
                 </Menu>
             )
-
-            var finaleMenu=(
-                <Menu>
-                    {noteCardStatus.isFinaleSaved?
-                        <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)} disabled>
-                            {editableColumns.includes(col.dataIndex) ? 'Annuler' : 'Modifier'}
-                        </Menu.Item>    
-                    :
-                        <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)}>
+            if(noteCardId.examen != null){
+                var finaleMenu=(
+                    <Menu>
+                        {noteCardStatus.isFinaleSaved?
+                            <Menu.Item key="editF" onClick={() => toggleEditable(col.dataIndex)} disabled>
+                                {editableColumns.includes(col.dataIndex) ? 'Annuler' : 'Modifier'}
+                            </Menu.Item>    
+                        :
+                            <Menu.Item key="editF" onClick={() => toggleEditable(col.dataIndex)}>
+                                {editableColumns.includes(col.dataIndex) ? 'Annuler' : 'Modifier'}
+                            </Menu.Item>
+                        }
+                        {noteCardStatus.isFinaleSaved?
+                            <Menu.Item key="saveF" onClick={handleCreate} disabled>
+                                Sauvegarder
+                            </Menu.Item>
+                        :
+                            <Menu.Item key="saveF" onClick={handleCreate}>
+                                Sauvegarder
+                            </Menu.Item>
+                        }
+                    </Menu>
+                )
+            }else{
+                var finaleMenu=(
+                    <Menu>
+                        <Menu.Item key="editF" onClick={() => toggleEditable(col.dataIndex)} disabled>
                             {editableColumns.includes(col.dataIndex) ? 'Annuler' : 'Modifier'}
                         </Menu.Item>
-                    }
-                    {noteCardStatus.isFinaleSaved?
-                        <Menu.Item key="save" onClick={handleCreate} disabled>
+                        <Menu.Item key="saveF" onClick={handleCreate} disabled>
                             Sauvegarder
                         </Menu.Item>
-                    :
-                        <Menu.Item key="save" onClick={handleCreate}>
-                            Sauvegarder
-                        </Menu.Item>
-                    }
-                </Menu>
-            )
-
+                    </Menu>
+                )
+            }
         }else if(group.toLowerCase() === 'coordinator'){
             var intraMenu = (
                 <Menu>
-                    <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)}>
+                    <Menu.Item key="editI" onClick={() => toggleEditable(col.dataIndex)}>
                         {editableColumns.includes(col.dataIndex) ? 'Annuler' : 'Modifier'}
                     </Menu.Item>
-                    <Menu.Item key="save" onClick={handleCreate}>
+                    <Menu.Item key="saveI" onClick={handleCreate}>
                         Sauvegarder
                     </Menu.Item>
                 </Menu>
             )
-
+            
             var finaleMenu=(
                 <Menu>
                     <Menu.Item key="edit" onClick={() => toggleEditable(col.dataIndex)}>

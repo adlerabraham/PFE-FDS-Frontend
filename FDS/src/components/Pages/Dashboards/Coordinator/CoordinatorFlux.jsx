@@ -1,11 +1,11 @@
-import React from 'react';
-import { useOutletContext } from 'react-router-dom';
-import './Flux.scss'; // Assurez-vous de créer le fichier CSS correspondant
+import React from 'react'
+import { useParams } from 'react-router-dom';
 
-function FluxComponent() {
-    const [classID] = useOutletContext();
-    if (localStorage.getItem('classTable') != null) {
-        const classes = JSON.parse(localStorage.getItem('classTable'))
+function CoordinatorFlux(props) {
+    const params = useParams()
+    const [classID] = params.classID
+    if (localStorage.getItem('classInfoTable') != null) {
+        const classes = JSON.parse(localStorage.getItem('classInfoTable'))
         var classIndex = classes.findIndex((item) =>
             item.id == classID
         )
@@ -37,30 +37,5 @@ function FluxComponent() {
     );
 }
 
-export default FluxComponent;
-
-// // FluxComponent.jsx
-// import React from 'react';
-// import { useOutletContext } from 'react-router-dom';
-
-// function FluxComponent() {
-//     const [classID] = useOutletContext();
-//   // Ajoutez le code pour gérer le contenu de l'onglet "flux"
-//   return (
-//     <div>
-//       {/* Contenu de l'onglet "flux" */}
-//       <h2>Flux pour la classe {classID}</h2>
-//     </div>
-//   );
-// }
-
-// export default FluxComponent;
-
-
-
-// Flux.js
-
-
-
-
+export default CoordinatorFlux
 

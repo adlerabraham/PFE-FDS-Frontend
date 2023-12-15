@@ -11,7 +11,7 @@ function Program(props) {
     // link = `/coordinatorDashboard/${props.programId}`
     link = `./${props.programId}`
   }
-  console.log(params.acaYearId);
+  //console.log(params.acaYearId);
   const getRandomClassID = () => {
     // Générer un identifiant de classe aléatoire (par exemple, entre 1 et 10)
     const randomClassID = Math.floor(Math.random() * 10) + 1;

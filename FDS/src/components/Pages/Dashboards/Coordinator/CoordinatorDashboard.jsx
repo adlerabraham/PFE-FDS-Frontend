@@ -40,10 +40,10 @@ function CoordinatorDashboard(props) {
                                 <BookOutlined className='nav-icon' />
                                 {isSidebarOpen && <NavLink to="/coordinatorDashboard" className='nav-link'>Rapports de cours</NavLink>}
                             </div>
-                            <div className="nav-option">
+                            {/* <div className="nav-option">
                                 <BookOutlined className='nav-icon' />
-                                {isSidebarOpen && <NavLink to="/coordinatorDashboard" className='nav-link'>Gestion des examens</NavLink>}
-                            </div>
+                                {isSidebarOpen && <NavLink to="/coordinatorDashboard/examManagement" className='nav-link'>Gestion des examens</NavLink>}
+                            </div> */}
                             <div className="nav-option">
                                 <BookOutlined className='nav-icon' />
                                 {isSidebarOpen && <NavLink to="/coordinatorDashboard" className='nav-link'>Gestion des calendriers</NavLink>}
