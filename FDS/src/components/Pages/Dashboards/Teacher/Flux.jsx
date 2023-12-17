@@ -1,11 +1,13 @@
 import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 import './Flux.scss'; // Assurez-vous de créer le fichier CSS correspondant
+import Event from '../../../Event/Event';
+import { useGetFluxExamQuery } from '../../../../api/ApiEndpoints';
 
 function FluxComponent() {
     const [classID] = useOutletContext();
     if (localStorage.getItem('classTable') != null) {
-        const classes = JSON.parse(localStorage.getItem('classTable'))
+        var classes = JSON.parse(localStorage.getItem('classTable'))
         var classIndex = classes.findIndex((item) =>
             item.id == classID
         )
@@ -16,25 +18,39 @@ function FluxComponent() {
 
     }
 
-    return (
-        <div className="flux-container">
-            <div className="flux-header">
-                {classIndex != -1 ?
-                    <h1>{courseName}</h1>
-                    :
-                    <h1>Nom du cours</h1>
-                }
-                {classIndex != -1 ?
-                    <p>{period}</p>
-                    :
-                    <p>periode</p>
-                }
+    const { data: events, isLoading, isError } = useGetFluxExamQuery({ classID, periodID: classes[classIndex].period.id })
+
+    if (!(isLoading || isError)) {
+        return (
+            <div className="flux-container">
+                <div className="flux-header">
+                    {classIndex != -1 ?
+                        <h1>{courseName.toUpperCase()}</h1>
+                        :
+                        <h1>Nom du cours</h1>
+                    }
+                    {classIndex != -1 ?
+                        <p>{period}</p>
+                        :
+                        <p>periode</p>
+                    }
+                </div>
+                <div className="flux-content">
+                    {events.map((event) => (
+                        <Event
+                            name={event.type_id}
+                            date={event.exam_date}
+                            time={event.start_time}
+                            duration={event.duration}
+                            room={event.exam_classroom}
+                            publication={event.created_at}
+                        />
+                    ))}
+
+                </div>
             </div>
-            <div className="flux-content">
-                {/* Ajoutez ici le contenu spécifique à la page Flux */}
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default FluxComponent;

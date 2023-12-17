@@ -95,7 +95,7 @@ function ExamCreate(props) {
                         rules={[{ required: true, message: 'Veuillez choisir le type de l\'examen!' }]}
                     >
                         <Select>
-                            <Option value="1">Intra</Option>
+                            <Option value="1">Partiel</Option>
                             <Option value="2">Final</Option>
                             {/* <Option value="3">Rappel</Option> */}
                         </Select>

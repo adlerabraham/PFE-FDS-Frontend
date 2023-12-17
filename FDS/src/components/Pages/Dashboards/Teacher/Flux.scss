@@ -6,9 +6,11 @@
 }
 
 .flux-header {
-    background-color: #4285f4; /* Couleur de fond bleue */
-    color: #ffffff; /* Couleur du texte blanc */
+    background-color: #4285f4;
+    color: #ffffff;
     padding: 20px;
+    border-radius: 8px;
+    box-shadow: 1px 2px 6px 5px lightgray;
 }
 
 .flux-header h1 {

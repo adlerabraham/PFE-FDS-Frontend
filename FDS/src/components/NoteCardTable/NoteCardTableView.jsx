@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Form, Input, Table, Dropdown, Menu, notification } from 'antd';
+import { Button, Form, Input, Table, Dropdown, Menu, notification, Popconfirm } from 'antd';
 import './NoteCardTable.scss'
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
 import { EllipsisOutlined, DownOutlined, PlusOutlined, EditOutlined, SaveOutlined } from '@ant-design/icons';
@@ -95,6 +95,7 @@ const NoteCardTableView = (props) => {
     });
   };
 
+
   const navigateToSubmitIntra = () => {
     // Logique pour le clic sur "Soumettre intra"
     const submissionResult = subumitTranscript({ transcriptID: noteCardID.intra }).unwrap()
@@ -119,6 +120,9 @@ const NoteCardTableView = (props) => {
     })
   };
 
+  const cancel = () => {
+    console.log('annule');
+  }
   const openNotification = () => {
     notification.success({
       message: 'Validation réussie',
@@ -182,8 +186,17 @@ const NoteCardTableView = (props) => {
           </Menu.Item>
           <Menu.SubMenu key="submit" title={<span><SaveOutlined /> Soumettre</span>}>
             {!noteCardStatus.isIntraSubmitted && noteCardStatus.isIntraSaved ?
-              <Menu.Item key="submitIntra" onClick={navigateToSubmitIntra}>
-                Soumettre Partiel
+              <Menu.Item key="submitIntra" >
+                {/* Soumettre Partiel */}
+                <Popconfirm
+                  title="Confirmer Soumission"
+                  description="Voullez vous effectuer cette soumission?"
+                  onConfirm={navigateToSubmitIntra}
+                  onCancel={cancel}
+                  okText="OUI"
+                  cancelText="NON">
+                  Soumettre Partiel
+                </Popconfirm>
               </Menu.Item>
               :
               <Menu.Item key="submitIntra" onClick={navigateToSubmitIntra} disabled>
@@ -216,8 +229,17 @@ const NoteCardTableView = (props) => {
           }
           <Menu.SubMenu key="submit" title={<span><SaveOutlined /> Valider</span>}>
             {!noteCardStatus.isIntraValidated && noteCardStatus.isIntraSubmitted ?
-              <Menu.Item key="submitIntra" onClick={navigateToValidateIntra}>
-                Valider Partiel
+              <Menu.Item key="submitIntra" >
+                {/* Valider Partiel */}
+                <Popconfirm
+                  title="Confirmer Soumission"
+                  description="Voullez vous effectuer cette soumission?"
+                  onConfirm={navigateToValidateIntra}
+                  onCancel={cancel}
+                  okText="OUI"
+                  cancelText="NON">
+                  Valider Partiel
+                </Popconfirm>
               </Menu.Item>
               :
               <Menu.Item key="submitIntra" onClick={navigateToValidateIntra} disabled>
@@ -257,8 +279,17 @@ const NoteCardTableView = (props) => {
           </Menu.Item>
           <Menu.SubMenu key="submit" title={<span><SaveOutlined /> Soumettre</span>}>
             {!noteCardStatus.isIntraSubmitted && noteCardStatus.isIntraSaved ?
-              <Menu.Item key="submitIntra" onClick={navigateToSubmitIntra}>
-                Soumettre Partiel
+              <Menu.Item key="submitIntra">
+                {/* Soumettre Partiel */}
+                <Popconfirm
+                  title="Confirmer Soumission"
+                  description="Voullez vous effectuer cette soumission?"
+                  onConfirm={navigateToSubmitIntra}
+                  onCancel={cancel}
+                  okText="OUI"
+                  cancelText="NON">
+                  Soumettre Partiel
+                </Popconfirm>
               </Menu.Item>
               :
               <Menu.Item key="submitIntra" onClick={navigateToSubmitIntra} disabled>
@@ -267,8 +298,17 @@ const NoteCardTableView = (props) => {
             }
             {!noteCardStatus.isFinaleSubmitted && noteCardStatus.isFinaleSaved ?
 
-              <Menu.Item key="submitFinal" onClick={navigateToSubmitFinal}>
-                Soumettre Final
+              <Menu.Item key="submitFinal" >
+                {/* Soumettre Final */}
+                <Popconfirm
+                  title="Confirmer Soumission"
+                  description="Voullez vous effectuer cette soumission?"
+                  onConfirm={navigateToSubmitFinal}
+                  onCancel={cancel}
+                  okText="OUI"
+                  cancelText="NON">
+                  Soumettre Partiel
+                </Popconfirm>
               </Menu.Item>
               :
               <Menu.Item key="submitFinal" onClick={navigateToSubmitFinal} disabled>
@@ -302,8 +342,16 @@ const NoteCardTableView = (props) => {
           }
           <Menu.SubMenu key="submit" title={<span><SaveOutlined /> Valider</span>}>
             {!noteCardStatus.isIntraValidated && noteCardStatus.isIntraSubmitted ?
-              <Menu.Item key="submitIntra" onClick={navigateToValidateIntra}>
-                Valider Partiel
+              <Menu.Item key="submitIntra">
+                <Popconfirm
+                  title="Confirmer Validation"
+                  description="Voullez vous effectuer cette validation?"
+                  onConfirm={navigateToValidateIntra}
+                  onCancel={cancel}
+                  okText="OUI"
+                  cancelText="NON">
+                  Valider Partiel
+                </Popconfirm>
               </Menu.Item>
               :
               <Menu.Item key="submitIntra" onClick={navigateToValidateIntra} disabled>
@@ -311,8 +359,16 @@ const NoteCardTableView = (props) => {
               </Menu.Item>
             }
             {!noteCardStatus.isFinaleValidated && noteCardStatus.isFinaleSubmitted ?
-              <Menu.Item key="submitFinal" onClick={naviagteToValidateFinale}>
-                Valider Final
+              <Menu.Item key="submitFinal" >
+                <Popconfirm
+                  title="Confirmer Validation"
+                  description="Voullez vous effectuer cette validation?"
+                  onConfirm={naviagteToValidateFinale}
+                  onCancel={cancel}
+                  okText="OUI"
+                  cancelText="NON">
+                  Valider Final
+                </Popconfirm>
               </Menu.Item>
               :
               <Menu.Item key="submitFinal" onClick={naviagteToValidateFinale} disabled>

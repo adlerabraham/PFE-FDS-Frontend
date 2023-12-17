@@ -73,6 +73,17 @@ export const authApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['transcriptStatus']
         }),
+        //*********Flux events********/
+        getFluxExam: builder.query({
+            query: (params) => ({
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                url: "note/exam/flux/?course_id=" + params.classID + "&period_id=" + params.periodID,
+                methode: 'GET'
+            }),
+            providesTags: ['exam']
+        }),
         //*****Coordinator endpoints****
         getPrograms: builder.query({
             query: () => ({
@@ -321,4 +332,5 @@ export const {
     useGetOrderStatQuery,
     useGetExamQuery,
     useCreateExamMutation,
+    useGetFluxExamQuery,
 } = authApiSlice
