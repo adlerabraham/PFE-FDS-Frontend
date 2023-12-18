@@ -1,12 +1,15 @@
 import React from 'react'
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+//import '@fullcalendar/react/main.css';
+//import '@fullcalendar/daygrid/main.css';
 
-function DirectorCalendar(props) {
+function CoordinatorCalendar(props) {
     const events = [
         {
             title: 'Event 1',
             start: '2023-12-01',
+            backgroundColor: 'red',
         },
         {
             title: 'Event 2',
@@ -26,11 +29,12 @@ function DirectorCalendar(props) {
                 initialView="dayGridMonth"
                 weekends={true}
                 events={events}
+                height={450}
                 eventClick={handleEventClick}
             />
         </div>
     )
 }
 
-export default DirectorCalendar
+export default CoordinatorCalendar
 

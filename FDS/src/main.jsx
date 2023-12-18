@@ -61,6 +61,8 @@ import ExamManagement from './components/Pages/Dashboards/Coordinator/ExamManage
 import ExamView from './components/Pages/Dashboards/Coordinator/Exam/ExamView'
 import ExamCreate from './components/Pages/Dashboards/Coordinator/Exam/ExamCreate'
 import ExamUpdate from './components/Pages/Dashboards/Coordinator/Exam/ExamUpdate'
+import CoordinatorCalendar from './components/Pages/Dashboards/Coordinator/CoordinatorCalendar'
+import StudentCalendar from './components/Pages/Dashboards/Student/StudentCalendar'
 
 
 
@@ -77,7 +79,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           {/****************DIRECTOR'S ROUTES SET UP****************/}
           <Route path='/directorDashboard' element={<DirectorDashboard />}>
             <Route index element={<DirectorDashbordHome />} />
-            <Route path='directorCalendar' element={<DirectorCalendar />} />
+            <Route path='directorCalendar' element={<DashboardCalendar />} />
             {/* <Route path='orderStat' element={<OrderStat />} /> */}
           </Route>
           <Route element={<RequireAuth />}>

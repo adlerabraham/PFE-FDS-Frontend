@@ -2,7 +2,7 @@ import React from 'react'
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
-function DirectorCalendar(props) {
+function StudentCalendar(props) {
     const events = [
         {
             title: 'Event 1',
@@ -32,5 +32,5 @@ function DirectorCalendar(props) {
     )
 }
 
-export default DirectorCalendar
+export default StudentCalendar
 

@@ -297,6 +297,16 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 methode: 'GET'
             })
         }),
+        //***********Calendar**********/
+        // getEvents: builder.query({
+        //     query: (params) => ({
+        //         headers: {
+        //             'Content-type': 'application/json',
+        //         },
+        //         url: "fdscalendar/event/occurrence/",
+        //         methode: 'GET'
+        //     })
+        // }),
     })
 })
 
