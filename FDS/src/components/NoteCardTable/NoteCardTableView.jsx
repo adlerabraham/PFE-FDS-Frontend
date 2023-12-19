@@ -147,7 +147,7 @@ const NoteCardTableView = (props) => {
       } else {
         openUnsuccessfulValidationNotification()
         localStorage.setItem('mismatchedID', JSON.stringify(result))
-        navigate(`/coordinatorDashboard/${params.programId}/${params.levelID}/${params.classID}/transcriptList/noteCardTable/intra`)
+        navigate(`../intra`)
       }
     })
 
@@ -162,7 +162,7 @@ const NoteCardTableView = (props) => {
       } else {
         openUnsuccessfulValidationNotification()
         localStorage.setItem('mismatchedID', JSON.stringify(result))
-        navigate(`/coordinatorDashboard/${params.programId}/${params.levelID}/${params.classID}/transcriptList/noteCardTable/finale`)
+        navigate(`../finale`)
       }
     })
   }
