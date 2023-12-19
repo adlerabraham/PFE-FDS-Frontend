@@ -63,6 +63,8 @@ import ExamCreate from './components/Pages/Dashboards/Coordinator/Exam/ExamCreat
 import ExamUpdate from './components/Pages/Dashboards/Coordinator/Exam/ExamUpdate'
 import CoordinatorCalendar from './components/Pages/Dashboards/Coordinator/CoordinatorCalendar'
 import StudentCalendar from './components/Pages/Dashboards/Student/StudentCalendar'
+import CalendarManagement from './components/Pages/Dashboards/Coordinator/CalendarManagement/CalendarManagement'
+import EventCreate from './components/Pages/Dashboards/Coordinator/CalendarManagement/EventCreate'
 
 
 
@@ -88,6 +90,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             {/****************COORDINATOR'S ROUTES SET UP****************/}
             <Route path='/coordinatorDashboard' element={<CoordinatorDashboard />}>
               <Route index element={<CoordinatorDashboardHome />} />
+              <Route path='calendarManagement' element={<CalendarManagement />}>
+                <Route index element={<EventCreate />} />
+              </Route>
               <Route path='calendar' element={<DashboardCalendar />} />
               <Route path=':programId' element={<ProgramManagement />} >
                 <Route path=':levelID' element={<LevelClasses />}>

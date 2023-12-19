@@ -298,15 +298,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
             })
         }),
         //***********Calendar**********/
-        // getEvents: builder.query({
-        //     query: (params) => ({
-        //         headers: {
-        //             'Content-type': 'application/json',
-        //         },
-        //         url: "fdscalendar/event/occurrence/",
-        //         methode: 'GET'
-        //     })
-        // }),
+        createEvents: builder.mutation({
+            query: (params) => ({
+                url: 'fdscalendar/event/create/',
+                method: 'POST',
+                body: { ...params.data }
+            })
+        }),
     })
 })
 
@@ -343,4 +341,5 @@ export const {
     useGetExamQuery,
     useCreateExamMutation,
     useGetFluxExamQuery,
+    useCreateEventsMutation,
 } = authApiSlice

@@ -46,7 +46,7 @@ function CoordinatorDashboard(props) {
                             </div> */}
                             <div className="nav-option">
                                 <CalendarOutlined className='nav-icon' />
-                                {isSidebarOpen && <NavLink to="/coordinatorDashboard" className='nav-link'>Gestion des calendriers</NavLink>}
+                                {isSidebarOpen && <NavLink to="/coordinatorDashboard/calendarManagement" className='nav-link'>Gestion des calendriers</NavLink>}
                             </div>
 
                         </div>

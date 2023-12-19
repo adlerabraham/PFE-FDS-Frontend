@@ -18,19 +18,7 @@ function DashboardCalendar(props) {
         const currentView = calendarRef.current.getApi().view;
         console.log('Mois actuel :', currentView.title); // Affiche le titre du mois actuel
     };
-    const events = [
-        // {
-        //     title: 'Conge',
-        //     start: '2023-12-01',
-        //     backgroundColor: 'red',
-        // },
-        // {
-        //     title: 'Examen',
-        //     start: '2023-12-05',
-        //     end: '2023-12-07',
-        // },
-        // Add more events as needed
-    ];
+    const events = [];
 
     const getEvents = async (startDate, endDate) => {
         if (token) {
@@ -43,6 +31,7 @@ function DashboardCalendar(props) {
                     }
                 });
                 console.log(response.data);
+                const events = [];
                 response.data.occurrences.map((occurrence) => (
                     events.push({
                         title: occurrence.event,
@@ -64,6 +53,7 @@ function DashboardCalendar(props) {
     useEffect(() => {
         // getEvents('2023-06-01', '2023-06-30')
         const calendarApi = calendarRef.current.getApi();
+
 
         const onViewRender = (info) => {
             const startDate = info.view.activeStart.toISOString().split('T')[0];
