@@ -86,7 +86,6 @@ function DashboardCalendar(props) {
                 locale={frLocale}
                 weekends={true}
                 events={occurrences}
-                height={450}
                 eventClick={handleEventClick}
             />
         </div>

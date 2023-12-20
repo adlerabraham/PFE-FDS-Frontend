@@ -1,0 +1,16 @@
+// .actions button {
+//     :hover {
+//         background-color: grey;
+//     }
+// }
+
+.actions Button[type="primary"]:hover {
+    background-color: #ff4500;
+    /* Choisir la couleur souhaitée */
+}
+
+/* Style pour le bouton "Creer" */
+.actions Button[type="primary"]:last-child:hover {
+    background-color: #32cd32;
+    /* Choisir la couleur souhaitée */
+}

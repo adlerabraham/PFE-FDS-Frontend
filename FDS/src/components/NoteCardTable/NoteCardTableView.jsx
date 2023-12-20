@@ -307,7 +307,7 @@ const NoteCardTableView = (props) => {
                   onCancel={cancel}
                   okText="OUI"
                   cancelText="NON">
-                  Soumettre Partiel
+                  Soumettre Final
                 </Popconfirm>
               </Menu.Item>
               :

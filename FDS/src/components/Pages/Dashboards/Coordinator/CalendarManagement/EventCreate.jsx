@@ -3,6 +3,7 @@ import { Form, Select, Input, DatePicker, Button, notification, TimePicker } fro
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { useCreateEventsMutation } from '../../../../../api/ApiEndpoints';
+import './CalendarManagement.scss'
 
 function EventCreate(props) {
     dayjs.extend(customParseFormat);
@@ -12,6 +13,7 @@ function EventCreate(props) {
     const [startTime, setStartTime] = useState('')
     const [endTime, setEndTime] = useState('')
 
+    //console.log(baseEvent.name);
     const openNotification = () => {
         notification.success({
             message: 'Création d\'événement réussie',
@@ -137,19 +139,21 @@ function EventCreate(props) {
                                 Annuler
                             </Button>
                             <Button type="primary" htmlType="submit">
-                                Creer événement
+                                Creer
                             </Button>
                         </div>
                     </Form.Item>
 
                 </Form>
 
-                <Button type='primary' onClick={addRule}>
+                {/* <Button type='primary' onClick={addRule}>
                     Ajouter une règle
-                </Button>
+                </Button> */}
                 {/* Rules */}
+
+                <h6>CREER LA REGLE</h6>
                 <Form
-                    name="eventForm"
+                    name="ruleForm"
                     layout='vertical'
                     onFinish={onFinish}
                 >
@@ -208,9 +212,16 @@ function EventCreate(props) {
                             >
                                 Annuler
                             </Button>
-                            <Button type="primary" htmlType="submit">
-                                Creer regle
-                            </Button>
+                            {
+                                baseEvent.name == undefined ?
+                                    <Button type="primary" htmlType="submit" disabled>
+                                        Creer règle
+                                    </Button>
+                                    :
+                                    <Button type="primary" htmlType="submit">
+                                        Creer règle
+                                    </Button>
+                            }
                         </div>
                     </Form.Item>
                 </Form>
