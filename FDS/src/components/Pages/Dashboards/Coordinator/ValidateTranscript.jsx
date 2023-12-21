@@ -201,7 +201,7 @@ const ValidateTranscript = () => {
             editable: true,
         },
         {
-            title: 'operation',
+            title: 'Opération',
             dataIndex: 'operation',
             render: (_, record) => {
                 if (record.isOdd) {
@@ -302,11 +302,11 @@ const ValidateTranscript = () => {
                     } else {
                         openUnsuccessfulValidationNotification()
                         localStorage.setItem('mismatchedID', JSON.stringify(result))
-                        navigate(`/coordinatorDashboard/${params.programId}/${params.levelID}/${params.classID}/transcriptList/noteCardTable/intra`)
+                        navigate(`../intra`)
                     }
                 })
             } else if (params.transcript === 'finale') {
-                const validationResult = validateTranscript({ transcriptID: noteCardID.intra }).unwrap()
+                const validationResult = validateTranscript({ transcriptID: noteCardID.examen }).unwrap()
                 validationResult.then((result) => {
                     if (result.message) {
                         openNotification()
@@ -314,7 +314,7 @@ const ValidateTranscript = () => {
                     } else {
                         openUnsuccessfulValidationNotification()
                         localStorage.setItem('mismatchedID', JSON.stringify(result))
-                        navigate(`/coordinatorDashboard/${params.programId}/${params.levelID}/${params.classID}/transcriptList/noteCardTable/finale`)
+                        navigate(`../finale`)
                     }
                 })
             }

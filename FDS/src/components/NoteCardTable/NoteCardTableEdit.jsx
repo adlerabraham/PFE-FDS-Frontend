@@ -149,7 +149,13 @@ const NoteCardTableEdit = (props) => {
             if (classIndex != -1) {
                 var courseName = classes[classIndex].name
                 var period = classes[classIndex].period.name
-                var level = params.levelID
+                var levels = classes[classIndex].levels
+                var levelIndex = levels.findIndex((item) =>
+                    item.id == params.levelID
+                )
+                if (levelIndex != -1) {
+                    var level = levels[levelIndex].name
+                }
             }
         }
     }

@@ -3,6 +3,7 @@ import { Outlet, useNavigate, useOutletContext, useParams } from 'react-router-d
 import { useGetNoteCardListQuery, useGetSudentsQuery } from '../../../../api/ApiEndpoints'
 import { Spin } from 'antd'
 import './CoordinatorDashboard.scss'
+import './TranscriptList.scss'
 
 function TranscriptList(props) {
     let params = useParams()
@@ -49,7 +50,7 @@ function TranscriptList(props) {
         ))
 
         return (
-            <div>
+            <div className='view-container'>
                 <Outlet context={[classID, levelID, noteData, noteCardList]} />
             </div>
         )
